@@ -1,5 +1,5 @@
-
-import os
+import os.path
+PROJECT_HOME = os.path.abspath(os.path.dirname(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
