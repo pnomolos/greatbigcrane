@@ -17,6 +17,7 @@ limitations under the License.
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic.list_detail import object_list
+from django.http import HttpResponse
 from notifications.models import Notification
 
 def list_notifications(request):
@@ -29,3 +30,9 @@ def view_notification(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
     return render_to_response("notifications/notification.html",
             RequestContext(request, {'notification': notification}))
+
+def dismiss_notification(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id)
+    notification.dismissed = True
+    notification.save()
+    return HttpResponse("success")

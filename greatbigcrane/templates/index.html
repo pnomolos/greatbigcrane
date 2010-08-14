@@ -22,11 +22,12 @@ Dashboard
   <h2>Notifications</h2>
   <ul class="tests">
       {% for notification in notifications %}
-      <li class="{{notification.status}}">
+      <li id="notification_{{notification.id}}" class="{{notification.status}}">
         <a href="{{notification.get_absolute_url}}">
             <span class="project">{{notification.project.name}}</span>:
             <span class="result">{{notification.summary}}</span>
         </a>
+        <a href="javascript: dismiss_notification({{notification.id}});">dismiss</a>
       </li>
       {% endfor %}
   </ul>

@@ -10,6 +10,13 @@ function ajaxHandler( data ) {
   }
 }
 
+function dismiss_notification(notification_id) {
+    $.get("/notifications/dismiss/" + notification_id + "/", {},
+            function(data, textStatus, xhr) {
+                $("#notification_" + notification_id).remove();
+            });
+}
+
 jQuery(function($){
   $('.autosubmit').change(function(){
     $(this).parents('form').first().submit();
