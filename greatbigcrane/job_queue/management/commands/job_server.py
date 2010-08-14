@@ -6,6 +6,7 @@ addr = 'tcp://127.0.0.1:5555'
 from django.core.management.base import NoArgsCommand
 
 class Command(NoArgsCommand):
+    help = "Run the 0MQ based job server for greatbigcrane."
     def handle(self, **options):
         context = zmq.Context()
         socket = context.socket(zmq.REP) # Receives job requests from application server
