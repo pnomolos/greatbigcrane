@@ -191,8 +191,8 @@ form textarea {
 }
 
 form input[type=text], form textarea {
-  width: 590px;
-  padding: 4px;
+  width: 578px;
+  padding: 10px;
   border: 1px solid #000;
   background: #ddd;
 }
