@@ -42,7 +42,7 @@ def add_project(request):
         instance = form.save()
         return redirect(instance.get_absolute_url())
 
-    base_url = Preference.get_preference("projects_directory", '')
+    base_url = Preference.objects.get_preference("projects_directory", '')
 
     return render_to_response("project/project_form.html",
             RequestContext(request, {'form': form, 'base_url': base_url}))
