@@ -78,7 +78,8 @@ def bootstrap(project_id):
     Notification.objects.create(status="success" if not process.returncode else "error",
             summary="Bootstrapping '%s' %s" % (
                 project.name, "success" if not process.returncode else "error"),
-            message=response)
+            message=response,
+            project=project)
 
 
 command_map = {
