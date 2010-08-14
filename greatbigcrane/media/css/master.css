@@ -164,6 +164,14 @@ ul.projects li .buttons .settings {
   background-position: 0 -48px;
 }
 
+ul.projects li .buttons .favourite {
+  background: url(../images/favourites.png) -48px 0 no-repeat;
+}
+
+ul.projects li .buttons .favourite.favourited {
+  background-position: 0 0;
+}
+
 /* Dashboard */
 .dashboard ul {
   padding: 0;
