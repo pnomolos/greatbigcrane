@@ -23,6 +23,7 @@ from django.views.generic.list_detail import object_detail
 from django.template import RequestContext
 from django.conf import settings
 
+from job_queue.jobs import run_job
 from project.models import Project
 from project.forms import ProjectForm
 from preferences.models import Preference
@@ -51,6 +52,7 @@ def add_project(request):
         os.makedirs(instance.base_directory)
         copyfile(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
                 os.path.join(instance.base_directory, "bootstrap.py"))
+        run_job("BOOTSTRAP", project_id=instance.id)
         return redirect(instance.get_absolute_url())
 
     base_url = Preference.objects.get_preference("projects_directory", '')
