@@ -1,5 +1,2 @@
 * Trash projects
-* don't automatically run bootstrap init on project creation
-    * we may want to git clone, or it may be an existing buildout
-* Add a default buildout.cfg
 * ensure trailing slash on preference
