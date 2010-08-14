@@ -15,6 +15,7 @@ limitations under the License.
 """
 
 from django.db import models
+from project.models import Project
 
 make_choice = lambda x: ([(p,p) for p in x])
 
@@ -24,6 +25,7 @@ class Notification(models.Model):
     summary = models.CharField(max_length=128)
     message = models.TextField()
     notification_time = models.DateTimeField(auto_now_add=True)
+    project = models.ForeignKey(Project, null=True, blank=True, default=None)
 
     class Meta:
         ordering=["-notification_time"]
