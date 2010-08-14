@@ -21,9 +21,13 @@ import tempfile
 from buildout_manage import recipes
 from buildout_manage.buildout_config import BuildoutConfig, buildout_parse, buildout_write
 
+from buildout_config_tests import *
+
 """
 Notes:
-* Add a djangorecipe section to a BuildoutConfig
+* *Add a djangorecipe section to a BuildoutConfig*
+* *Parse an existing djangorecipe section*
+* *Parse an existing djangorecipe section, modify it, and write it out again*
 """
 
 class RecipeTests(TestCase):
@@ -74,4 +78,68 @@ wsgi = False
 
 """
 
-from buildout_config_tests import *
+    def test_parse_djangorecipe(self):
+        fp = mktmpcfg(complicated_buildout_cfg)
+        bc = buildout_parse(fp.name)
+
+        djangorecipe = recipes['djangorecipe']
+        dr = djangorecipe(bc, 'django')
+
+        assert dr.settings == 'development'
+        assert dr.version == '1.2.1'
+        assert dr.extra_paths == ('eggs', 'extra-paths')
+        assert dr.fcgi == True
+
+    def test_change_existing_djangorecipe(self):
+        fp = mktmpcfg(complicated_buildout_cfg)
+        bc = buildout_parse(fp.name)
+
+        djangorecipe = recipes['djangorecipe']
+        dr = djangorecipe(bc, 'django')
+
+        dr.settings = 'production'
+        dr.version = '1.1.1'
+        dr.fcgi = False
+        dr.wsgi = False
+        dr.eggs = [dr.eggs, ('pyzmq', 'parts')]
+
+        fp.seek(0)
+        buildout_write(fp.name, bc)
+        
+        data = fp.read()
+        assert data == """[buildout]
+parts = 
+\teggs
+\tdjango
+\tpyzmq
+unzip = true
+
+[eggs]
+recipe = zc.recipe.egg
+eggs = 
+\tsouth==0.7.1
+\tIPython
+extra-paths = 
+\t${buildout:directory}/parts/django
+\t${buildout:directory}/parts/django-registration
+\t${buildout:directory}/greatbigcrane
+\t${buildout:directory}/parts/pyzmq
+
+[django]
+settings = production
+recipe = djangorecipe
+version = 1.1.1
+eggs = 
+\t${eggs:eggs}
+\t${pyzmq:parts}
+project = greatbigcrane
+extra-paths = ${eggs:extra-paths}
+fcgi = False
+wsgi = False
+
+[pyzmq]
+recipe = zerokspot.recipe.git
+repository = http://github.com/zeromq/pyzmq.git
+as_egg = True
+
+"""
