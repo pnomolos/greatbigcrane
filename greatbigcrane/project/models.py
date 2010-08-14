@@ -23,6 +23,8 @@ class Project(models.Model):
     base_directory = models.CharField(max_length=512, unique=True)
     git_repo = models.CharField(max_length=512, blank=True, default='')
     description = models.TextField()
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse("view_project", args=[self.id])
