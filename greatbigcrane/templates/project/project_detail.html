@@ -6,9 +6,16 @@
 <p>{{project.git_repo}}</p>
 <p>{{project.base_directory}}</p>
 <p>{{project.description}}</p>
-{% for section in project.buildout_sections %}
+<h2>Buildout Sections</h2>
+{% for name, section in project.buildout_sections %}
 <ul>
-    {{section}}
+    <li><h3>{{name}}</h3>
+    {% for key, value in section %}
+    <ul>
+        {{key}} = {{value}}
+    </ul>
+    {% endfor %}
+    </li>
 </ul>
 {% endfor %}
 {% endblock %}
