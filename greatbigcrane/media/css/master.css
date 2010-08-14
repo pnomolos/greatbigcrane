@@ -89,3 +89,30 @@ header nav a.current {
   margin-bottom: -10px;
 }
 
+/* Dashboard */
+/* -- project listing */
+.dashboard .projects {}
+.dashboard .projects {
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+}
+
+.dashboard .projects li {
+  padding: 10px;
+  color: #627f60;
+  font: normal normal 12px/1.3 Verdana, sans-serif;
+  background: #121212;
+}
+
+.dashboard .projects li h3 {
+  font-size: 36px;
+}
+
+.dashboard .projects li span {
+  display: block;
+}
+
+.dashboard .projects li .buttons {
+  float: right;
+}

@@ -5,16 +5,19 @@ Dashboard
 {% endblock %}
 
 {% block main %}
-<h2>Current Projects</h2>
-<ul class="projects">
-  <li>
-    <h3>Epic Project</h3>
-    <span>/some/path/in/here</span>
-    <div class="buttons">
-      <a href="#play" class="play">Play</a>
-      <a href="#settings" class="settings">Settings</a>
-    </div>
-</ul>
+<div class="dashboard">
+  <h2>Current Projects</h2>
+  <ul class="projects">
+    <li>
+      <div class="buttons">
+        <a href="#play" class="play">Play</a>
+        <a href="#settings" class="settings">Settings</a>
+      </div>
+      <h3>Epic Project</h3>
+      <span>/some/path/in/here</span>
+    </li>
+  </ul>
+</div>
 {% endblock %}
 
 {% block sidebar %}
