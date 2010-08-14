@@ -72,9 +72,9 @@ def bool_property_get(name):
 def bool_property_set(name):
     def set(self, value):
         if value == True:
-            value = 'True'
+            value = 'true'
         else:
-            value = 'False'
+            value = 'false'
         self.section[name] = value
     return set
 

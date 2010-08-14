@@ -54,8 +54,8 @@ class RecipeTests(TestCase):
         assert django['eggs'] == '${eggs:eggs}'
         assert django['project'] == 'greatbigcrane'
         assert django['extra-paths'] == '${eggs:extra-paths}'
-        assert django['fcgi'] == 'True'
-        assert django['wsgi'] == 'False'
+        assert django['fcgi'] == 'true'
+        assert django['wsgi'] == 'false'
 
         fp = tempfile.NamedTemporaryFile()
 
@@ -73,8 +73,8 @@ version = 1.2.1
 eggs = ${eggs:eggs}
 project = greatbigcrane
 extra-paths = ${eggs:extra-paths}
-fcgi = True
-wsgi = False
+fcgi = true
+wsgi = false
 
 """
 
@@ -134,8 +134,8 @@ eggs =
 \t${pyzmq:parts}
 project = greatbigcrane
 extra-paths = ${eggs:extra-paths}
-fcgi = False
-wsgi = False
+fcgi = false
+wsgi = false
 
 [pyzmq]
 recipe = zerokspot.recipe.git
