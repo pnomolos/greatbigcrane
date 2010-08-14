@@ -21,7 +21,7 @@ from django.template import RequestContext
 
 from project.models import Project
 from project.forms import ProjectForm
-from preference.models import Preference
+from preferences.models import Preference
 
 def index(request):
     '''We should move this to a different app'''
