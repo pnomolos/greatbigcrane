@@ -90,19 +90,22 @@ header nav a.current {
 }
 
 /* Dashboard */
-/* -- project listing */
-.dashboard .projects {}
-.dashboard .projects {
+.dashboard ul {
   padding: 0;
   margin: 10px 0 0;
   list-style: none;
 }
 
+/* -- project listing */
 .dashboard .projects li {
   padding: 10px;
   color: #627f60;
   font: normal normal 12px/1.3 Verdana, sans-serif;
   background: #121212;
+}
+
+.dashboard .projects li + li {
+  margin-top: 1px;
 }
 
 .dashboard .projects li h3 {
@@ -138,4 +141,27 @@ header nav a.current {
 
 .dashboard .projects li .buttons .settings {
   background-position: 0 -48px;
+}
+
+/* -- tests */
+.dashboard .tests li a {
+  font-size: 14px;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.dashboard .tests li a:hover {
+  padding: 9px;
+  border: 1px solid #666;
+}
+
+.dashboard .tests li.pass a {
+  color: #9de983;
+  background: #121212;
+}
+
+.dashboard .tests li.fail a {
+  color: #a9a9a9;
+  background: #4f2020;
 }
