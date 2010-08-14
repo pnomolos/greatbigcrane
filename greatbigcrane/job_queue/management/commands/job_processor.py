@@ -65,14 +65,21 @@ class Command(NoArgsCommand):
 # Create the actual commands here and keep the command_map below up to date
 # FIXME: I feel this should go to it's own module
 from project.models import Project
+from notifications.models import Notification
 def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
     print("running bootstrap %s" % project_id)
     project = Project.objects.get(id=project_id)
     process = subprocess.Popen("python bootstrap.py init", cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    print process.communicate()[0]
-    print process.returncode
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Bootstrapping '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response)
+
 
 command_map = {
     'BOOTSTRAP': bootstrap,
