@@ -14,12 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
-from django.views.generic.create_update import create_object
 from django.template import RequestContext
+
 from project.models import Project
+from project.forms import ProjectForm
 
 def index(request):
     '''We should move this to a different app'''
@@ -35,6 +36,9 @@ def view_project(request, project_id):
             template_object_name='project')
 
 def add_project(request):
-    # We have to do stuff like create the buildout directory on save
-    # so this can't stay generic
-    return create_object(request, model=Project)
+    form = ProjectForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save()
+        return redirect(instance.get_absolute_url())
+    return render_to_response("project/project_form.html",
+            RequestContext(request, {'form': form}))
