@@ -1,2 +1,4 @@
 * Trash projects
 * rename run_job to queue_job
+* allow viewing notification contents
+* allow viewing all notifications
