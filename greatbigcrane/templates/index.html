@@ -8,14 +8,16 @@ Dashboard
 <div class="dashboard">
   <h2>Current Projects</h2>
   <ul class="projects">
-    <li>
+    {% for project in project_list %}
+    <li id="project-{{project.id}}">
       <div class="buttons">
         <a href="#play" class="play">Play</a>
         <a href="#settings" class="settings">Settings</a>
       </div>
-      <h3>Epic Project</h3>
-      <span>/some/path/in/here</span>
+      <h3>{{project.name}}</h3>
+      <span>{{projects.base_directory}}</span>
     </li>
+    {% endfor %}
   </ul>
 </div>
 {% endblock %}
