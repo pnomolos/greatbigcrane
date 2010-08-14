@@ -209,14 +209,35 @@ ul.projects li .buttons .favourite.favourited {
 
 .notifications .tests li {
   width: 300px;
+  clear: both;
 }
 
 .notifications .tests li.success {
   text-align: left;
+  float: left;
 }
 
 .notifications .tests li.error {
   text-align: right;
+  float: right;
+}
+
+.notifications .successes {
+  float: left;
+  width: 300px;
+  margin-left: -400px;
+}
+
+.notifications .errors {
+  float: right;
+  width: 300px;
+}
+
+.notifications .svg {
+  min-height: 1px;
+  width: 100px;
+  float: left;
+  margin-left: 300px;
 }
 /* notifications */
 
