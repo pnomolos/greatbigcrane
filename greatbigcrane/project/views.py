@@ -36,7 +36,7 @@ from notifications.models import Notification
 def index(request):
     '''We should move this to a different app. Possibly preferences, it's more generic.'''
     projects = Project.objects.all()
-    notifications = Notification.objects.filter(dismissed=False)[:10]
+    notifications = Notification.objects.exclude(dismissed=True)[:10]
     return render_to_response('index.html', RequestContext(request,
         {'project_list': projects, 'notifications': notifications}))
 
