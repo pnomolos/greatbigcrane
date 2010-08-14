@@ -21,10 +21,12 @@ import tempfile
 from buildout_manage import recipes
 from buildout_manage.buildout_config import BuildoutConfig, buildout_parse, buildout_write
 
+from buildout_config_tests import *
+
 """
 Notes:
 * *Add a djangorecipe section to a BuildoutConfig*
-* Parse an existing djangorecipe section
+* *Parse an existing djangorecipe section*
 * Parse an existing djangorecipe section, modify it, and write it out again
 """
 
@@ -76,4 +78,14 @@ wsgi = False
 
 """
 
-from buildout_config_tests import *
+    def test_parse_djangorecipe(self):
+        fp = mktmpcfg(complicated_buildout_cfg)
+        bc = buildout_parse(fp.name)
+
+        djangorecipe = recipes['djangorecipe']
+        dr = djangorecipe(bc, 'django')
+
+        assert dr.settings == 'development'
+        assert dr.version == '1.2.1'
+        assert dr.extra_paths == ('eggs', 'extra-paths')
+        assert dr.fcgi == True

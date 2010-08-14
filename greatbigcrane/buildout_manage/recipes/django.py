@@ -14,53 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from buildout_manage import recipetools
-
-def simple_property_get(name):
-    def get(self):
-        # FIXME: Parse ${
-        return self.section[name]
-    return get
-
-def simple_property_set(name):
-    def set(self, value):
-        def convert_value(data):
-            if isinstance(data, tuple):
-                data = '${%s:%s}' % data
-            return data
-
-        if isinstance(value, list):
-            value = [convert_value(x) for x in value]
-        else:
-            value = convert_value(value)
-        self.section[name] = value
-    return set
-
-def simple_property_delete(name):
-    def delete(self):
-        del self.section[name]
-    return delete
-
-simple_property = lambda name: property(simple_property_get(name), simple_property_set(name), simple_property_delete(name))
-
-def bool_property_get(name):
-    def get(self):
-        value = self.section[name]
-        if value.lower() == 'true':
-            return True
-        return False
-    return get
-
-def bool_property_set(name):
-    def set(self, value):
-        if value == True:
-            value = 'True'
-        else:
-            value = 'False'
-        self.section[name] = value
-    return set
-
-bool_property = lambda name: property(bool_property_get(name), bool_property_set(name), simple_property_delete(name))
+from buildout_manage.recipetools import add_parts, simple_property, bool_property
 
 class DjangoRecipe(object):
     def __init__(self, config, section_name):
@@ -69,7 +23,7 @@ class DjangoRecipe(object):
 
     def init(self):
         # Does section already exist?
-        recipetools.add_parts(self.config, self.section_name)
+        add_parts(self.config, self.section_name)
         self.section = self.config[self.section_name]
         self.section['recipe'] = 'djangorecipe'
 
