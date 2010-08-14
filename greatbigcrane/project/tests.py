@@ -8,30 +8,39 @@ class MockPathRequest(object):
 class HelperTest(TestCase):
     '''tests for the helper template tags'''
 
-    def test_nav_url_tag_matches_root(self):
-        template = Template("{% load helpers %}<a {% nav_url '/' %}>")
-        request = MockPathRequest("/")
+    def nav_url_test(self, template_string, request_path, expected):
+        template = Template(template_string)
+        request = MockPathRequest(request_path)
         context = RequestContext(request, {})
         rendered = template.render(context)
-        assert rendered == '<a href="/" class="current">'
+        assert rendered == expected
+
+    def test_nav_url_tag_matches_root(self):
+        return self.nav_url_test("{% load helpers %}<a {% nav_url '/' %}>", "/",
+                '<a href="/" class="current">')
 
     def test_nav_url_not_root_current(self):
-        template = Template("{% load helpers %}<a {% nav_url '/projects/' %}>")
-        request = MockPathRequest("/")
-        context = RequestContext(request, {})
-        rendered = template.render(context)
-        assert rendered == '<a href="/projects/">'
+        return self.nav_url_test(
+                "{% load helpers %}<a {% nav_url '/projects/' %}>", "/",
+                '<a href="/projects/">')
 
     def test_nav_url_not_current_root(self):
-        template = Template("{% load helpers %}<a {% nav_url '/' %}>")
-        request = MockPathRequest("/projects/")
-        context = RequestContext(request, {})
-        rendered = template.render(context)
-        assert rendered == '<a href="/">'
+        return self.nav_url_test("{% load helpers %}<a {% nav_url '/' %}>",
+                '/projects/', '<a href="/">')
 
     def test_nav_url_full_path(self):
-        template = Template("{% load helpers %}<a {% nav_url '/projects/' %}>")
-        request = MockPathRequest("/projects/")
-        context = RequestContext(request, {})
-        rendered = template.render(context)
-        assert rendered == '<a href="/projects/" class="current">'
+        return self.nav_url_test(
+                "{% load helpers %}<a {% nav_url '/projects/' %}>",
+                '/projects/', '<a href="/projects/" class="current">')
+
+    def test_nav_url_partial_path(self):
+        return self.nav_url_test(
+                "{% load helpers %}<a {% nav_url '/projects/' %}>",
+                "/projects/cool/",
+                '<a href="/projects/" class="current">')
+
+    def test_nav_url_sub_path(self):
+        return self.nav_url_test(
+                "{% load helpers %}<a {% nav_url '/projects/cool/' '/projects/' %}>",
+                "/projects/food/",
+                '<a href="/projects/cool/" class="current">')
