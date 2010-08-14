@@ -30,3 +30,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse("view_project", args=[self.id])
+
+    def __unicode__(self):
+        retrn self.name
