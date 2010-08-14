@@ -25,7 +25,9 @@ from preferences.models import Preference
 
 def index(request):
     '''We should move this to a different app'''
-    return render_to_response('index.html', RequestContext(request, {}))
+    projects = Project.objects.all()
+    return render_to_response('index.html', RequestContext(request,
+        {'project_list': projects}))
 
 def list_projects(request):
     projects = Project.objects.all()
