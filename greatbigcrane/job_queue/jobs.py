@@ -25,7 +25,7 @@ context = zmq.Context()
 socket = context.socket(zmq.REQ)
 socket.connect(addr)
 
-def run_job(command, **kwargs):
+def queue_job(command, **kwargs):
     '''Run the given command on the job queue, passing it any arguments as kwargs.'''
     assert command in command_map
     kwargs.update(command=command)
