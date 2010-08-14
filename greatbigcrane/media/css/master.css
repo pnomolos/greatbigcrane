@@ -69,8 +69,8 @@ h2 {
   float: left;
 }
 
-* + p {
-  margin-top: 10px;
+p {
+  margin-bottom: 10px;
 }
 
 /* header styles */
