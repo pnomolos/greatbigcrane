@@ -45,7 +45,7 @@ def list_projects(request):
     orderby = request.GET.get('orderby', 'name')
     projects = Project.objects.all().order_by(orderby)
     return object_list(request, projects, template_name="project/project_list.html",
-            template_object_name="project")
+            template_object_name="project", extra_context={'orderby': orderby})
 
 def view_project(request, project_id):
     return object_detail(request, Project.objects.all(), object_id=project_id,
