@@ -44,3 +44,5 @@ class HelperTest(TestCase):
                 "{% load helpers %}<a {% nav_url '/projects/cool/' '/projects/' %}>",
                 "/projects/food/",
                 '<a href="/projects/cool/" class="current">')
+
+from buildout_config_tests import *
