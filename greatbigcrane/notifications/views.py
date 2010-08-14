@@ -22,9 +22,15 @@ from notifications.models import Notification
 
 def list_notifications(request):
     notifications = Notification.objects.all()
-    return object_list(request, notifications,
-            template_name="notifications/notification_list.html",
-            template_object_name="notification", paginate_by=100)
+    error_notifications = Notification.objects.filter(status='error')
+    success_notifications = Notification.objects.filter(status='success')
+    return render_to_response("notifications/notification_list.html",
+            RequestContext(request, 
+            {
+                'all_notifications': notifications,
+                'error_notifications': error_notifications,
+                'success_notifications': success_notifications
+            }))
 
 def view_notification(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
