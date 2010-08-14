@@ -15,13 +15,17 @@ limitations under the License.
 """
 
 import os.path
+import json
 from shutil import copyfile
 
 from django.shortcuts import render_to_response, redirect
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.conf import settings
+from django.core import serializers
+from django.http import HttpResponse
 
 from job_queue.jobs import queue_job
 from project.models import Project
@@ -62,3 +66,16 @@ def add_project(request):
 
     return render_to_response("project/project_form.html",
             RequestContext(request, {'form': form, 'base_url': base_url}))
+
+def favourite_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    project.favourite=not project.favourite
+    project.save()
+    projects = Project.objects.all()
+    
+    if 'update' in request.POST:
+        rendered = render_to_string("project/_project_list.html", RequestContext(request,
+            {'project_list': projects}))
+        return HttpResponse(json.dumps({'update':{request.POST['update']: rendered}}),content_type="application/json")
+    else:
+        return HttpResponse('')
