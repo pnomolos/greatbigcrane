@@ -6,14 +6,13 @@ admin.autodiscover()
 
 handler500 # Pyflakes
 
-urlpatterns = patterns(
-    '',
+urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
-    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    (r'^$', 'buildout.views.index'),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
          {'document_root': settings.MEDIA_ROOT}),
     )
