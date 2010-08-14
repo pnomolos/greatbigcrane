@@ -55,6 +55,7 @@ INSTALLED_APPS = (
 
     # Our apps
     'project',
+    'preferences',
 )
 
 TEMPLATE_LOADERS = (
