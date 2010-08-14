@@ -14,3 +14,7 @@ def list_projects(request):
 def view_project(request, project_id):
     from django.http import HttpResponse
     return HttpResponse("not implemented")
+
+def add_project(request):
+    from django.http import HttpResponse
+    return HttpResponse("not implemented")

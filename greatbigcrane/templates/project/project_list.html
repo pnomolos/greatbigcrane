@@ -6,4 +6,6 @@
     <li><a href="{{project.get_absolute_url}}">{{project.name}}</a></li>
     {% endfor %}
 </ul>
+
+<a href="{% url add_project %}">Add Project</a>
 {% endblock %}
