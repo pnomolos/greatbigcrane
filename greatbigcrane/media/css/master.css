@@ -176,15 +176,14 @@ ul.projects li .buttons .favourite.favourited {
   background-position: 0 0;
 }
 
-/* Dashboard */
-.dashboard ul {
+/* tests */
+.tests {
   padding: 0;
   margin: 10px 0 0;
   list-style: none;
 }
 
-/* -- tests */
-.dashboard .tests li a {
+.tests li a {
   font-size: 14px;
   display: block;
   padding: 10px 10px 10px 40px;
@@ -192,18 +191,18 @@ ul.projects li .buttons .favourite.favourited {
   background: url(../images/small-icons.png) right 0 no-repeat;
 }
 
-.dashboard .tests li a:hover {
+.tests li a:hover {
   padding: 9px 9px 9px 39px;
   border: 1px solid #666;
   background-position: 9px center !important;
 }
 
-.dashboard .tests li.success a {
+.tests li.success a {
   color: #9de983;
   background: #121212 url(../images/small-icon-pass.png) 10px center no-repeat;
 }
 
-.dashboard .tests li.error a {
+.tests li.error a {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
 }
