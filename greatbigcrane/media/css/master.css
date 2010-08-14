@@ -57,7 +57,15 @@ h1 {
 
 h2 {
   font: normal normal 20px/1.2 Verdana, sans-serif;
-  color: #627f60;
+  color: #fff;
+}
+
+h3 {
+  font: normal normal 16px/1.2 Verdana, sans-serif;
+}
+
+* + h2 {
+  margin-top: 10px;
 }
 
 /* misc styles */
@@ -131,10 +139,6 @@ ul.projects li + li {
 
 ul.projects li:nth-child(2n) {
   background: #212121;
-}
-
-ul.projects li h3 {
-  font-size: 36px;
 }
 
 ul.projects li span {
