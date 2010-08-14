@@ -12,7 +12,6 @@ jobs = Queue.Queue()
 print("Job Server Is Running")
 while True:
     request = socket.recv()
-    socket.send("ACK")
     if request == "GET":
         # Request came from a worker send it the next available job
         try:
@@ -23,3 +22,4 @@ while True:
     else:
         # Request came from the django app, queue the job
         jobs.put(request)
+        socket.send("ACK")
