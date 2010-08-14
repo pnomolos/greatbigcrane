@@ -50,3 +50,30 @@ h1 {
   margin: 0 0 10px;
   line-height: 1;
 }
+
+header nav ul, header nav li {
+  margin: 0;
+  padding: 0;
+}
+
+header nav li {
+  float: left;
+}
+
+header nav li a {
+  font-size: 24px;
+  color: #f6f6f6;
+  text-decoration: none;
+  display: block;
+}
+
+header nav li + li a {
+  margin-left: 10px;
+}
+
+header nav li.current a {
+  background: #212121;
+  padding: 10px;
+  margin: -10px 0;
+}
+
