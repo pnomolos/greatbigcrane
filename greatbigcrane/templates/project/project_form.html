@@ -8,3 +8,11 @@
 </form>
 
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $('#id_name').change(function() {
+            $('#id_base_directory').val('{{base_url}}' + slugify($('#id_name').val()) + "/");
+    });
+</script>
+{% endblock %}
