@@ -147,8 +147,9 @@ header nav a.current {
 .dashboard .tests li a {
   font-size: 14px;
   display: block;
-  padding: 10px;
+  padding: 10px 10px 10px 40px;
   text-decoration: none;
+  background: url(../images/small-icons.png) right 0 no-repeat;
 }
 
 .dashboard .tests li a:hover {
@@ -158,10 +159,10 @@ header nav a.current {
 
 .dashboard .tests li.pass a {
   color: #9de983;
-  background: #121212;
+  background: #121212 url(../images/small-icon-pass.png) 10px center no-repeat;
 }
 
 .dashboard .tests li.fail a {
   color: #a9a9a9;
-  background: #4f2020;
+  background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
 }
