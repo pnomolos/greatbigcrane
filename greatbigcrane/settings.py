@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'project',
     'preferences',
     'job_queue',
+    'notifications',
 )
 
 TEMPLATE_LOADERS = (
