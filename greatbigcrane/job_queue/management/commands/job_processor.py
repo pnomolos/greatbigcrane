@@ -56,7 +56,10 @@ class Command(NoArgsCommand):
             job = json.loads(job)
             command = command_map[job['command']]
             del job['command']
+            # unicode strings as keyword arguments != cool for Python 2.6.1
+            #job = dict((str(k), v) for k,v in job.iteritems())
             try:
+                print repr(job)
                 command(**job)
             except Exception, e:
                 print e
