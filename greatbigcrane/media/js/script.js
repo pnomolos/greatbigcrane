@@ -2,9 +2,12 @@ function slugify(string) {
     return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
 }
 
-function ajaxRequest( url, _data ) {
-  callback = _data['update'] ? function(data) { $(_data['update']).html(data.html) } : $.noop;
-  $.post( url, data, callback );
+function ajaxHandler( data ) {
+  if ( data.update ) {
+    $.each(data.update,function(k,v){
+      $(k).html(v);
+    });
+  }
 }
 
 jQuery(function($){
@@ -12,9 +15,9 @@ jQuery(function($){
     $(this).parents('form').first().submit();
   });
   
-  $('.buttons .favourite').click(function(e){
-    e.preventDefault();
-    ajaxRequest( $(this).attr('href'), { update: '#project-list' } );
+  $('.buttons .favourite').live('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    $.post( $(this).attr('href'), { update: '#project-list' }, ajaxHandler );
   });
 });
 
