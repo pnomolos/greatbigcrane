@@ -12,7 +12,7 @@ Notes:
 
 * *Write simplest buildout.cfg*
 * Write more complicated buildout.cfg
-* Write config and make sure sections order is preserved
+* *Write config and make sure sections order is preserved*
 * *Write config and make sure lists of things are separated by newlines and indents properly*
 """
 
@@ -66,6 +66,63 @@ find-links =
 \thttp://python.org
 
 '''
+
+    def test_write_obscene_amount_of_sections(self):
+        bc = BuildoutConfig()
+
+        bc['buildout']['parts'] = ''
+        bc['1section']['a'] = '1'
+        bc['8section']['b'] = '3'
+        bc['2section']['c'] = '4'
+        bc['something']['d'] = '99eleven'
+        bc['09876']['d'] = ['yes', 'again']
+        bc['dusty']['kkkkk'] = ''
+        bc['dusty']['kkkk'] = ''
+        bc['dusty']['k'] = ''
+        bc['dusty']['kk'] = ''
+        bc['dusty']['kkk'] = ''
+        bc['dusty']['argh!'] = ''
+
+        assert bc.keys() != dict(bc.items()).keys(), "A regular dict's key order should be different than a BuildoutConfig's"
+
+        assert bc['dusty'].keys() != dict(bc['dusty'].items()).keys()
+
+        fp = tempfile.NamedTemporaryFile()
+
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        print repr(data)
+
+        assert data == """[buildout]
+parts = 
+
+[1section]
+a = 1
+
+[8section]
+b = 3
+
+[2section]
+c = 4
+
+[something]
+d = 99eleven
+
+[09876]
+d = 
+\tyes
+\tagain
+
+[dusty]
+kkkkk = 
+kkkk = 
+k = 
+kk = 
+kkk = 
+argh! = 
+
+"""
 
 def mktmpcfg(cfg):
     fp = tempfile.NamedTemporaryFile()
