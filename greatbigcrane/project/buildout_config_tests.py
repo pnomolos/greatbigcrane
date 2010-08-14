@@ -11,7 +11,7 @@ Notes:
 * *Parse more complicated buildout.cfg*
 
 * *Write simplest buildout.cfg*
-* Write more complicated buildout.cfg
+* *Write more complicated buildout.cfg*
 * *Write config and make sure sections order is preserved*
 * *Write config and make sure lists of things are separated by newlines and indents properly*
 """
@@ -92,7 +92,6 @@ find-links =
         buildout_write(fp.name, bc)
 
         data = fp.read()
-        print repr(data)
 
         assert data == """[buildout]
 parts = 
@@ -121,6 +120,76 @@ k =
 kk = 
 kkk = 
 argh! = 
+
+"""
+
+    def test_write_complicated_config(self):
+        bc = BuildoutConfig()
+
+        sec = bc['buildout']
+        sec['parts'] = ['eggs', 'django', 'pyzmq']
+        sec['unzip'] = 'true'
+
+        sec = bc['eggs']
+        sec['recipe'] = 'zc.recipe.egg'
+        sec['eggs'] = ['south==0.7.1', 'IPython']
+        sec['extra-paths'] = ['${buildout:directory}/parts/django',
+            '${buildout:directory}/parts/django-registration',
+            '${buildout:directory}/greatbigcrane',
+            '${buildout:directory}/parts/pyzmq']
+
+        sec = bc['django']
+        sec['settings'] = 'development'
+        sec['recipe'] = 'djangorecipe'
+        sec['version'] = '1.2.1'
+        sec['eggs'] = '${eggs:eggs}'
+        sec['project'] = 'greatbigcrane'
+        sec['extra-paths'] = '${eggs:extra-paths}'
+        sec['fcgi'] = 'True'
+        sec['wsgi'] = 'True'
+
+        sec = bc['pyzmq']
+        sec['recipe'] = 'zerokspot.recipe.git'
+        sec['repository'] = 'http://github.com/zeromq/pyzmq.git'
+        sec['as_egg'] = 'True'
+
+        fp = tempfile.NamedTemporaryFile()
+
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        assert data == """[buildout]
+parts = 
+\teggs
+\tdjango
+\tpyzmq
+unzip = true
+
+[eggs]
+recipe = zc.recipe.egg
+eggs = 
+\tsouth==0.7.1
+\tIPython
+extra-paths = 
+\t${buildout:directory}/parts/django
+\t${buildout:directory}/parts/django-registration
+\t${buildout:directory}/greatbigcrane
+\t${buildout:directory}/parts/pyzmq
+
+[django]
+settings = development
+recipe = djangorecipe
+version = 1.2.1
+eggs = ${eggs:eggs}
+project = greatbigcrane
+extra-paths = ${eggs:extra-paths}
+fcgi = True
+wsgi = True
+
+[pyzmq]
+recipe = zerokspot.recipe.git
+repository = http://github.com/zeromq/pyzmq.git
+as_egg = True
 
 """
 
