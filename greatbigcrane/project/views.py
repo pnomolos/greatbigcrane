@@ -57,7 +57,10 @@ def add_project(request):
         os.makedirs(instance.base_directory)
         copyfile(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
                 os.path.join(instance.base_directory, "bootstrap.py"))
+        copyfile(os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
+                os.path.join(instance.base_directory, "buildout.cfg"))
         queue_job("BOOTSTRAP", project_id=instance.id)
+
         return redirect(instance.get_absolute_url())
 
     base_url = Preference.objects.get_preference("projects_directory", '')
