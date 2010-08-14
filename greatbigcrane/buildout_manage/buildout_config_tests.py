@@ -19,7 +19,7 @@ from django.template import Template, RequestContext
 
 import tempfile
 
-from greatbigcrane.project.buildout_config import buildout_parse, BuildoutConfig, buildout_write
+from greatbigcrane.buildout_manage.buildout_config import buildout_parse, BuildoutConfig, buildout_write
 
 """
 Notes:
