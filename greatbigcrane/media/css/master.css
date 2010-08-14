@@ -42,7 +42,7 @@ nav, #main {
 }
 
 #content, #sidebar {
-  background: #212121;
+  background: #323232;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -109,7 +109,11 @@ ul.projects li {
 }
 
 ul.projects li + li {
-  margin-top: 1px;
+  margin-top: 10px;
+}
+
+ul.projects li:nth-child(2n) {
+  background: #212121;
 }
 
 ul.projects li h3 {
