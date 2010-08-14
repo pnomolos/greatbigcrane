@@ -1,3 +1,4 @@
+{% load helpers %}
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -52,9 +53,9 @@
     <header>
       <nav>
         <ul>
-          <li><a href="/">Dashboard</a></li>
-          <li><a href="/projects/">Projects</a></li>
-          <li><a href="/preferences/">Preferences</a></li>
+          <li><a {% nav_url '/' %}>Dashboard</a></li>
+          <li><a {% nav_url '/project/' %}>Projects</a></li>
+          <li><a {% nav_url '/preferences/' %}>Preferences</a></li>
         </ul>
       </nav>
     </header>
