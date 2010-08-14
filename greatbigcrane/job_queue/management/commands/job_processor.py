@@ -1,6 +1,7 @@
 import zmq
 import time
 import json
+import subprocess
 
 from django.core.management.base import NoArgsCommand
 
@@ -25,14 +26,21 @@ class Command(NoArgsCommand):
             del job['command']
             try:
                 command(**job)
-            except Exception:
-                pass
+            except Exception, e:
+                print e
 
 
 # Create the actual commands here and keep the command_map below up to date
+# FIXME: I feel this should go to it's own module
+from project.models import Project
 def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
-    print("bootstrapping %s" % project_id)
+    print("running bootstrap %s" % project_id)
+    project = Project.objects.get(id=project_id)
+    process = subprocess.Popen("python bootstrap.py init", cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    print process.communicate()[0]
+    print process.returncode
 
 command_map = {
     'BOOTSTRAP': bootstrap,
