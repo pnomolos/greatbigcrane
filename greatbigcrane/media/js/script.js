@@ -16,7 +16,7 @@ jQuery(function($){
   });
   
   $('.buttons .favourite').live('click', function(e){
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
     $.post( $(this).attr('href'), { update: '#project-list' }, ajaxHandler );
   });
 });
