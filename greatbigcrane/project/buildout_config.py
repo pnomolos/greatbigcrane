@@ -28,6 +28,9 @@ class BuildoutConfig(SortedDict):
         return super(BuildoutConfig, self).__getitem__(key)
 
 def buildout_parse(filename):
+    """
+    Given a filename, parse the buildout config and return a BuildoutConfig object that represents it
+    """
     parser = RawConfigParser(dict_type=SortedDict)
 
     # Don't ask me, buildout had it...
@@ -45,3 +48,25 @@ def buildout_parse(filename):
             config[section][key] = value
 
     return config
+
+def buildout_write(filename, config):
+    """
+    Given a filename and a BuildoutConfig, write the contents of the BuildoutConfig to the file
+    """
+
+    fp = open(filename, "w")
+
+    parser = RawConfigParser(dict_type=SortedDict)
+
+    # Don't ask me, buildout had it...
+    parser.optionxform = lambda s: s
+
+    for section in config:
+        parser.add_section(section)
+        for key, value in config[section].iteritems():
+            if isinstance(value, list):
+                value = '\n'.join([''] + value)
+            parser.set(section, key, value)
+
+    parser.write(fp)
+    fp.close()

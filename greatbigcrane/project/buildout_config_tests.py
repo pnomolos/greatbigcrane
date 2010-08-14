@@ -3,15 +3,17 @@ from django.template import Template, RequestContext
 
 import tempfile
 
-from greatbigcrane.project.buildout_config import buildout_parse
+from greatbigcrane.project.buildout_config import buildout_parse, BuildoutConfig, buildout_write
 
 """
 Notes:
 * *Parse simplest buildout.cfg*
 * *Parse more complicated buildout.cfg*
 
-* Write simplest buildout.cfg
+* *Write simplest buildout.cfg*
 * Write more complicated buildout.cfg
+* Write config and make sure sections order is preserved
+* Write config and make sure lists of things are separated by newlines and indents properly
 """
 
 class BuildoutParse(TestCase):
@@ -30,6 +32,22 @@ class BuildoutParse(TestCase):
         assert buildout_object['buildout'].keys() == ['parts', 'unzip']
 
         assert buildout_object['buildout']['parts'] == ['eggs', 'django', 'pyzmq']
+
+    def test_write_simplest_buildout(self):
+        bc = BuildoutConfig()
+        bc['buildout']['parts'] = ''
+        bc['buildout']['find-links'] = 'http://pypi.python.org/simple'
+
+        fp = tempfile.NamedTemporaryFile()
+
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        assert data == '''[buildout]
+parts = 
+find-links = http://pypi.python.org/simple
+
+'''
 
 def mktmpcfg(cfg):
     fp = tempfile.NamedTemporaryFile()
