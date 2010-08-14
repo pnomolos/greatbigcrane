@@ -32,7 +32,7 @@ nav, #main {
 }
 
 .no-sidebar {
-  width: 620px;
+  width: 720px;
   margin: 0 auto;
 }
 
@@ -207,6 +207,19 @@ ul.projects li .buttons .favourite.favourited {
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
 }
 
+.notifications .tests li {
+  width: 300px;
+  clear: both;
+}
+
+.notifications .tests li.success {
+  float: left;
+}
+
+.notifications .tests li.error {
+  float: right;
+}
+
 /* notifications */
 
 .notification code {
@@ -241,12 +254,12 @@ form label,
 form input[type=text],
 form textarea {
   display: block;
-  width: 600px;
+  width: 700px;
   font-size: 16px;
 }
 
 form input[type=text], form textarea {
-  width: 578px;
+  width: 678px;
   padding: 10px;
   border: 1px solid #000;
   background: #ddd;
