@@ -209,17 +209,15 @@ ul.projects li .buttons .favourite.favourited {
 
 .notifications .tests li {
   width: 300px;
-  clear: both;
 }
 
 .notifications .tests li.success {
-  float: left;
+  text-align: left;
 }
 
 .notifications .tests li.error {
-  float: right;
+  text-align: right;
 }
-
 /* notifications */
 
 .notification code {
