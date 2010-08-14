@@ -73,6 +73,10 @@ p {
   margin-bottom: 10px;
 }
 
+code {
+  white-space: pre;
+}
+
 /* header styles */
 header nav ul, header nav li {
   margin: 0;
@@ -202,6 +206,31 @@ ul.projects li .buttons .favourite.favourited {
 .dashboard .tests li.error a {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
+}
+
+/* notifications */
+
+.notification code {
+  border: 1px solid #666;
+  background: #121212;
+  padding: 10px;
+  display: block;
+  clear: both;
+}
+
+.notification h2 {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.notification .meta {
+  float: right;
+}
+
+.notification .meta span {
+  display: block;
+  text-align: right;
+  line-height: 24px;
 }
 
 /* form styling */
