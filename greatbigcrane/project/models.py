@@ -26,6 +26,7 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     test_status = models.BooleanField(default=False)
+    favourite = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse("view_project", args=[self.id])
