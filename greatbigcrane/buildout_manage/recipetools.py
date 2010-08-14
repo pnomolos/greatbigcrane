@@ -27,9 +27,17 @@ def simple_property_get(name):
     def get(self):
         # Parse ${
         def convert_value(data):
-            if data.startswith('${'):
-                g = section_re.match(data)
-                return (g.group(1), g.group(2))
+            if '${' in data:
+                tokens = section_re.split(data)
+                token_list = []
+                if tokens[0]:
+                    token_list.append(tokens[0])
+                steps = (len(tokens) - 1)/3
+                for step in range(steps):
+                    token_list.append(tuple(tokens[step*3+1:step*3+3]))
+                    if tokens[step*3+3]:
+                        token_list.append(tokens[step*3+3])
+                return tuple(token_list)
             return data
 
         value = self.section[name]
@@ -44,7 +52,13 @@ def simple_property_set(name):
     def set(self, value):
         def convert_value(data):
             if isinstance(data, tuple):
-                data = '${%s:%s}' % data
+                data_list = []
+                for elem in data:
+                    if isinstance(elem, tuple):
+                        data_list.append('${%s:%s}' % elem)
+                    else:
+                        data_list.append(elem)
+                data = ''.join(data_list)
             return data
 
         if isinstance(value, list):
@@ -72,9 +86,9 @@ def bool_property_get(name):
 def bool_property_set(name):
     def set(self, value):
         if value == True:
-            value = 'True'
+            value = 'true'
         else:
-            value = 'False'
+            value = 'false'
         self.section[name] = value
     return set
 

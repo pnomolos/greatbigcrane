@@ -28,6 +28,7 @@ Notes:
 * *Add a djangorecipe section to a BuildoutConfig*
 * *Parse an existing djangorecipe section*
 * *Parse an existing djangorecipe section, modify it, and write it out again*
+* *Parse strings of the form ${buildout:directory}/some/path*
 """
 
 class RecipeTests(TestCase):
@@ -39,9 +40,9 @@ class RecipeTests(TestCase):
 
         dr.settings = 'development'
         dr.version = '1.2.1'
-        dr.eggs = ('eggs', 'eggs')
+        dr.eggs = (('eggs', 'eggs'),)
         dr.project = 'greatbigcrane'
-        dr.extra_paths = ('eggs', 'extra-paths')
+        dr.extra_paths = (('eggs', 'extra-paths'),)
         dr.fcgi = True
         dr.wsgi = False
 
@@ -54,8 +55,8 @@ class RecipeTests(TestCase):
         assert django['eggs'] == '${eggs:eggs}'
         assert django['project'] == 'greatbigcrane'
         assert django['extra-paths'] == '${eggs:extra-paths}'
-        assert django['fcgi'] == 'True'
-        assert django['wsgi'] == 'False'
+        assert django['fcgi'] == 'true'
+        assert django['wsgi'] == 'false'
 
         fp = tempfile.NamedTemporaryFile()
 
@@ -73,8 +74,8 @@ version = 1.2.1
 eggs = ${eggs:eggs}
 project = greatbigcrane
 extra-paths = ${eggs:extra-paths}
-fcgi = True
-wsgi = False
+fcgi = true
+wsgi = false
 
 """
 
@@ -87,7 +88,7 @@ wsgi = False
 
         assert dr.settings == 'development'
         assert dr.version == '1.2.1'
-        assert dr.extra_paths == ('eggs', 'extra-paths')
+        assert dr.extra_paths == (('eggs', 'extra-paths'),)
         assert dr.fcgi == True
 
     def test_change_existing_djangorecipe(self):
@@ -101,7 +102,7 @@ wsgi = False
         dr.version = '1.1.1'
         dr.fcgi = False
         dr.wsgi = False
-        dr.eggs = [dr.eggs, ('pyzmq', 'parts')]
+        dr.eggs = [dr.eggs, (('pyzmq', 'parts'),)]
 
         fp.seek(0)
         buildout_write(fp.name, bc)
@@ -134,8 +135,63 @@ eggs =
 \t${pyzmq:parts}
 project = greatbigcrane
 extra-paths = ${eggs:extra-paths}
-fcgi = False
-wsgi = False
+fcgi = false
+wsgi = false
+
+[pyzmq]
+recipe = zerokspot.recipe.git
+repository = http://github.com/zeromq/pyzmq.git
+as_egg = True
+
+"""
+
+    def test_parse_replacements(self):
+        fp = mktmpcfg(complicated_buildout_cfg)
+        bc = buildout_parse(fp.name)
+
+        eggrecipe = recipes['zc.recipe.egg']
+        eg = eggrecipe(bc, 'eggs')
+
+        assert eg.extra_paths == [(('buildout', 'directory'), '/parts/django'),
+            (('buildout', 'directory'), '/parts/django-registration'),
+            (('buildout', 'directory'), '/greatbigcrane'),
+            (('buildout', 'directory'), '/parts/pyzmq'),
+            ]
+
+        eg.extra_paths = ('/something/', ('buildout', 'directory'), '/another/thing')
+
+        djangorecipe = recipes['djangorecipe']
+        dr = djangorecipe(bc, 'django')
+
+        assert dr.eggs == (('eggs', 'eggs'),)
+
+        fp.seek(0)
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        assert data == """[buildout]
+parts = 
+\teggs
+\tdjango
+\tpyzmq
+unzip = true
+
+[eggs]
+recipe = zc.recipe.egg
+eggs = 
+\tsouth==0.7.1
+\tIPython
+extra-paths = /something/${buildout:directory}/another/thing
+
+[django]
+settings = development
+recipe = djangorecipe
+version = 1.2.1
+eggs = ${eggs:eggs}
+project = greatbigcrane
+extra-paths = ${eggs:extra-paths}
+fcgi = True
+wsgi = True
 
 [pyzmq]
 recipe = zerokspot.recipe.git
