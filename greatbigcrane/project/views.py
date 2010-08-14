@@ -42,9 +42,8 @@ def index(request):
         {'project_list': projects, 'notifications': notifications}))
 
 def list_projects(request):
-    projects = Project.objects.all()
-    if "orderby" in request.GET:
-        projects = projects.order_by(request.GET['orderby'])
+    orderby = request.GET.get('orderby', 'name')
+    projects = Project.objects.all().order_by(orderby)
     return object_list(request, projects, template_name="project/project_list.html",
             template_object_name="project")
 
