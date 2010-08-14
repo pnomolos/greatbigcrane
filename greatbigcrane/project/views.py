@@ -17,4 +17,6 @@ def view_project(request, project_id):
     return HttpResponse("not implemented")
 
 def add_project(request):
+    # We have to do stuff like create the buildout directory on save
+    # so this can't stay generic
     return create_object(request, model=Project)
