@@ -14,5 +14,64 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from buildout_config_tests import *
+from django.test import TestCase
 
+import tempfile
+
+from buildout_manage import recipes
+from buildout_manage.buildout_config import BuildoutConfig, buildout_parse, buildout_write
+
+"""
+Notes:
+* Add a djangorecipe section to a BuildoutConfig
+"""
+
+class RecipeTests(TestCase):
+    def test_add_djangorecipe_to_buildoutconfig(self):
+        bc = BuildoutConfig()
+        djangorecipe = recipes['djangorecipe']
+
+        dr = djangorecipe(bc, 'django')
+
+        dr.settings = 'development'
+        dr.version = '1.2.1'
+        dr.eggs = ('eggs', 'eggs')
+        dr.project = 'greatbigcrane'
+        dr.extra_paths = ('eggs', 'extra-paths')
+        dr.fcgi = True
+        dr.wsgi = False
+
+        django = bc['django']
+        assert django
+
+        assert django['recipe'] == 'djangorecipe'
+        assert django['settings'] == 'development'
+        assert django['version'] == '1.2.1'
+        assert django['eggs'] == '${eggs:eggs}'
+        assert django['project'] == 'greatbigcrane'
+        assert django['extra-paths'] == '${eggs:extra-paths}'
+        assert django['fcgi'] == 'True'
+        assert django['wsgi'] == 'False'
+
+        fp = tempfile.NamedTemporaryFile()
+
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        assert data == """[buildout]
+parts = 
+\tdjango
+
+[django]
+recipe = djangorecipe
+settings = development
+version = 1.2.1
+eggs = ${eggs:eggs}
+project = greatbigcrane
+extra-paths = ${eggs:extra-paths}
+fcgi = True
+wsgi = False
+
+"""
+
+from buildout_config_tests import *

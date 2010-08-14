@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import recipes.django
-
-recipes = {'djangorecipe':recipes.django.django}
+def add_parts(config, section_name):
+    parts_list = config['buildout'].setdefault('parts', [])
+    if section_name not in parts_list:
+        parts_list.append(section_name)
