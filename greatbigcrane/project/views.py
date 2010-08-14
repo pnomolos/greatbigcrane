@@ -37,7 +37,6 @@ def index(request):
     '''We should move this to a different app. Possibly preferences, it's more generic.'''
     projects = Project.objects.all()
     notifications = Notification.objects.all()[:10]
-    print notifications
     return render_to_response('index.html', RequestContext(request,
         {'project_list': projects, 'notifications': notifications}))
 
