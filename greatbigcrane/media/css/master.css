@@ -60,6 +60,15 @@ h2 {
   color: #627f60;
 }
 
+/* misc styles */
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
 /* header styles */
 header nav ul, header nav li {
   margin: 0;
@@ -207,7 +216,8 @@ form input[type=text], form textarea {
   background: #ddd;
 }
 
-form input[type=submit] {
+form input[type=submit],
+a.button {
   border: 1px solid #ddd;
   background: #999;
   padding: 10px;
@@ -221,7 +231,8 @@ form input[type=submit] {
   -webkit-box-shadow: 0 0 5px rgba(196,196,196,0.4);
 }
 
-form input[type=submit]:hover {
+form input[type=submit]:hover,
+a.button:hover {
   box-shadow: 0 0 8px rgba(196,196,196,1);
   -moz-box-shadow: 0 0 8px rgba(196,196,196,1);
   -webkit-box-shadow: 0 0 8px rgba(196,196,196,1);
