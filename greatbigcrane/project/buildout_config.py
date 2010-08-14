@@ -22,6 +22,11 @@ class BuildoutConfig(SortedDict):
     Represents a buildout.cfg
     """
 
+    def __getitem__(self, key):
+        if not self.__contains__(key):
+            self[key] = SortedDict()
+        return super(BuildoutConfig, self).__getitem__(key)
+
 def buildout_parse(filename):
     parser = RawConfigParser(dict_type=SortedDict)
 
@@ -33,7 +38,6 @@ def buildout_parse(filename):
     config = BuildoutConfig()
 
     for section in parser.sections():
-        config[section] = SortedDict()
         for key, value in parser.items(section):
             value = value.strip()
             if '\n' in value:
