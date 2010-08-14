@@ -1,17 +1,13 @@
 {% extends 'nosidebar.html' %}
 
 {% block main %}
+<h1>Notifications</h1>
 <div class="notifications clearfix">
-  <ul class="tests successes">
-      {% for notification in success_notifications %}
-        {% include 'notifications/_notification.html' %}
-      {% endfor %}
-  </ul>
-
-  <ul class="tests errors">
-      {% for notification in error_notifications %}
-        {% include 'notifications/_notification.html' %}
-      {% endfor %}
+  <div class="svg"></div>
+  <ul class="tests">
+    {% for notification in all_notifications %}
+      {% include 'notifications/_notification.html' %}
+    {% endfor %}
   </ul>
 </div>
 {% include 'notifications/paginator.html' %}
