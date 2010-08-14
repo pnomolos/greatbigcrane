@@ -16,6 +16,14 @@ limitations under the License.
 
 from django.db import models
 
+class PreferenceManager(models.Manager):
+    def get_preference(self, name, default=None):
+        try:
+            value = Preference.objects.get(name="projects_directory").value
+        except Preference.DoesNotExist:
+            return default
+
 class Preference(models.Model):
     name = models.CharField(max_length=32, unique=True)
     value = models.CharField(max_length=512)
+    objects = PreferenceManager()
