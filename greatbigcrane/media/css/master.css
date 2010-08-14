@@ -1,7 +1,7 @@
 @import url(base.css);
 
 body {
-  background: #313236 url(/media/images/bg.jpg) 0 center no-repeat;
+  background: #313236 url(/media/images/bg.jpg) center 0 no-repeat;
   color: #f6f6f6;
 }
 
