@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'nosidebar.html' %}
 
-{% block content %}
+{% block contenttitle %}
+Preferences
+{% endblock %}
+
+{% block main %}
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
