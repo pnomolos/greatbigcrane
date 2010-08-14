@@ -1,4 +1,4 @@
 * Trash projects
-* rename run_job to queue_job
-* allow viewing notification contents
 * allow viewing all notifications
+* don't automatically run bootstrap init on project creation
+    * we may want to git clone, or it may be an existing buildout
