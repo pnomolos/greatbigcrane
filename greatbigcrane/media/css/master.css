@@ -69,6 +69,10 @@ h2 {
   float: left;
 }
 
+* + p {
+  margin-top: 10px;
+}
+
 /* header styles */
 header nav ul, header nav li {
   margin: 0;
@@ -195,10 +199,6 @@ ul.projects li .buttons .settings {
 /* form styling */
 form {
   margin: 10px 0;
-}
-
-form p {
-  margin-bottom: 10px;
 }
 
 form label,
