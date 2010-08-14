@@ -17,22 +17,27 @@ limitations under the License.
 from ConfigParser import RawConfigParser
 from django.utils.datastructures import SortedDict
 
-import StringIO
-
 class BuildoutConfig(SortedDict):
     """
     Represents a buildout.cfg
     """
 
-def buildout_parse(cfg):
-    parser = RawConfigParser()
-    parser.readfp(StringIO.StringIO(cfg))
+def buildout_parse(filename):
+    parser = RawConfigParser(dict_type=SortedDict)
+
+    # Don't ask me, buildout had it...
+    parser.optionxform = lambda s: s
+
+    parser.read(filename)
 
     config = BuildoutConfig()
 
     for section in parser.sections():
         config[section] = SortedDict()
         for key, value in parser.items(section):
+            value = value.strip()
+            if '\n' in value:
+                value = value.split('\n')
             config[section][key] = value
 
     return config
