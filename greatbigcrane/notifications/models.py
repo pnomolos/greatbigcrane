@@ -24,3 +24,6 @@ class Notification(models.Model):
     summary = models.CharField(max_length=128)
     message = models.TextField()
     notification_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=["-notification_time"]
