@@ -14,7 +14,7 @@
   </select>
 </form>
 
-<ul class="projects">
+<ul class="projects" id="project-list">
   {% for project in project_list %}
     {% with project as project %}
       {% include 'project/single_project.html' %}
