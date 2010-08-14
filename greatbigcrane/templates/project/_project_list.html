@@ -1,0 +1,5 @@
+{% for project in project_list %}
+  {% with project as project %}
+    {% include 'project/_project.html' %}
+  {% endwith %}
+{% endfor %}
