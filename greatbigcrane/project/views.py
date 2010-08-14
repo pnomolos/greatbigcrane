@@ -36,15 +36,10 @@ from notifications.models import Notification
 
 def index(request):
     '''We should move this to a different app. Possibly preferences, it's more generic.'''
-    projects = Project.objects.filter(favourite=False).order_by('-updated_at')[:5]
-    favourite_projects = Project.objects.filter(favourite=True).order_by('name')
+    projects = Project.objects.all()
     notifications = Notification.objects.exclude(dismissed=True)[:10]
     return render_to_response('index.html', RequestContext(request,
-        {
-            'project_list': projects,
-            'favourite_project_list': favourite_projects,
-            'notifications': notifications
-        }))
+        {'project_list': projects, 'notifications': notifications}))
 
 def list_projects(request):
     orderby = request.GET.get('orderby', 'name')
@@ -93,3 +88,6 @@ def add_recipe(request, project_id):
             RequestContext(request, {
                 'project': project,
                 'available_recipes': buildout_manage.recipes}))
+
+def recipe_template(request, recipe_name):
+    return HttpResponse(recipe_name)

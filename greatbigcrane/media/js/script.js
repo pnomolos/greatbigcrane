@@ -17,6 +17,11 @@ function dismiss_notification(notification_id) {
             });
 }
 
+function load_recipe_template() {
+    $("#recipe_template_container").load("/projects/recipe_template/" +
+            $('#available_recipes').val() + '/');
+}
+
 jQuery(function($){
   $('.autosubmit').change(function(){
     $(this).parents('form').first().submit();
@@ -26,6 +31,8 @@ jQuery(function($){
     e.preventDefault();
     $.post( $(this).attr('href'), { update: '#project-list' }, ajaxHandler );
   });
+
+  $('#available_recipes').change(load_recipe_template);
   
   // if ($('.notifications').size()) {
   //   var paper = Raphael(

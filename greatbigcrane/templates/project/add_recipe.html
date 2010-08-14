@@ -1,11 +1,14 @@
 {% extends 'nosidebar.html' %}
 
 {% block main %}
+Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:
 <form>
-    <select name="available_recipes">
+    <select id="available_recipes">
         {% for recipe in available_recipes %}
         <option value="{{recipe}}">{{recipe}}</option>
         {% endfor %}
     </select>
 </form>
+<div id="recipe_template_container">
+</div>
 {% endblock %}
