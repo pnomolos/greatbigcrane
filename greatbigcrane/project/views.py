@@ -80,3 +80,6 @@ def favourite_project(request, project_id):
         return HttpResponse(json.dumps({'update':{request.POST['update']: rendered}}),content_type="application/json")
     else:
         return HttpResponse('')
+
+def add_recipe(request, project_id):
+    return HttpResponse("not implemented")
