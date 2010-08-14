@@ -69,6 +69,10 @@ header nav li a:visited {
   display: block;
 }
 
+header nav li a:hover {
+  color: #ddd;
+}
+
 header nav li + li a {
   margin-left: 10px;
 }
@@ -76,6 +80,7 @@ header nav li + li a {
 header nav a.current {
   background: #212121;
   padding: 10px;
-  margin: -10px 0;
+  margin-top: -10px;
+  margin-bottom: -10px;
 }
 
