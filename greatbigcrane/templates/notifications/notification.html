@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class={{notification.status}}>
+    <h2>{{notification.summary}}</h2>
+    {{notification.notification_time}}
+    {{notification.project.name}}
+    <pre>{{notification.message}}</pre>
+</div>
+{% endblock %}

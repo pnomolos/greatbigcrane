@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
+from notifications.models import Notification
+
 def view_notification(request, notification_id):
-    from django.http import HttpResponse
-    return HttpResponse("notification...")
+    notification = get_object_or_404(Notification, id=notification_id)
+    return render_to_response("notifications/notification.html",
+            RequestContext(request, {'notification': notification}))
