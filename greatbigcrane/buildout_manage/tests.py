@@ -23,7 +23,9 @@ from buildout_manage.buildout_config import BuildoutConfig, buildout_parse, buil
 
 """
 Notes:
-* Add a djangorecipe section to a BuildoutConfig
+* *Add a djangorecipe section to a BuildoutConfig*
+* Parse an existing djangorecipe section
+* Parse an existing djangorecipe section, modify it, and write it out again
 """
 
 class RecipeTests(TestCase):
