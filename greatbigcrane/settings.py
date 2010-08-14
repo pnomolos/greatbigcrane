@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'preferences',
     'job_queue',
     'notifications',
+    'buildout_manage',
 )
 
 TEMPLATE_LOADERS = (
