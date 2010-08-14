@@ -223,6 +223,7 @@ a.button {
   padding: 10px;
   color: #121212;
   font-size: 16px;
+  text-decoration: none;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
