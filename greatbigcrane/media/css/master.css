@@ -179,9 +179,40 @@ form {
 }
 
 form p {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-form label, form input[type=text] {
+form label,
+form input[type=text],
+form textarea {
   display: block;
+  width: 600px;
+  font-size: 16px;
+}
+
+form input[type=text], form textarea {
+  width: 590px;
+  padding: 4px;
+  border: 1px solid #000;
+  background: #ddd;
+}
+
+form input[type=submit] {
+  border: 1px solid #ddd;
+  background: #999;
+  padding: 10px;
+  color: #121212;
+  font-size: 16px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 0 0 5px rgba(196,196,196,0.4);
+  -moz-box-shadow: 0 0 5px rgba(196,196,196,0.4);
+  -webkit-box-shadow: 0 0 5px rgba(196,196,196,0.4);
+}
+
+form input[type=submit]:hover {
+  box-shadow: 0 0 8px rgba(196,196,196,1);
+  -moz-box-shadow: 0 0 8px rgba(196,196,196,1);
+  -webkit-box-shadow: 0 0 8px rgba(196,196,196,1);
 }
