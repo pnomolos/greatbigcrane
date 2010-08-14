@@ -8,7 +8,7 @@ handler500 # Pyflakes
 
 urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
-    (r'^$', 'buildout.views.index'),
+    (r'^$', 'project.views.index'),
 )
 
 if settings.DEBUG:

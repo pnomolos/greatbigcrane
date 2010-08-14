@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'south',
 
     # Our apps
-    'buildout',
+    'project',
 )
 
 TEMPLATE_LOADERS = (
