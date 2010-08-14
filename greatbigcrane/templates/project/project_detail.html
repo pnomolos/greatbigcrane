@@ -1,8 +1,9 @@
 {% extends 'nosidebar.html' %}
 
+{% block contenttitle %}{{project.name}}{% endblock %}
+
 {% block main %}
-{{project.name}}
-{{project.git_repo}}
-{{project.base_directory}}
-{{project.description}}
+<p>{{project.git_repo}}</p>
+<p>{{project.base_directory}}</p>
+<p>{{project.description}}</p>
 {% endblock %}
