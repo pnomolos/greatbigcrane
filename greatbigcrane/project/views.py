@@ -18,5 +18,3 @@ def view_project(request, project_id):
 
 def add_project(request):
     return create_object(request, model=Project)
-    from django.http import HttpResponse
-    return HttpResponse("not implemented")
