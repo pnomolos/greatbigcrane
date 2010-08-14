@@ -45,12 +45,17 @@ nav, #main {
 
 /* Font styles */
 h1 {
-  font-size: 36px;
+  font: normal normal 36px/1 Verdana, sans-serif;
   text-align: right;
   margin: 0 0 10px;
-  line-height: 1;
 }
 
+h2 {
+  font: normal normal 20px/1.2 Verdana, sans-serif;
+  color: #627f60;
+}
+
+/* header styles */
 header nav ul, header nav li {
   margin: 0;
   padding: 0;
