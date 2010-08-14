@@ -21,6 +21,7 @@ from django.template import RequestContext
 
 from project.models import Project
 from project.forms import ProjectForm
+from preference.models import Preference
 
 def index(request):
     '''We should move this to a different app'''
@@ -40,5 +41,8 @@ def add_project(request):
     if form.is_valid():
         instance = form.save()
         return redirect(instance.get_absolute_url())
+
+    base_url = Preference.objects.get(name="projects_directory").value
+
     return render_to_response("project/project_form.html",
-            RequestContext(request, {'form': form}))
+            RequestContext(request, {'form': form, 'base_url': base_url}))
