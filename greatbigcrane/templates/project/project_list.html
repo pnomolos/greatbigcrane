@@ -1,11 +1,16 @@
-{% extends 'nosidebar.html' %}
+{% extends 'sidebar.html' %}
+
+{% block contenttitle %}Projects{% endblock %}
 
 {% block main %}
-<ul>
-    {% for project in project_list %}
-    <li><a href="{{project.get_absolute_url}}">{{project.name}}</a></li>
-    {% endfor %}
+<h2>Projects</h2>
+<ul class="projects">
+  {% for project in project_list %}
+  <li><a href="{{project.get_absolute_url}}">{{project.name}}</a></li>
+  {% endfor %}
 </ul>
+{% endblock %}
 
+{% block sidebar %}
 <a href="{% url add_project %}">Add Project</a>
 {% endblock %}
