@@ -186,12 +186,12 @@ ul.projects li .buttons .settings {
   background-position: 9px center !important;
 }
 
-.dashboard .tests li.pass a {
+.dashboard .tests li.success a {
   color: #9de983;
   background: #121212 url(../images/small-icon-pass.png) 10px center no-repeat;
 }
 
-.dashboard .tests li.fail a {
+.dashboard .tests li.error a {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
 }
