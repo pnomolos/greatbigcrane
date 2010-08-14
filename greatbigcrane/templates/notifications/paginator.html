@@ -1,0 +1,15 @@
+    {% if is_paginated %}
+    <div class="paginator">
+        Page {{page_obj.number}} of {{paginator.num_pages}}<br />
+        {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}{% if paginator_extra %}&amp;{{paginator_extra}}{% endif %}">&larr; previous</a>
+        {% else %}
+            <span>&larr; previous</span>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}{% if paginator_extra %}&amp;{{paginator_extra}}{% endif %}">next &rarr;</a>
+        {% else %}
+            <span>next &rarr;</span>
+        {% endif %}
+    </div>
+    {% endif %}

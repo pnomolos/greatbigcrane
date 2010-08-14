@@ -17,5 +17,6 @@ limitations under the License.
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('notifications.views',
+        url('^$', 'list_notifications', name="list_notifications"),
         url('^view/(?P<notification_id>\d+)/$', 'view_notification', name="view_notification"),
         )

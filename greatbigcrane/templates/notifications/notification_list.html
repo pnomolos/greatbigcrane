@@ -1,0 +1,15 @@
+{% extends 'nosidebar.html' %}
+
+{% block content %}
+  <ul class="tests">
+      {% for notification in notification_list %}
+      <li class="{{notification.status}}">
+        <a href="{{notification.get_absolute_url}}">
+            <span class="project">{{notification.project.name}}</span>:
+            <span class="result">{{notification.summary}}</span>
+        </a>
+      </li>
+      {% endfor %}
+  </ul>
+{% include 'notifications/paginator.html' %}
+{% endblock %}
