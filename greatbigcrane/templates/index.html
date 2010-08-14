@@ -10,7 +10,7 @@ Dashboard
   <ul class="projects">
     {% for project in project_list %}
       {% with project as project %}
-        {% include 'project/single_project.html' %}
+        {% include 'project/_project.html' %}
       {% endwith %}
     {% endfor %}
   </ul>
