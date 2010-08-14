@@ -60,7 +60,9 @@ header nav li {
   float: left;
 }
 
-header nav li a {
+header nav li a,
+header nav li a:active,
+header nav li a:visited {
   font-size: 24px;
   color: #f6f6f6;
   text-decoration: none;
@@ -71,7 +73,7 @@ header nav li + li a {
   margin-left: 10px;
 }
 
-header nav li.current a {
+header nav a.current {
   background: #212121;
   padding: 10px;
   margin: -10px 0;
