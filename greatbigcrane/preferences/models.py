@@ -17,5 +17,5 @@ limitations under the License.
 from django.db import models
 
 class Preference(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32, unique=True)
     value = models.CharField(max_length=512)
