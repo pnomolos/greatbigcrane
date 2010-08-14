@@ -32,4 +32,4 @@ class Project(models.Model):
         return reverse("view_project", args=[self.id])
 
     def __unicode__(self):
-        retrn self.name
+        return self.name
