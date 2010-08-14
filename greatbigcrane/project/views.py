@@ -18,7 +18,7 @@ import os.path
 import json
 from shutil import copyfile
 
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.template import RequestContext
@@ -27,6 +27,7 @@ from django.conf import settings
 from django.core import serializers
 from django.http import HttpResponse
 
+import buildout_manage
 from job_queue.jobs import queue_job
 from project.models import Project
 from project.forms import ProjectForm
@@ -87,4 +88,8 @@ def favourite_project(request, project_id):
         return HttpResponse('')
 
 def add_recipe(request, project_id):
-    return HttpResponse("not implemented")
+    project = get_object_or_404(Project, id=project_id)
+    return render_to_response("project/add_recipe.html", 
+            RequestContext(request, {
+                'project': project,
+                'available_recipes': buildout_manage.recipes}))

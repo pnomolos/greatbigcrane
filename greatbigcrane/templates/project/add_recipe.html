@@ -1,0 +1,11 @@
+{% extends 'nosidebar.html' %}
+
+{% block main %}
+<form>
+    <select name="available_recipes">
+        {% for recipe in available_recipes %}
+        <option value="{{recipe}}">{{recipe}}</option>
+        {% endfor %}
+    </select>
+</form>
+{% endblock %}
