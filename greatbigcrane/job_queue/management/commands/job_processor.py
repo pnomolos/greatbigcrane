@@ -23,7 +23,11 @@ class Command(NoArgsCommand):
             job = json.loads(job)
             command = command_map[job['command']]
             del job['command']
-            command(**job)
+            try:
+                command(**job)
+            except Exception:
+                pass
+
 
 # Create the actual commands here and keep the command_map below up to date
 def bootstrap(project_id):
