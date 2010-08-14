@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div id="content" class="no-sidebar">
-    {% block main %}
-    {% endblock %}
+  <div class="no-sidebar">
+    <h1>{% block contenttitle %}{% endblock %}</h1>
+    <div id="content">
+      {% block main %}
+      {% endblock %}
+    </div>
   </div>
 {% endblock %}

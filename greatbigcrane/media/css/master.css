@@ -31,7 +31,12 @@ nav, #main {
   padding: 10px;
 }
 
-#content.no-sidebar {
+.no-sidebar {
+  width: 620px;
+  margin: 0 auto;
+}
+
+.no-sidebar #content {
   float: none;
   width: auto;
 }
@@ -166,4 +171,17 @@ header nav a.current {
 .dashboard .tests li.fail a {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
+}
+
+/* form styling */
+form {
+  margin: 10px 0;
+}
+
+form p {
+  margin-bottom: 5px;
+}
+
+form label, form input[type=text] {
+  display: block;
 }
