@@ -195,6 +195,12 @@ ul.projects li .buttons .favourite.favourited {
   position: absolute;
   top: 5px;
   right: 5px;
+  overflow: hidden;
+  text-indent: -999em;
+  outline: none;
+  background: url(../images/small-icon-delete.png) 0 0 no-repeat;
+  width: 20px;
+  height: 20px;
 }
 
 .tests li a.result {
@@ -228,12 +234,10 @@ ul.projects li .buttons .favourite.favourited {
 }
 
 .notifications .tests li.success {
-  text-align: left;
   float: left;
 }
 
 .notifications .tests li.error {
-  text-align: right;
   float: right;
 }
 
