@@ -1,6 +1,6 @@
 <li id="project-{{project.id}}">
   <div class="buttons">
-    <a href="{% url favourite_project project.id %}" class="favourite">Favourite</a>
+    <a href="{% url favourite_project project.id %}" class="favourite{{project.favourite|yesno:' favourited,'}}">Favourite</a>
     <a href="#play" class="play">Play</a>
     <a href="{% url view_project project.id %}" class="settings">Settings</a>
   </div>
