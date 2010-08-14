@@ -116,3 +116,26 @@ header nav a.current {
 .dashboard .projects li .buttons {
   float: right;
 }
+
+.dashboard .projects li .buttons a {
+  background: url(../images/icons.png) 0 0 no-repeat;
+  width: 48px;
+  height: 48px;
+  float: left;
+  text-indent: -999em;
+  overflow: hidden;
+  outline: none;
+  opacity: 0.6;
+}
+
+.dashboard .projects li .buttons a:hover {
+  opacity: 0.9;
+}
+
+.dashboard .projects li .buttons .play {
+  background-position: 0 0;
+}
+
+.dashboard .projects li .buttons .settings {
+  background-position: 0 -48px;
+}
