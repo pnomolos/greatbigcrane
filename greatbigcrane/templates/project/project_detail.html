@@ -6,4 +6,9 @@
 <p>{{project.git_repo}}</p>
 <p>{{project.base_directory}}</p>
 <p>{{project.description}}</p>
+{% for section in project.buildout_sections %}
+<ul>
+    {{section}}
+</ul>
+{% endfor %}
 {% endblock %}

@@ -14,8 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import os.path
 from django.db import models
 from django.core.urlresolvers import reverse
+from buildout_manage.buildout_config import buildout_parse
 
 
 class Project(models.Model):
@@ -31,5 +33,11 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse("view_project", args=[self.id])
 
+    def buildout_sections(self):
+        '''Return sorted dictionary of buildout sections'''
+        buildout_filename = os.path.join(self.base_directory, 'buildout.cfg')
+        sections = buildout_parse(buildout_filename)
+        return sections
+        
     def __unicode__(self):
         return self.name
