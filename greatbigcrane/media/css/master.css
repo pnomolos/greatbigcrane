@@ -2,4 +2,49 @@
 
 body {
   background: #313236 url(/media/images/bg.jpg) 0 center no-repeat;
+  color: #f6f6f6;
+}
+
+#container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+nav, #main {
+  background: #4b4b4b;
+  padding: 10px;
+}
+
+#main {
+  margin-top: 10px;
+}
+
+#content {
+  float: left;
+  width: 610px;
+  padding: 10px;
+}
+
+#sidebar {
+  float: right;
+  width: 280px;
+  padding: 10px;
+}
+
+#content.no-sidebar {
+  float: none;
+  width: auto;
+}
+
+#content, #sidebar {
+  background: #212121;
+  border-radius: 5px;
+}
+
+/* Font styles */
+h1 {
+  font-size: 36px;
+  text-align: right;
+  margin: 0 0 10px;
+  line-height: 1;
 }
