@@ -67,3 +67,4 @@ TEMPLATE_DIRS = (
 )
 
 
+DEBUG = True
