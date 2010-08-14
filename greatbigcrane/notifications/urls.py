@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-def view_notification(request, notification_id):
-    from django.http import HttpResponse
-    return HttpResponse("notification...")
+from django.conf.urls.defaults import *
+
+urlpatterns = patterns('notifications.views',
+        url('^view/(?P<notification_id>\d+)/$', 'view_notification', name="view_notification"),
+        )
