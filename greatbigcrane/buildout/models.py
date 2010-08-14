@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class Project(models.Model):
+    name = models.CharField(max_length=32)
+    base_directory = models.CharField(max_length=512)
+    description = models.TextField()

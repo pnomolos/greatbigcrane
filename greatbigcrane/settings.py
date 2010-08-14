@@ -42,12 +42,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
 )
 
-ROOT_URLCONF = 'greatbigcrane.urls'
+ROOT_URLCONF = 'urls'
 
 
 INSTALLED_APPS = (
+    # Django apps
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+
+    # Third party apps
+    'south',
+
+    # Our apps
+    'buildout',
 )
 
 TEMPLATE_LOADERS = (
