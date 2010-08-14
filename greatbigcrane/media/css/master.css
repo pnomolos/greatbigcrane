@@ -187,26 +187,37 @@ ul.projects li .buttons .favourite.favourited {
   list-style: none;
 }
 
-.tests li a {
+.tests .notification {
+  position: relative;
+}
+
+.tests .notification .dismiss {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.tests li a.result {
   font-size: 14px;
   display: block;
   padding: 10px 10px 10px 40px;
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
+  text-align: left;
 }
 
-.tests li a:hover {
+.tests li a.result:hover {
   padding: 9px 9px 9px 39px;
   border: 1px solid #666;
   background-position: 9px center !important;
 }
 
-.tests li.success a {
+.tests li.success a.result {
   color: #9de983;
   background: #121212 url(../images/small-icon-pass.png) 10px center no-repeat;
 }
 
-.tests li.error a {
+.tests li.error a.result {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
 }

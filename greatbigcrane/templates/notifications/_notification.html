@@ -1,7 +1,7 @@
 <li class="notification {{notification.status}}" id="notification-{{notification.id}}">
-  <a href="{{notification.get_absolute_url}}">
+  <a href="{{notification.get_absolute_url}}" class="result">
       <span class="project">{{notification.project.name}}</span>:
       <span class="result">{{notification.summary}}</span>
   </a>
-  <!-- <a href="javascript: dismiss_notification({{notification.id}});">dismiss</a> -->
+  <a href="javascript: dismiss_notification({{notification.id}});" class="dismiss">dismiss</a>
 </li>
