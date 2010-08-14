@@ -7,7 +7,7 @@ Dashboard
 {% block main %}
 <div class="dashboard">
   <h2>Current Projects</h2>
-  <ul class="projects">
+  <ul class="projects" id="project-list">
     {% for project in project_list %}
       {% with project as project %}
         {% include 'project/_project.html' %}
