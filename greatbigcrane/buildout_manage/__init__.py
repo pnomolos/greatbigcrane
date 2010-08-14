@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import recipes.django
+import recipes.django, recipes.egg
 
-recipes = {'djangorecipe':recipes.django.django}
+recipes = {'djangorecipe':recipes.django.django,
+    'zc.recipe.egg': recipes.egg.egg}
