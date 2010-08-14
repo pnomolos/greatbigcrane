@@ -4,23 +4,13 @@
 <div class="notifications clearfix">
   <ul class="tests successes">
       {% for notification in success_notifications %}
-      <li class="notification {{notification.status}}">
-        <a href="{{notification.get_absolute_url}}">
-            <span class="project">{{notification.project.name}}</span>:
-            <span class="result">{{notification.summary}}</span>
-        </a>
-      </li>
+        {% include 'notifications/_notification.html' %}
       {% endfor %}
   </ul>
 
   <ul class="tests errors">
       {% for notification in error_notifications %}
-      <li class="notification {{notification.status}}">
-        <a href="{{notification.get_absolute_url}}">
-            <span class="project">{{notification.project.name}}</span>:
-            <span class="result">{{notification.summary}}</span>
-        </a>
-      </li>
+        {% include 'notifications/_notification.html' %}
       {% endfor %}
   </ul>
 </div>
