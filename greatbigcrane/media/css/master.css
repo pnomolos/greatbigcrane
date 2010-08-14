@@ -95,6 +95,12 @@ header nav a.current {
 }
 
 /* project listing */
+ul.projects {
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+}
+
 ul.projects li {
   padding: 10px;
   color: #627f60;
