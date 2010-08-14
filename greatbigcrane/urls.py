@@ -7,7 +7,6 @@ admin.autodiscover()
 handler500 # Pyflakes
 
 urlpatterns = patterns('',
-    (r'^admin/(.*)', admin.site.root),
     (r'^$', 'project.views.index'),
 )
 
