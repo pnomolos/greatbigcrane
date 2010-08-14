@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     # Our apps
     'project',
     'preferences',
+    'job_queue',
 )
 
 TEMPLATE_LOADERS = (
