@@ -4,6 +4,16 @@
 
 {% block main %}
 <h2>Projects</h2>
+
+<form action="/projects">
+  <select>
+    <option value="">Sort Projects By</option>
+    <option value="commits">Commits</option>
+    <option value="date">Date</option>
+    <option value="test-status">Test Status</option>
+  </select>
+</form>
+
 <ul class="projects">
   {% for project in project_list %}
   <li id="project-{{project.id}}">
