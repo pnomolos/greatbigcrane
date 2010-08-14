@@ -9,6 +9,7 @@ handler500 # Pyflakes
 urlpatterns = patterns('',
     (r'^$', 'project.views.index'),
     (r'^project/', include('project.urls')),
+    (r'^preferences/', include('preferences.urls')),
 )
 
 if settings.DEBUG:
