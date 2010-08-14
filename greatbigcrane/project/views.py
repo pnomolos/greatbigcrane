@@ -27,12 +27,15 @@ from job_queue.jobs import run_job
 from project.models import Project
 from project.forms import ProjectForm
 from preferences.models import Preference
+from notifications.models import Notification
 
 def index(request):
-    '''We should move this to a different app'''
+    '''We should move this to a different app. Possibly preferences, it's more generic.'''
     projects = Project.objects.all()
+    notifications = Notification.objects.all()[:10]
+    print notifications
     return render_to_response('index.html', RequestContext(request,
-        {'project_list': projects}))
+        {'project_list': projects, 'notifications': notifications}))
 
 def list_projects(request):
     projects = Project.objects.all()

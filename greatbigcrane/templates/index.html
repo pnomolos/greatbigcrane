@@ -26,18 +26,14 @@ Dashboard
 <div class="dashboard">
   <h2>Notifications</h2>
   <ul class="tests">
-    <li class="pass">
-      <a href="#project">
-        <span class="project">Great Big Crane</span>:
-        <span class="result">Passed 934/934</span>
-      </a>
-    </li>
-    <li class="fail">
-      <a href="#project">
-        <span class="project">Epic Project</span>:
-        <span class="result">Passed 34/785</span>
-      </a>
-    </li>
+      {% for notification in notifications %}
+      <li class="{{notification.status}}">
+        <a href="{{notification.get_absolute_url}}">
+            <span class="project">{{notification.project.name}}</span>:
+            <span class="result">{{notification.summary}}</span>
+        </a>
+      </li>
+      {% endfor %}
   </ul>
 </div>
 {% endblock %}
