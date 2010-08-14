@@ -7,7 +7,7 @@ Add a project
 {% block main %}
 <form method="post">
   {% csrf_token %}
-  {{form.as_p}}
+  {% include 'project/_form.html' %}
   <input type="submit" value="Create Project" />
 </form>
 {% endblock %}
