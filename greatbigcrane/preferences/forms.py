@@ -13,6 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+import os.path
 from django import forms
 from preferences.models import Preference
 
@@ -21,3 +22,9 @@ class PreferencesForm(forms.Form):
         super(PreferencesForm, self).__init__(*args, **kwargs)
         for preference in Preference.objects.all():
             self.fields[preference.name] = forms.CharField()
+
+    def clean(self):
+        # Apparently clean__projects_directory doesn't work with dynamic forms
+        if not self.cleaned_data['projects_directory'].endswith(os.path.sep):
+            self.cleaned_data['projects_directory'] += os.path.sep
+        return self.cleaned_data
