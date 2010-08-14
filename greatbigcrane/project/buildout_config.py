@@ -17,6 +17,10 @@ limitations under the License.
 from ConfigParser import RawConfigParser
 from django.utils.datastructures import SortedDict
 
+import re
+
+whitespace = re.compile(r'\s')
+
 class BuildoutConfig(SortedDict):
     """
     Represents a buildout.cfg
@@ -43,8 +47,8 @@ def buildout_parse(filename):
     for section in parser.sections():
         for key, value in parser.items(section):
             value = value.strip()
-            if '\n' in value:
-                value = value.split('\n')
+            if whitespace.search(value):
+                value = whitespace.split(value)
             config[section][key] = value
 
     return config

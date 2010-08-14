@@ -13,7 +13,7 @@ Notes:
 * *Write simplest buildout.cfg*
 * Write more complicated buildout.cfg
 * Write config and make sure sections order is preserved
-* Write config and make sure lists of things are separated by newlines and indents properly
+* *Write config and make sure lists of things are separated by newlines and indents properly*
 """
 
 class BuildoutParse(TestCase):
@@ -49,6 +49,24 @@ find-links = http://pypi.python.org/simple
 
 '''
 
+    def test_write_simplest_list_buildout(self):
+        bc = BuildoutConfig()
+        bc['buildout']['parts'] = ''
+        bc['buildout']['find-links'] = ['http://pypi.python.org/simple', 'http://python.org']
+
+        fp = tempfile.NamedTemporaryFile()
+
+        buildout_write(fp.name, bc)
+
+        data = fp.read()
+        assert data == '''[buildout]
+parts = 
+find-links = 
+\thttp://pypi.python.org/simple
+\thttp://python.org
+
+'''
+
 def mktmpcfg(cfg):
     fp = tempfile.NamedTemporaryFile()
     fp.write(cfg)
@@ -60,10 +78,7 @@ simple_buildout_cfg = """[buildout]
 parts = """
 
 complicated_buildout_cfg = """[buildout]
-parts =
-    eggs
-    django
-    pyzmq
+parts = eggs django pyzmq
 unzip = true
 
 [eggs]
