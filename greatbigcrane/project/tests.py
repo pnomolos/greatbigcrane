@@ -1,23 +1,37 @@
-"""
-This file demonstrates two different styles of tests (one doctest and one
-unittest). These will both pass when you run "manage.py test".
-
-Replace these with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
+from django.template import Template, RequestContext
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+class MockPathRequest(object):
+    def __init__(self, path):
+        self.path = path
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
+class HelperTest(TestCase):
+    '''tests for the helper template tags'''
 
->>> 1 + 1 == 2
-True
-"""}
+    def test_nav_url_tag_matches_root(self):
+        template = Template("{% load helpers %}<a {% nav_url '/' %}>")
+        request = MockPathRequest("/")
+        context = RequestContext(request, {})
+        rendered = template.render(context)
+        assert rendered == '<a href="/" class="current">'
 
+    def test_nav_url_not_root_current(self):
+        template = Template("{% load helpers %}<a {% nav_url '/projects/' %}>")
+        request = MockPathRequest("/")
+        context = RequestContext(request, {})
+        rendered = template.render(context)
+        assert rendered == '<a href="/projects/">'
+
+    def test_nav_url_not_current_root(self):
+        template = Template("{% load helpers %}<a {% nav_url '/' %}>")
+        request = MockPathRequest("/projects/")
+        context = RequestContext(request, {})
+        rendered = template.render(context)
+        assert rendered == '<a href="/">'
+
+    def test_nav_url_full_path(self):
+        template = Template("{% load helpers %}<a {% nav_url '/projects/' %}>")
+        request = MockPathRequest("/projects/")
+        context = RequestContext(request, {})
+        rendered = template.render(context)
+        assert rendered == '<a href="/projects/" class="current">'
