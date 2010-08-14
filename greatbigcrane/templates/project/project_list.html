@@ -16,14 +16,9 @@
 
 <ul class="projects">
   {% for project in project_list %}
-  <li id="project-{{project.id}}">
-    <div class="buttons">
-      <a href="#play" class="play">Play</a>
-      <a href="{{project.get_absolute_url}}" class="settings">Settings</a>
-    </div>
-    <h3>{{project.name}}</h3>
-    <span>{{project.base_directory}}</span>
-  </li>
+    {% with project as project %}
+      {% include 'project/single_project.html' %}
+    {% endwith %}
   {% endfor %}
 </ul>
 {% endblock %}
