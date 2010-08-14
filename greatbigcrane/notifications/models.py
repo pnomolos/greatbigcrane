@@ -27,6 +27,7 @@ class Notification(models.Model):
     message = models.TextField()
     notification_time = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Project, null=True, blank=True, default=None)
+    dismissed = models.BooleanField(blank=True, default=False)
 
     def get_absolute_url(self):
         return reverse("view_notification", args=[self.id])
