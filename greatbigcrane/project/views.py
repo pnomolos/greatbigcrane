@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.views.generic.list_detail import object_list
+from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
 from project.models import Project
 
@@ -13,8 +14,8 @@ def list_projects(request):
             template_object_name="project")
 
 def view_project(request, project_id):
-    from django.http import HttpResponse
-    return HttpResponse("not implemented")
+    return object_detail(request, Project.objects.all(), object_id=project_id,
+            template_object_name='project')
 
 def add_project(request):
     # We have to do stuff like create the buildout directory on save
