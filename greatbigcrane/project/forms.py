@@ -65,11 +65,11 @@ class DjangoRecipeForm(forms.Form):
 class EggRecipeForm(forms.Form):
     name = forms.CharField(initial="eggs")
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
-    find_links = forms.CharField(required=False)
+    find_links = forms.CharField(required=False,widget=LineEditorWidget)
     interpreter = forms.CharField(required=False)
     index = forms.CharField(required=False)
     python = forms.CharField(required=False)
-    extra_paths = forms.CharField(required=False)
+    extra_paths = forms.CharField(required=False,widget=LineEditorWidget)
     relative_paths = forms.BooleanField(required=False)
     dependent_scripts = forms.BooleanField(required=False)
 
