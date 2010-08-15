@@ -57,8 +57,11 @@ def save_recipe(request, project_id):
         form.save(buildout)
         return redirect(project.get_absolute_url())
     else:
-        return render_to_response("recipes/recipe_templates/%s.html" % recipe_name,
-                {'form': form})
+        return render_to_response("recipes/edit_recipe.html", RequestContext(
+            request, {'form': form,
+                'template_name': "recipes/recipe_templates/%s.html" % recipe_name,
+                'recipe_name': recipe_name,
+                'project': project}))
 
 def edit_buildout_section(request, project, buildout, section_name):
     new_buildout = buildout_manage.parser.BuildoutConfig()
