@@ -16,7 +16,6 @@ limitations under the License.
 
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from django.views.generic.list_detail import object_list
 from django.http import HttpResponse
 from notifications.models import Notification
 

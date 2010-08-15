@@ -15,7 +15,6 @@ limitations under the License.
 """
 
 from django.test import TestCase
-from django.template import Template, RequestContext
 
 import tempfile
 

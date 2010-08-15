@@ -116,7 +116,7 @@ def test_buildout(project_id):
                 project.name, "success" if not errors else "error"),
             message=('\n\n'+'*'*50+'\n\n').join(responses),
             project=project)
-    prject.test_status = bool(errors)
+    project.test_status = bool(errors)
     project.save()
 
 @command("GITCLONE")
