@@ -37,8 +37,9 @@
         value = (value && value.target ? value.preventDefault() && '' : value);
         var input = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
         var input_container = $('<span class="input"></span>');
-        container.find('a:last').before(input_container.append(input).append(buttons.clone()));
+        container.find('a:last').before(input_container.append(input).append(buttons.clone(true)));
         processValues();
+        calculatePositioning();
         return input;
       }
       
@@ -57,6 +58,7 @@
           } else if ( direction == 'up' ) {
             target.insertBefore(target.prev('.input'));
           }
+          calculatePositioning();
         })
       }
       
@@ -80,8 +82,17 @@
       
       function calculatePositioning() {
         container.find('.input').each(function(){
-          $(this).prev('.input').size() || $(this).find('.moveup').remove();
-          $(this).next('.input').size() || $(this).find('.movedown').remove();
+          if ( $(this).prev('.input').size() ) {
+            $(this).find('.moveup').size() || $(this).find('.buttons').append(buttons.find('.moveup').clone(true));
+          } else {
+            $(this).find('.moveup').remove();
+          }
+          
+          if ( $(this).next('.input').size() ) {
+             $(this).find('.movedown').size() || $(this).find('.buttons').append( buttons.find('.movedown').clone(true) );
+          } else {
+            $(this).find('.movedown').remove();
+          }
           
           $(this).width($(this).find('input[type=text]').outerWidth());
         })
