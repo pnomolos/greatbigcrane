@@ -3,4 +3,3 @@
 * Ensure that notifications show up ajaxy on project page if there are currently no notifications for that project (It looks like no, but I didn't look too close)
 
 * Problem renaming sections
-* Add ability to delete section
