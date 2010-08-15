@@ -1,5 +1,6 @@
 {% extends 'sidebar.html' %}
 {% load buildout_config %}
+{% load markup %}
 
 {% block contenttitle %}{{project.name}}{% endblock %}
 
@@ -11,7 +12,7 @@
     
     <p><strong>Directory:</strong> {{project.base_directory}}</p>
     
-    <p>{{project.description}}</p>
+    <div class="description">{{project.description|markdown}}</div>
 
     <section class="buildout">
       <h2>Buildout Sections</h2>
