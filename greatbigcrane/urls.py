@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     (r'^about/$', 'project.views.about'),
     (r'^notifications/', include('notifications.urls')),
     (r'^projects/', include('project.urls')),
+    (r'^recipes/', include('recipes.urls')),
     (r'^preferences/', include('preferences.urls')),
     (r'^jobs/', include('job_queue.urls')),
 )

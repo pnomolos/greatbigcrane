@@ -16,10 +16,9 @@ limitations under the License.
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('project.views',
-        url('^$', 'list_projects', name="list_projects"),
-        url('^(?P<project_id>\d+)/view/$', 'view_project', name="view_project"),
-        url('^add/$', 'add_project', name="add_project"),
-        url('^(?P<project_id>\d+)/delete/$', 'delete_project', name="delete_project"),
-        url('^(?P<project_id>\d+)/favourite/$', 'favourite_project', name="favourite_project"),
+urlpatterns = patterns('recipes.views',
+        url('^(?P<project_id>\d+)/add_recipe/$', 'add_recipe', name="add_recipe"),
+        url('^(?P<project_id>\d+)/recipe/(?P<recipe_name>[^/]*)/edit/$', 'edit_recipe', name="edit_recipe"),
+        url('^(?P<project_id>\d+)/save_recipe/$', 'save_recipe', name="save_recipe"),
+        url('^(?P<project_id>\d+)/recipe_template/(?P<recipe_name>[^/]*)/$', 'recipe_template', name='recipe_template')
         )
