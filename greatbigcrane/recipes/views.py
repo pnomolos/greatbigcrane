@@ -11,7 +11,7 @@ def add_recipe(request, project_id):
     return render_to_response("project/add_recipe.html", 
             RequestContext(request, {
                 'project': project,
-                'available_recipes': buildout_manage.recipes}))
+                'available_recipes': sorted(buildout_manage.recipes)}))
 
 def edit_recipe(request, project_id, recipe_name):
     #FIXME: rename recipe_name to section_name to avoid confusion
