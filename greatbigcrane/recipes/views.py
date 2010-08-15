@@ -37,6 +37,7 @@ def delete_recipe(request, project_id, section_name):
     project = get_object_or_404(Project, id=project_id)
     buildout = project.buildout()
     del buildout[section_name]
+    buildout.remove_part(section_name)
     buildout_manage.parser.buildout_write(project.buildout_filename(), buildout)
     return redirect(project.get_absolute_url())
 
