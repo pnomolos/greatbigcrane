@@ -6,4 +6,5 @@
 * Figure out how to edit the buildout section (not a recipe)
 
 Phil:
+* Possibly include RTE on description fields
 * Notification page should have a link back to the project
