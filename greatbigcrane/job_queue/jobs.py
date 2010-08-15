@@ -169,3 +169,19 @@ def syncdb(project_id):
                 project.name, "success" if not process.returncode else "error"),
             message=response,
             project=project)
+
+@command("MIGRATE")
+def migrate(project_id):
+    project = Project.objects.get(id=project_id)
+    print("running migrate for %s" % project.name)
+
+    process = subprocess.Popen(['bin/django', 'migrate'], cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Migrate '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
