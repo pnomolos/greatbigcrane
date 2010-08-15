@@ -48,8 +48,8 @@ command_map = {}
 @command("BOOTSTRAP")
 def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
-    print("running bootstrap %s" % project_id)
     project = Project.objects.get(id=project_id)
+    print("running bootstrap %s" % project.name)
     process = subprocess.Popen(["python", "bootstrap.py"], cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
@@ -63,8 +63,8 @@ def bootstrap(project_id):
 
 @command("BUILDOUT")
 def buildout(project_id):
-    print("running buildout %s" % project_id)
     project = Project.objects.get(id=project_id)
+    print("running buildout %s" % project.name)
     process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
@@ -78,8 +78,8 @@ def buildout(project_id):
 
 @command("TEST")
 def test_buildout(project_id):
-    print("running tests for %s" % project_id)
     project = Project.objects.get(id=project_id)
+    print("running tests for %s" % project.name)
 
     bc = buildout_parse(project.buildout_filename())
 
@@ -122,8 +122,8 @@ def test_buildout(project_id):
 @command("GITCLONE")
 def clone_repo(project_id):
     from greatbigcrane.job_queue.jobs import queue_job
-    print("cloning repo for %s" % project_id)
     project = Project.objects.get(id=project_id)
+    print("cloning repo for %s" % project.name)
 
     process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
@@ -139,8 +139,8 @@ def clone_repo(project_id):
 
 @command("GITPULL")
 def pull_repo(project_id):
-    print("pulling repo for %s" % project_id)
     project = Project.objects.get(id=project_id)
+    print("pulling repo for %s" % project.name)
 
     process = subprocess.Popen(['git', 'pull'], cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
