@@ -152,15 +152,22 @@ def clone_repo(project_id):
     project = Project.objects.get(id=project_id)
     print("cloning repo for %s" % project.name)
 
-    process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    if os.path.exists(project.base_directory):
+        Notification.objects.create(status="general",
+                summary="Cloning '%s' %s" % (
+                    project.name, "not necessary"),
+                message="Repo not cloned because directory already exists",
+                project=project)
+    else:
+        process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-    response = process.communicate()[0]
+        response = process.communicate()[0]
 
-    Notification.objects.create(status="success" if not process.returncode else "error",
-            summary="Cloning '%s' %s" % (
-                project.name, "success" if not process.returncode else "error"),
-            message=response,
-            project=project)
+        Notification.objects.create(status="success" if not process.returncode else "error",
+                summary="Cloning '%s' %s" % (
+                    project.name, "success" if not process.returncode else "error"),
+                message=response,
+                project=project)
 
     queue_job('BOOTSTRAP', project_id=project_id)
 
