@@ -63,9 +63,11 @@ class RecipeTests(TestCase):
         buildout_write(fp.name, bc)
 
         data = fp.read()
+        print data
         assert data == """[buildout]
 parts = 
 \tdjango
+unzip = true
 
 [django]
 recipe = djangorecipe
