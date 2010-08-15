@@ -21,3 +21,12 @@ from project.models import Project
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
+
+class DjangoRecipeForm(forms.Form):
+    settings = forms.CharField()
+    version = forms.CharField()
+    eggs = forms.CharField()
+    project = forms.CharField()
+    extra_paths = forms.CharField()
+    fcgi = forms.BooleanField()
+    wsgi = forms.BooleanField()
