@@ -24,6 +24,7 @@
 
 {% block sidebar %}
 PHILSTYLEMEPLEASE!!!!!<br />
+<a class="button right" href="{% url delete_project project.id %}">Delete Project</a><br />
 <a class="button right" href="{% url schedule_buildout project.id %}">Buildout</a><br />
 <a class="button right" href="{% url schedule_test project.id %}">Test</a><br />
 {% if project.git_repo %}

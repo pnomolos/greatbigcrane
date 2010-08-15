@@ -1,0 +1,9 @@
+{% extends 'nosidebar.html' %}
+
+{% block main %}
+Are you sure you want to delete the {{object.name}} project?
+<form method="POST">
+    <input type="submit" value="Yes" /> 
+    <a href="{{object.get_absolute_url}}">No</a>
+</form>
+{% endblock %}

@@ -22,6 +22,8 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
+from django.views.generic.create_update import delete_object
+from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -94,6 +96,10 @@ def add_project(request):
 
     return render_to_response("project/project_form.html",
             RequestContext(request, {'form': form, 'base_url': base_url}))
+
+def delete_project(request, project_id):
+    return delete_object(request, model=Project, object_id=project_id,
+            post_delete_redirect=reverse("list_projects"))
 
 def favourite_project(request, project_id):
     project = Project.objects.get(pk=project_id)
