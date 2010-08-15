@@ -41,6 +41,9 @@
       {# Ideally this would only show up if we knew south was installed #}
         <a class="migrate" href="{% url schedule_migrate project.id %}">Migrate</a>
       {% endif %}
+      {% if project.github_url %}
+      <a class="github" href="{{project.github_url}}">Migrate</a>
+      {% endif %}
     </div>
   </section>
   <section>
