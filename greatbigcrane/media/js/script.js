@@ -43,6 +43,11 @@ jQuery(function($){
     }, ajaxHandler );
   });
 
+  $('div.dashboard .projects .buildout').click(function(e){
+    e.preventDefault();
+    $.get($(this).attr('href'));
+  })
+
   $('div.dashboard').ekko({url: '/notifications/ajax/'},
     function(data) {
       $(data).each(function(_,n){
