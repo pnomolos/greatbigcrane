@@ -1,4 +1,5 @@
 * Trash projects
+    * I added a delete, but we don't have trash yet
 * Add support for list-based interface for extra_paths
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
@@ -7,3 +8,4 @@
 * put git scheduling stuff into it's own app, I think
 * fix up the dict methods on recipes to be less breaky and duplicaty (Jason)
 * Figure out how to edit the buildout section (not a recipe)
+* use project names instead of ids in job output
