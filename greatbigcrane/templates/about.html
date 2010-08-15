@@ -51,5 +51,19 @@ by status (success, general, failure) at the same time. Clicking the notificatio
 allows you to view the output of the command that was run.
 </p>
 <p>
+If you click the project's option, you can see the buildout configuration for
+that project, with some helpers to edit the buildout. This information is introspected
+from the buildout.cfg itself, so if you want to edit it directly in your text
+editor, you can. We have provided a nifty line editor for editing key value pairs
+in sections such as eggs or extra paths that often have multiple lines.
+</p>
+<p>
+The sidebar on project lists not only non-dismissed notifications for the project,
+but also a set of actions that can be executed on that project, mostly asynchronously
+through the job queue. You can edit the project details or delete it. You can run
+buildout on the project or bootstrap the buildout. You can run the test suite. If
+the project has a git repo, you can issue a git pull to update it. If it is a github
+project, you can view the github page to review commits and issue. If it is a django
+project, you can run syncdb and migrate.
 </p>
 {% endblock %}
