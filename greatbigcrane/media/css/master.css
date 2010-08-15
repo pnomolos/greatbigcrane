@@ -86,6 +86,11 @@ code {
 }
 
 /* header styles */
+header .title {
+  font: 36px/1.4 'Cardo', Arial, sans-serif;
+  margin: 10px;
+  display: block;
+}
 header nav ul, header nav li {
   margin: 0;
   padding: 0;
