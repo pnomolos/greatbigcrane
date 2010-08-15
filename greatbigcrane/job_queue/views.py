@@ -15,6 +15,10 @@ def schedule_pull(request, project_id):
     return schedule_project_command(request, project_id, "GITPULL",
             "Successuflly queued git pull")
 
+def schedule_syncdb(request, project_id):
+    return schedule_project_command(request, project_id, "SYNCDB",
+            "Successuflly queued syncdb")
+
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)
     try:

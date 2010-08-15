@@ -20,4 +20,5 @@ urlpatterns = patterns('job_queue.views',
         url('^(?P<project_id>\d+)/buildout/$', 'schedule_buildout', name="schedule_buildout"),
         url('^(?P<project_id>\d+)/test/$', 'schedule_test', name="schedule_test"),
         url('^(?P<project_id>\d+)/pull/$', 'schedule_pull', name="schedule_pull"),
+        url('^(?P<project_id>\d+)/syncdb/$', 'schedule_syncdb', name="schedule_syncdb"),
         )
