@@ -16,7 +16,9 @@ limitations under the License.
 
 import zmq
 import json
-from job_queue.management.commands.job_processor import command_map
+import subprocess
+from project.models import Project
+from notifications.models import Notification
 
 addr = 'tcp://127.0.0.1:5555'
 
@@ -32,3 +34,120 @@ def queue_job(command, **kwargs):
     serialized = json.dumps(kwargs)
     socket.send(serialized)
     assert socket.recv() == "ACK"
+
+# Create the actual commands here and keep the command_map below up to date
+def bootstrap(project_id):
+    '''Run the bootstrap process inside the given project's base directory.'''
+    print("running bootstrap %s" % project_id)
+    project = Project.objects.get(id=project_id)
+    process = subprocess.Popen(["python", "bootstrap.py"], cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Bootstrapping '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
+def buildout(project_id):
+    print("running buildout %s" % project_id)
+    project = Project.objects.get(id=project_id)
+    process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Buildouting '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
+def test_buildout(project_id):
+    print("running tests for %s" % project_id)
+    project = Project.objects.get(id=project_id)
+
+    bc = buildout_parse(project.buildout_filename())
+
+    test_binaries = []
+
+    parts = bc['buildout']['parts']
+    if not isinstance(parts, list):
+        parts = [parts]
+
+    # We get to do some detection in this one
+    # First look for django test
+    for section, values in bc.iteritems():
+        if section in parts:
+            if values.get('recipe') == 'djangorecipe':
+                # Django, we know what's going on
+                test_script = section
+                if 'control-script' in values:
+                    test_script = values['control-script']
+                test_binaries.append(['bin/' + test_script, 'test'])
+
+    errors = False
+    responses = []
+    for binary in test_binaries:
+        process = subprocess.Popen(binary, cwd=project.base_directory,
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+        responses.append(process.communicate()[0])
+        errors = errors or process.returncode != 0
+
+    # FIXME: Make the output a little nicer when you run multiple test suites
+
+    Notification.objects.create(status="success" if not errors else "error",
+            summary="Testing '%s' %s" % (
+                project.name, "success" if not errors else "error"),
+            message=('\n\n'+'*'*50+'\n\n').join(responses),
+            project=project)
+    if not errors:
+        # TODO: Potential for race condition?
+        
+        project.test_status = True
+        project.save()
+
+def clone_repo(project_id):
+    from greatbigcrane.job_queue.jobs import queue_job
+    print("cloning repo for %s" % project_id)
+    project = Project.objects.get(id=project_id)
+
+    process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Cloning '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
+    queue_job('BOOTSTRAP', project_id=project_id)
+
+def pull_repo(project_id):
+    print("pulling repo for %s" % project_id)
+    project = Project.objects.get(id=project_id)
+
+    process = subprocess.Popen(['git', 'pull'], cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Pulling '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
+
+
+command_map = {
+    'BOOTSTRAP': bootstrap,
+    'BUILDOUT': buildout,
+    'TEST': test_buildout,
+    'GITCLONE': clone_repo,
+    'GITPULL': pull_repo,
+}
