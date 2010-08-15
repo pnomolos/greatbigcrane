@@ -21,6 +21,10 @@ from project.widgets import LineEditorWidget, LineEditorChoiceWidget
 from buildout_manage.parser import buildout_write
 from buildout_manage import recipes
 
+def choices_from_section(project, section_name):
+        sections = project.buildout().sections_with_key(section_name)
+        return [("${%s:%s}" % (s, section_name), "${%s:%s}" % (s, section_name)) for s in sections]
+
 class DjangoRecipeForm(forms.Form):
     name = forms.CharField(initial="django")
     settings = forms.CharField(initial="development")
@@ -44,13 +48,10 @@ class DjangoRecipeForm(forms.Form):
         self.project = project
         safe_name = re.sub(r'[^A-Za-z0-9_]', '', project.name).lower()
         self.fields['project'].initial = safe_name
-        egg_sections = project.buildout().sections_with_key('eggs')
-        egg_choices = [("${%s:eggs}" % s, "${%s:eggs}" % s) for s in egg_sections]
-        extra_path_sections = project.buildout().sections_with_key('extra-paths')
-        extra_paths_choices = [("${%s:extra-paths}" % s, "${%s:extra-paths}" % s) for s in extra_path_sections]
-        print extra_paths_choices
-        self.fields['eggs'].widget = LineEditorChoiceWidget(choices=egg_choices)
-        self.fields['extra_paths'].widget = LineEditorChoiceWidget(choices=extra_paths_choices)
+        self.fields['eggs'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section(project, "eggs"))
+        self.fields['extra_paths'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section( project, "extra-paths"))
 
     def save(self, buildout):
         name = self.cleaned_data['name']
