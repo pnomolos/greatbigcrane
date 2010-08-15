@@ -119,13 +119,13 @@ jQuery(function($){
   });
 
   $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'));
-  $('.actions .ajax').live('click',queue_button('closest', 'section'))
-  $('.confirm').live('click',function(ev){
-    ev.preventDefault();
+  $('.actions .ajax').live('click',queue_button('closest', 'section'));
+  $('.confirm').live('click',function(e){
+    e.preventDefault();
     if ( confirm("Are you sure you want to do this?") ) {
       $('<form action="' + $(this).attr('href') + '" method="post"></form>').submit();
     } else {
-      ev.preventDefault();
+      e.preventDefault();
     }
   });
   
