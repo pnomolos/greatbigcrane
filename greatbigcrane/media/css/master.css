@@ -52,7 +52,7 @@ nav, #main {
 h1 {
   font: normal normal 36px/1 'Cardo', Arial, sans-serif;
   text-align: right;
-  margin: 0 0 15px;
+  margin: 5px 0 10px;
 }
 
 h2 {
@@ -91,6 +91,7 @@ header .title {
   margin: 10px;
   display: block;
   text-shadow: 0 0 5px #000;
+  color: #ffc;
 }
 header nav ul, header nav li {
   margin: 0;
