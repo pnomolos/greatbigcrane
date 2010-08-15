@@ -51,8 +51,8 @@ def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
     project = Project.objects.get(id=project_id)
     print("running bootstrap %s" % project.name)
-    process = subprocess.Popen(["python", "bootstrap.py"], cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen("python bootstrap.py", cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
 
@@ -67,7 +67,7 @@ def buildout(project_id):
     project = Project.objects.get(id=project_id)
     print("running buildout %s" % project.name)
     process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
 
@@ -100,23 +100,23 @@ def test_buildout(project_id):
                     test_script = 'test'
                     if 'testrunner' in values:
                         test_script = values['testrunner']
-                    test_binaries.append(['bin/' + test_script])
+                    test_binaries.append('bin/' + test_script)
                 else:
                     test_script = section
                     if 'control-script' in values:
                         test_script = values['control-script']
-                    test_binaries.append(['bin/' + test_script, 'test'])
+                    test_binaries.append('bin/' + test_script + ' test')
             elif values.get('recipe') == 'zc.recipe.testrunner':
                 test_script = section
                 if 'script' in values:
                     test_script = values['control-script']
-                test_binaries.append(['bin/' + test_script])
+                test_binaries.append('bin/' + test_script)
 
     errors = False
     responses = []
     for binary in test_binaries:
         process = subprocess.Popen(binary, cwd=project.base_directory,
-                stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
         responses.append(process.communicate()[0])
         errors = errors or process.returncode != 0
@@ -159,7 +159,7 @@ def clone_repo(project_id):
                 message="Repo not cloned because directory already exists",
                 project=project)
     else:
-        process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        process = subprocess.Popen('git clone "%s" "%s"' % (project.git_repo, project.base_directory), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
         response = process.communicate()[0]
 
@@ -176,8 +176,8 @@ def pull_repo(project_id):
     project = Project.objects.get(id=project_id)
     print("pulling repo for %s" % project.name)
 
-    process = subprocess.Popen(['git', 'pull'], cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen('git pull', cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
 
@@ -193,8 +193,8 @@ def syncdb(project_id):
     project = Project.objects.get(id=project_id)
     print("running syncdb for %s" % project.name)
 
-    process = subprocess.Popen(['bin/django', 'syncdb'], cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen('bin/django syncdb', cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
 
@@ -209,8 +209,8 @@ def migrate(project_id):
     project = Project.objects.get(id=project_id)
     print("running migrate for %s" % project.name)
 
-    process = subprocess.Popen(['bin/django', 'migrate'], cwd=project.base_directory,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    process = subprocess.Popen('bin/django migrate', cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
 
