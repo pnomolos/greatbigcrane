@@ -1,9 +1,9 @@
 <li id="project-{{project.id}}" class="clearfix">
   <div class="buttons clearfix">
-    <a href="{% url favourite_project project.id %}" class="favourite{{project.favourite|yesno:' favourited,'}}">Favourite</a>
-    <a href="{% url schedule_buildout project.id %}" class="buildout">Run Buildout</a>
-    <a href="{% url schedule_test project.id %}" class="tests {{ project.test_status|yesno:'success,error' }}">Run Tests</a>
-    <a href="{% url view_project project.id %}" class="settings">Settings</a>
+    <a href="{% url favourite_project project.id %}" class="favourite{{project.favourite|yesno:' favourited,'}}" title="Favourite">Favourite</a>
+    <a href="{% url schedule_buildout project.id %}" class="buildout" title="Run Buildout">Run Buildout</a>
+    <a href="{% url schedule_test project.id %}" class="tests {{ project.test_status|yesno:'success,error' }}" title="Run Tests">Run Tests</a>
+    <a href="{% url view_project project.id %}" class="settings" title="Project Settings">Settings</a>
   </div>
   <h3>{{project.name}}</h3>
   <span>{{project.base_directory}}</span>
