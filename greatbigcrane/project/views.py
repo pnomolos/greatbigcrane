@@ -89,6 +89,9 @@ def add_recipe(request, project_id):
                 'project': project,
                 'available_recipes': buildout_manage.recipes}))
 
+def edit_recipe(request, project_id, recipe):
+    pass
+
 
 def recipe_template(request, project_id, recipe_name):
     project = get_object_or_404(Project, id=project_id)
