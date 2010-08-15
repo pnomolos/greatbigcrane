@@ -43,7 +43,7 @@
 					if (elem.settings.prevContent != data) {
 						elem.settings.prevContent = data;
 						if (callback) {
-							callback(data)
+							$.proxy(callback, elem)(data)
 						}
 						// reset minTimeout
 						elem.settings.minTimeout = elem.settings.originalMinTimeout;
