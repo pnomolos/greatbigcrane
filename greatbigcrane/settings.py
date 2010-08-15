@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     # Django apps
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.markup',
 
     # Third party apps
     'south',
