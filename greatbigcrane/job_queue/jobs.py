@@ -36,7 +36,16 @@ def queue_job(command, **kwargs):
     socket.send(serialized)
     assert socket.recv() == "ACK"
 
-# Create the actual commands here and keep the command_map below up to date
+def command(command_name):
+    def wrap(function):
+        command_map[command_name] = function
+        return function
+    return wrap
+
+command_map = {}
+
+# Create the actual commands here. Use dcommand decorator to keep the map up to date
+@command("BOOTSTRAP")
 def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
     print("running bootstrap %s" % project_id)
@@ -52,6 +61,7 @@ def bootstrap(project_id):
             message=response,
             project=project)
 
+@command("BUILDOUT")
 def buildout(project_id):
     print("running buildout %s" % project_id)
     project = Project.objects.get(id=project_id)
@@ -66,6 +76,7 @@ def buildout(project_id):
             message=response,
             project=project)
 
+@command("TEST")
 def test_buildout(project_id):
     print("running tests for %s" % project_id)
     project = Project.objects.get(id=project_id)
@@ -108,6 +119,7 @@ def test_buildout(project_id):
     prject.test_status = bool(errors)
     project.save()
 
+@command("GITCLONE")
 def clone_repo(project_id):
     from greatbigcrane.job_queue.jobs import queue_job
     print("cloning repo for %s" % project_id)
@@ -125,6 +137,7 @@ def clone_repo(project_id):
 
     queue_job('BOOTSTRAP', project_id=project_id)
 
+@command("GITPULL")
 def pull_repo(project_id):
     print("pulling repo for %s" % project_id)
     project = Project.objects.get(id=project_id)
@@ -141,6 +154,7 @@ def pull_repo(project_id):
             project=project)
 
 # Django commands
+@command("SYNCDB")
 def syncdb(project_id):
     project = Project.objects.get(id=project_id)
     print("running syncdb for %s" % project.name)
@@ -155,14 +169,3 @@ def syncdb(project_id):
                 project.name, "success" if not process.returncode else "error"),
             message=response,
             project=project)
-
-
-
-command_map = {
-    'BOOTSTRAP': bootstrap,
-    'BUILDOUT': buildout,
-    'TEST': test_buildout,
-    'GITCLONE': clone_repo,
-    'GITPULL': pull_repo,
-    'SYNCDB': syncdb,
-}
