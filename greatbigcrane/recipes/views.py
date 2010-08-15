@@ -44,7 +44,7 @@ def delete_recipe(request, project_id, section_name):
 def recipe_template(request, project_id, recipe_name):
     project = get_object_or_404(Project, id=project_id)
     form = recipe_form_map[recipe_name](project)
-    return render_to_response("project/recipe_templates/%s.html" % recipe_name,
+    return render_to_response("recipes/recipe_templates/%s.html" % recipe_name,
             {'form': form})
 
 @require_POST
