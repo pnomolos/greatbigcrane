@@ -34,7 +34,7 @@
       
       function addLine(value) {
         value = (value && value.target ? value.preventDefault() && '' : value);
-        var input = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
+        var input = $('<input type="text">').val(value?value.toString():'').change(processValues).keyup(processValues).keypress(processValues);
         var input_container = $('<span class="input"></span>');
         container.find('a:last').before(input_container.append(input).append(buttons.clone(true)));
         processValues();
