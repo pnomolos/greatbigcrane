@@ -55,11 +55,15 @@ def add_project(request):
     form = ProjectForm(request.POST or None)
     if form.is_valid():
         instance = form.save()
-        os.makedirs(instance.base_directory)
-        copyfile(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
-                os.path.join(instance.base_directory, "bootstrap.py"))
-        copyfile(os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
-                os.path.join(instance.base_directory, "buildout.cfg"))
+        if not os.path.isdir(instance.base_directory):
+            os.makedirs(instance.base_directory)
+        skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
+                os.path.join(instance.base_directory, "bootstrap.py")),
+            (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
+                os.path.join(instance.base_directory, "buildout.cfg"))]
+        for source, dest in skeleton:
+            if not os.path.isfile(dest):
+                copyfile(source, dest)
         queue_job("BOOTSTRAP", project_id=instance.id)
 
         return redirect(instance.get_absolute_url())
