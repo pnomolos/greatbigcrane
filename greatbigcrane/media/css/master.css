@@ -560,6 +560,10 @@ form input[type=submit] + a.button,
 a.button + a.button {
   margin-left: 10px;
 }
+a.button.right + a.button.right {
+  margin-right: 10px;
+}
+
 
 form input[type=submit]:hover,
 a.button:hover {
@@ -651,6 +655,7 @@ footer {
   background: #fdd;
   color: #600;
   list-style: none;
+  width: 680px;
 }
 
 .errorlist + p input {
