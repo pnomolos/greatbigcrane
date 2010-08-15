@@ -64,6 +64,7 @@ def add_project(request):
         try:
             base_dir = os.path.expanduser(form.cleaned_data['base_directory'])
             
+            base_dir = base_dir.rstrip('/')
             if form.cleaned_data['git_repo']:
                 target_dir = os.path.dirname(base_dir)
             else:
