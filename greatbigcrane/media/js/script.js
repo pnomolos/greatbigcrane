@@ -18,8 +18,10 @@ function dismiss_notification(notification_id) {
 }
 
 function load_recipe_template() {
-    $("#recipe_template_container").load("/projects/recipe_template/" +
-            $('#available_recipes').val() + '/');
+    if ($('#available_recipes').val() != "") {
+        $("#recipe_template_container").load("/projects/recipe_template/" +
+                $('#available_recipes').val() + '/');
+    }
 }
 
 jQuery(function($){

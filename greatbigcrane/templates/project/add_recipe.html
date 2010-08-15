@@ -4,6 +4,7 @@
 Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:
 <form>
     <select id="available_recipes">
+        <option value=""></option>
         {% for recipe in available_recipes %}
         <option value="{{recipe}}">{{recipe}}</option>
         {% endfor %}

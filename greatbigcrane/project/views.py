@@ -30,7 +30,7 @@ from django.http import HttpResponse
 import buildout_manage
 from job_queue.jobs import queue_job
 from project.models import Project
-from project.forms import ProjectForm
+from project.forms import ProjectForm, recipe_form_map
 from preferences.models import Preference
 from notifications.models import Notification
 
@@ -88,7 +88,9 @@ def add_recipe(request, project_id):
                 'available_recipes': buildout_manage.recipes}))
 
 def recipe_template(request, recipe_name):
-    return HttpResponse(recipe_name)
+    form = recipe_form_map[recipe_name]()
+    return render_to_response("project/recipe_templates/%s.html" % recipe_name,
+            {'form': form})
 
 def handle_ajax(request):
     # return HttpResponse(request.POST['update'])

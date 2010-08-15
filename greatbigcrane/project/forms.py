@@ -30,3 +30,7 @@ class DjangoRecipeForm(forms.Form):
     extra_paths = forms.CharField()
     fcgi = forms.BooleanField()
     wsgi = forms.BooleanField()
+
+recipe_form_map = {
+        'djangorecipe': DjangoRecipeForm
+        }
