@@ -123,9 +123,8 @@ jQuery(function($){
   
   $("#id_eggs, #id_extra_paths").lineeditor();
 
-  $("#add_recipe_form").live('submit', function() {
-    alert($(".available_recipes").val());
-    if ($(".available_recipes").val() == "") {
+  $("#add_recipe_form").submit(function() {
+    if ($("#available_recipes").val() == "") {
       alert("Must select a recipe");
       return false;
     }
