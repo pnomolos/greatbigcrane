@@ -126,9 +126,36 @@ class GitRecipeForm(forms.Form):
                 delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
+class MercurialRecipeForm(forms.Form):
+    name = forms.CharField(initial="mercurial")
+    repository = forms.CharField(required=True)
+    location = forms.CharField(required=False)
+    newest = forms.BooleanField(required=False)
+
+    def __init__(self, project, *args, **kwargs):
+        super(MercurialRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+
+
+    def save(self, buildout):
+        name = self.cleaned_data['name']
+        dr = recipes['mercurialrecipe'](buildout, name)
+        for key in self.fields:
+            if key == "name": continue
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
+        buildout_write(self.project.buildout_filename(), buildout)
+
 
 recipe_form_map = {
         'djangorecipe': DjangoRecipeForm,
         'zc.recipe.egg': EggRecipeForm,
-        'zerokspot.recipe.git': GitRecipeForm
+        'zerokspot.recipe.git': GitRecipeForm,
+        'mercurialrecipe': MercurialRecipeForm,
         }
