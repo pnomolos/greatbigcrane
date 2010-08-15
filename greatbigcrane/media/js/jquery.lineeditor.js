@@ -20,14 +20,19 @@
       
 
       $el.replaceWith(container);
+      calculatePositioning();
+      
       
       function addLine(value) {
         value = (value && value.target ? value.preventDefault() && '' : value);
-        var node = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
-        var delete_node = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
-        container.find('a:last').before(node, delete_node);
+        var input = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
+        var input_container = $('<span class="input"></span>');
+        var button_container = $('<span class="buttons"></span>');
+        var delete_button = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
+        container.find('a:last').before(input_container.append(input, button_container.append(delete_button)));
         processValues();
-        return node;
+        calculatePositioning()
+        return input;
       }
       
       function removeLine(ev) {
@@ -52,6 +57,12 @@
             return $(this).val();
           }).toArray().join("\n").trim()
         );
+      }
+      
+      function calculatePositioning() {
+        container.find('.input').each(function(){
+          $(this).width($(this).find('input[type=text]').outerWidth());
+        })
       }
       
     })

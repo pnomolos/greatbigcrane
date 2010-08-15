@@ -384,16 +384,24 @@ footer {
 
 
 /* lineeditor */
-.lineeditor .delete {
+.lineeditor .input {
+  display: block;
   position: relative;
+}
+
+.lineeditor .buttons {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  display: block;
+}
+
+.lineeditor .delete {
   text-indent: -999em;
   float: right;
-  top: -30px;
-  right: 5px;
-  background: url(../images/small-icon-delete.png) 0 0 no-repeat;
   width: 20px;
   height: 20px;
-  margin-bottom: -20px;
+  background: url(../images/small-icon-delete.png) 0 0 no-repeat;
 }
 
 /* errors */
