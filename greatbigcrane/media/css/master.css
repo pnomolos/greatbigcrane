@@ -50,7 +50,7 @@ nav, #main {
 
 /* Font styles */
 h1 {
-  font: normal normal 36px/1 Verdana, sans-serif;
+  font: normal normal 36px/1 'Cardo', Arial, sans-serif;
   text-align: right;
   margin: 0 0 15px;
 }
