@@ -393,4 +393,5 @@ footer {
   background: url(../images/small-icon-delete.png) 0 0 no-repeat;
   width: 20px;
   height: 20px;
+  margin-bottom: -20px;
 }
