@@ -3,20 +3,20 @@
 {% block main %}
 Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:
 <form method="post" action="{% url save_recipe project.id %}">
-    <select name="recipe_name" id="available_recipes">
-        <option value=""></option>
-        {% for recipe in available_recipes %}
-        <option value="{{recipe}}">{{recipe}}</option>
-        {% endfor %}
-    </select>
-    <div id="recipe_template_container">
-    </div>
-    <input type="submit" value="create recipe" />
+  <select name="recipe_name" id="available_recipes">
+    <option value=""></option>
+    {% for recipe in available_recipes %}
+      <option value="{{recipe}}">{{recipe}}</option>
+    {% endfor %}
+  </select>
+  <div id="recipe_template_container">
+  </div>
+  <input type="submit" value="create recipe">
 </form>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
-    $('#available_recipes').change(load_recipe_template({{project.id}}));
+  $('#available_recipes').change(load_recipe_template({{project.id}}));
 </script>
 {% endblock %}

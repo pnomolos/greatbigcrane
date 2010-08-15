@@ -8,14 +8,14 @@ Add A Project
 <form method="post">
   {% csrf_token %}
   {% include 'project/_form.html' %}
-  <input type="submit" value="Create Project" />
+  <input type="submit" value="Create Project">
 </form>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
-    $('#id_name').change(function() {
-            $('#id_base_directory').val('{{base_url}}' + slugify($('#id_name').val()) + "/");
-    });
+  $('#id_name').change(function() {
+    $('#id_base_directory').val('{{base_url}}' + slugify($('#id_name').val()) + "/");
+  });
 </script>
 {% endblock %}

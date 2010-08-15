@@ -10,13 +10,13 @@
 <h2>Buildout Sections</h2>
 {% for name, section in project.buildout_sections %}
 <ul>
-    <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
-    {% for key, value in section.items %}
-    <ul>
-        {{key}} = {{value|configvalue}}
-    </ul>
-    {% endfor %}
-    </li>
+  <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
+  {% for key, value in section.items %}
+  <ul>
+    {{key}} = {{value|configvalue}}
+  </ul>
+  {% endfor %}
+  </li>
 </ul>
 {% endfor %}
 <a href="{% url add_recipe project.id %}">Add Recipe</a>
