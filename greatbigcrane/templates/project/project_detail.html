@@ -30,7 +30,7 @@ PHILSTYLEMEPLEASE!!!!!<br />
 {% if project.git_repo %}
     <a class="button right" href="{% url schedule_pull project.id %}">Git Pull</a><br />
 {% endif %}
-{% if project.is_django_project %}
+{% if project.is_django %}
 <a class="button right" href="{% url schedule_syncdb project.id %}">Syncdb</a><br />
 {% endif %}
 {% endblock %}
