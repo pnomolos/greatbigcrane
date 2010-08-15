@@ -54,7 +54,7 @@ class DjangoRecipeForm(forms.Form):
         for key in self.fields:
             if key == "name": continue
             setattr(dr, key, self.cleaned_data[key])
-        buildout_write(project.buildout_filename(), buildout)
+        buildout_write(self.project.buildout_filename(), buildout)
 
 
 recipe_form_map = {
