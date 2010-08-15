@@ -128,7 +128,7 @@ jQuery(function($){
       alert("Must select a recipe");
       return false;
     }
-    return false;
+    return true;
   });
 });
 
