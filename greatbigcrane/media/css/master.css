@@ -387,6 +387,10 @@ ul.tests .notification .dismiss {
   margin-bottom: 1px;
 }
 
+.notifications > .tests {
+  margin: 0;
+}
+
 .notifications ul.tests li .time {
   float: right;
 }
