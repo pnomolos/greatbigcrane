@@ -4,7 +4,3 @@
 
 * Problem renaming sections
 * Add ability to delete section
-* Description text doesn't handle any markup (like markdown) so newlines are ignored
-
-Phil:
-* Possibly include RTE on description fields
