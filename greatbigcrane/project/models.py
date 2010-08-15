@@ -51,7 +51,7 @@ class Project(models.Model):
     def is_django(self):
         sections = self.buildout()
         for name, section in sections.items():
-            if section['recipe'] == 'djangorecipe':
+            if 'recipe' in section and section['recipe'] == 'djangorecipe':
                 return True
         return False
 
