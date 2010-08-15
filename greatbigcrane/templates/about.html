@@ -4,7 +4,7 @@
 
 {% block main %}
 <p>
-Great big crane is a project for managing python buildouts and django projects.
+Great big crane allows managing python buildouts and django projects.
 Unlike many django applications, it is designed to be run on a local secured
 environment. This allows it to be extremely responsive and dispenses with user
 authentication.
@@ -15,31 +15,35 @@ in a specific code directory. This directory name is set in the preferences
 page. For example, I store my code in <code>/home/dusty/code/</code> and individual
 projects are in <code>/home/dusty/code/greatbigcrane/</code> or
 <code>/home/dusty/code/whohasmy/</code>. The projects are expected to contain a
-standard buildout structure with a bootstrap.py. Great big crane can introspect
-directories in this format, or it can help set up brand new buildouts. This is
-where it excels.
+standard buildout structure with a <code>buildout.cfg</code> and
+<code>bootstrap.py</code>. Great big crane can introspect directories and buildouts
+in this format, or it can help set up brand new buildouts.
 </p>
 <p>
 To see it in action, hit the Projects button on the menu bar and then click the
 <a href="{% url add_project %}">Add Project</a> button to add a new project. This 
-displays a simple form where you can enter the name, base directory, an
+simple form allows you can enter the name, base directory, an
 optional git repository and description. The base directory is automatically
 populated from the directory preference and the name of the project, however
 you are free to change this for code in non-standard locations.
 </p>
 <p>
 If you provided a git repository, it will automatically clone the repository into
-the new working directory. Otherwise, it will initialize and boostrap a new
-buildout in that directory. Both of these are processed in an external job queue,
-and notifications will show up on your dashboard when they have completed. The
-dashboard lists your most recently active projects and explicitly favourited
-projects. Projects can be favourited using the star icon in the project list.
-The play icon runs bin/buildout for a given project, and you can also test
-the project.
+the new working directory. Otherwise, it will initialize and boostrap a simple
+skeleton buildout in that directory. Both the clone and bootstrap processes are
+processed in an external job queue, and notifications will show up on your
+dashboard when they have completed.
+</p>
+<p>The dashboard lists your most recently active projects and explicitly
+favourited projects. Projects can be favourited using the star icon in the
+project list. You can also schedule a buildout and tests from the dashboard.
 </p>
 <p>
-The settings icon takes you to the project page, which allows you to edit the buildout
-and run commands on the project.
+Notifications indicate the output of various asynchronous commands, and can
+indicate success, failure, or a general notification. The small "x" box
+on the right of a notification allows you to dismiss it. The notifications
+page allows you to visually review all recent notifications and is set up
+so you can spatially see notifications in both chronological order and sorted
+by status (success, general, failure) at the same time.
 </p>
-
 {% endblock %}
