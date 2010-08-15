@@ -457,12 +457,12 @@ a.button {
       left bottom,
       left top,
       color-stop(0.13, rgba(66,66,66,0.4)),
-      color-stop(0.57, rgba(138,138,136,0.4))
+      color-stop(0.57, rgba(138,138,136,0.2))
   );
   background-image: -moz-linear-gradient(
       center bottom,
-      rgb(66,66,66) 13%,
-      rgb(138,138,136) 57%
+      rgba(66,66,66,0.4) 13%,
+      rgba(138,138,136,0.2) 57%
   );
   
   -webkit-text-shadow: 0 1px 3px #000;
@@ -483,7 +483,12 @@ a.button:hover {
 
 .button.orange,
 form input[type=submit].orange {
-  background-color: #960;
+  background-color: #c60;
+}
+
+.button.orange:hover,
+form input[type=submit].orange:hover {
+  background-color: #ea0;
 }
 
 a.button.margin {
