@@ -431,15 +431,6 @@ ul.tests li.general a.result {
   border-color: #666;
 }
 
-
-/*.notifications ul.tests li.success {
-  float: left;
-}
-
-.notifications ul.tests li.error {
-  float: right;
-}*/
-
 .notifications ul.tests li.general {
   margin: 0 auto;
 }
