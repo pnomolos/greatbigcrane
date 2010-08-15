@@ -123,7 +123,7 @@ jQuery(function($){
   
   $("#id_eggs, #id_extra_paths").lineeditor();
 
-  $("#add_recipe_form").submit(function() {
+  $("#recipe_form").submit(function() {
     if ($("#available_recipes").val() == "") {
       alert("Must select a recipe");
       return false;

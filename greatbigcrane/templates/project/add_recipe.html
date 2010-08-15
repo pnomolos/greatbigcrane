@@ -2,7 +2,7 @@
 
 {% block main %}
 <p>Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:</p>
-<form method="post" action="{% url save_recipe project.id %}" class="clearfix" id="add_recipe_form">
+<form method="post" action="{% url save_recipe project.id %}" class="clearfix" id="recipe_form">
   <select name="recipe_name" id="available_recipes">
     <option value=""></option>
     {% for recipe in available_recipes %}

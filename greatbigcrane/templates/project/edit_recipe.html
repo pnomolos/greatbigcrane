@@ -3,7 +3,7 @@
 {% block contenttitle %}Edit {{recipe_name}} on "{{project.name}}"{% endblock %}
 
 {% block main %}
-<form method="post" action="{% url save_recipe project.id %}" class="clearfix">
+<form method="post" action="{% url save_recipe project.id %}" class="clearfix" id="recipe_form">
   {{form.media}}
   <input type="hidden" name="recipe_name" value="{{recipe_name}}">
   <div id="recipe_template_container">
