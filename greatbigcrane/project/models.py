@@ -17,7 +17,7 @@ limitations under the License.
 import os.path
 from django.db import models
 from django.core.urlresolvers import reverse
-from buildout_manage.buildout_config import buildout_parse
+from buildout_manage.parser import buildout_parse
 
 
 class Project(models.Model):

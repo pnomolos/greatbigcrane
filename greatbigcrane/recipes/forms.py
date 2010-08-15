@@ -2,7 +2,7 @@ import re
 from django import forms
 
 from project.widgets import LineEditorWidget
-from buildout_manage.buildout_config import buildout_write
+from buildout_manage.parser import buildout_write
 from buildout_manage import recipes
 
 class DjangoRecipeForm(forms.Form):

@@ -20,7 +20,7 @@ import json
 import subprocess
 from project.models import Project
 from notifications.models import Notification
-from greatbigcrane.buildout_manage.buildout_config import buildout_parse
+from buildout_manage.parser import buildout_parse
 
 addr = 'tcp://127.0.0.1:5555'
 

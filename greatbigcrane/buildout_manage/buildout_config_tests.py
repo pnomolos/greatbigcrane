@@ -18,7 +18,7 @@ from django.test import TestCase
 
 import tempfile
 
-from greatbigcrane.buildout_manage.buildout_config import buildout_parse, BuildoutConfig, buildout_write
+from buildout_manage.parser import buildout_parse, BuildoutConfig, buildout_write
 
 """
 Notes:
