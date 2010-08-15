@@ -5,8 +5,15 @@
 
 {% block main %}
   <div id="project-{{project.id}}" class="project">
-    <p>{{project.git_repo}}</p>
+    {% if project.git_repo %}
+      <h2>Git Repository</h2>
+      <p>{{project.git_repo}}</p>
+    {% endif %}
+    
+    <h2>Base Directory</h2>
     <p>{{project.base_directory}}</p>
+    
+    <h2>Description</h2>
     <p>{{project.description}}</p>
 
     <section>
