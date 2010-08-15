@@ -18,9 +18,9 @@ def edit_recipe(request, project_id, section_name):
     project = get_object_or_404(Project, id=project_id)
     buildout=project.buildout()
     section=buildout[section_name]
-    if section_name == "buildout":
-        return edit_buildout_section(request, project, buildout)
     recipe_name = section.get('recipe')
+    if recipe_name not in buildout_manage.recipes:
+        return edit_buildout_section(request, project, buildout, section_name)
     recipe = buildout_manage.recipes[recipe_name](buildout, section_name)
 
     initial=recipe.dict()
@@ -53,9 +53,9 @@ def save_recipe(request, project_id):
                 {'form': form})
 
 
-def edit_buildout_section(request, project, buildout):
+def edit_buildout_section(request, project, buildout, section_name):
     new_buildout = buildout_manage.parser.BuildoutConfig()
-    new_buildout['buildout'] = buildout['buildout']
+    new_buildout[section_name] = buildout[section_name]
     string = StringIO()
     buildout_manage.parser.buildout_write(string, new_buildout)
 
@@ -64,7 +64,7 @@ def edit_buildout_section(request, project, buildout):
     if form.is_valid():
         string = StringIO(str(form.cleaned_data['contents']))
         config = buildout_manage.parser.buildout_parse(string)
-        buildout['buildout'] = config['buildout']
+        buildout[section_name] = config[section_name]
         buildout_manage.parser.buildout_write(project.buildout_filename(), buildout)
         return redirect(project.get_absolute_url())
 
