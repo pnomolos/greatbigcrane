@@ -247,6 +247,12 @@ ul.projects li .buttons .github,
   background-position: 0 -384px;
 }
 
+ul.projects li .buttons .edit,
+.project .actions .edit {
+  background-position: 0 -432px;
+}
+
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
