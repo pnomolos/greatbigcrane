@@ -136,7 +136,7 @@ header nav {
       left bottom,
       left top,
       color-stop(0.0, rgba(66,66,66,0.4)),
-      color-stop(0.57, rgba(138,138,136,0.2))
+      color-stop(0.57, rgba(138,138,136,0.3))
   );
   background-image: -moz-linear-gradient(
       center bottom,
