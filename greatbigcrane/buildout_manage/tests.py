@@ -19,7 +19,7 @@ from django.test import TestCase
 import tempfile
 
 from buildout_manage import recipes
-from buildout_manage.buildout_config import BuildoutConfig, buildout_parse, buildout_write
+from buildout_manage.parser import BuildoutConfig, buildout_parse, buildout_write
 
 from buildout_config_tests import *
 
@@ -63,7 +63,6 @@ class RecipeTests(TestCase):
         buildout_write(fp.name, bc)
 
         data = fp.read()
-        print data
         assert data == """[buildout]
 parts = 
 \tdjango
