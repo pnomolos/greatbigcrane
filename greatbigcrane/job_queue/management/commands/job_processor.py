@@ -68,6 +68,7 @@ class Command(NoArgsCommand):
             except Exception, e:
                 Notification.objects.create(status="error",
                         summary="%s command failed to run" %(command_name),
+                        project_id=job.get('project_id', None),
                         message = "%s failed on these arguments: \n%s\n\n"
                         "The exception was %s" % (
                             command_name, job, str(e)))
