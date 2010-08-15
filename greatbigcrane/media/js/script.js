@@ -30,7 +30,7 @@ function load_recipe_template(project_id) {
 }
 
 
-function show_buildout_result(node) {
+function show_queuing_response(node) {
   return (function(data_or_xhr, textStatus) {
     var to_append = '';
     switch (textStatus) {
@@ -83,8 +83,8 @@ jQuery(function($){
     e.stopPropagation();
     $.ajax({
       url: $(this).attr('href'),
-      success: show_buildout_result($(this).parents('li')),
-      error: show_buildout_result($(this).parents('li'))
+      success: show_queuing_response($(this).parents('li')),
+      error: show_queuing_response($(this).parents('li'))
     });
   })
 
