@@ -148,10 +148,28 @@ def test_buildout(project_id):
         project.test_status = True
         project.save()
 
+def clone_repo(project_id):
+    from greatbigcrane.job_queue.jobs import queue_job
+    print("cloning repo for %s" % project_id)
+    project = Project.objects.get(id=project_id)
+
+    process = subprocess.Popen(['git', 'clone', project.git_repo, project.base_directory], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Cloning '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
+    queue_job('BOOTSTRAP', project_id=project_id)
+
 
 
 command_map = {
     'BOOTSTRAP': bootstrap,
     'BUILDOUT': buildout,
     'TEST': test_buildout,
+    'GITCLONE': clone_repo,
 }
