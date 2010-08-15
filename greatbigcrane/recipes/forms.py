@@ -159,6 +159,41 @@ class MercurialRecipeForm(forms.Form):
                 delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
+class PipRecipeForm(forms.Form):
+    name = forms.CharField(initial="pip")
+    eggs = forms.CharField(required=False,widget=LineEditorWidget)
+    interpreter = forms.CharField(required=False)
+    find_links = forms.CharField(required=False,widget=LineEditorWidget)
+    virtualenv = forms.CharField(required=False)
+    indexes = forms.CharField(required=False,widget=LineEditorWidget)
+    env = forms.CharField(required=False,widget=LineEditorWidget)
+    install = forms.CharField(required=False,widget=LineEditorWidget)
+    editables = forms.CharField(required=False,widget=LineEditorWidget)
+
+    def __init__(self, project, *args, **kwargs):
+        super(PipRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+        self.fields['eggs'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section(project, "eggs"))
+        self.fields['find_links'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section( project, "find-paths"))
+
+
+    def save(self, buildout):
+        name = self.cleaned_data['name']
+        dr = recipes['gp.recipe.pip'](buildout, name)
+        for key in self.fields:
+            if key == "name": continue
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
+        buildout_write(self.project.buildout_filename(), buildout)
+
 class BuildoutForm(forms.Form):
     contents = forms.CharField(widget=forms.Textarea)
 
@@ -168,4 +203,5 @@ recipe_form_map = {
         'zc.recipe.egg': EggRecipeForm,
         'zerokspot.recipe.git': GitRecipeForm,
         'mercurialrecipe': MercurialRecipeForm,
+        'gp.recipe.pip': PipRecipeForm,
         }
