@@ -48,16 +48,14 @@ jQuery(function($){
     $.get($(this).attr('href'));
   })
 
-  $('div.dashboard').ekko({url: '/notifications/ajax/'},
+  $('div.dashboard .tests').ekko({url: '/notifications/ajax/'},
     function(data) {
       $(data).each(function(_,n){
         if ( n.id && $("#"+n.id).size() == 0 ) {
           $(n).css('display','none').prependTo($('div.dashboard ul.tests')).slideDown();
-          while($('div.dashboard ul.tests li').size() > 10) {
-            $('div.dashboard ul.tests li:last').slideUp(function(){$(this).remove()});
-          }
         }
       })
+      $('div.dashboard ul.tests li:nth-child(11n)').slideUp(function(){$(this).remove()});
   });
   
   // if ($('.notifications').size()) {
