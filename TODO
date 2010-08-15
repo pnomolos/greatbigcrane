@@ -3,3 +3,5 @@
 * Add support for list-based interface for extra_paths
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
+* IOError if you enter '/' into Base Directory field
+
