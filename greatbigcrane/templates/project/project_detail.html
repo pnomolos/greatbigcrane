@@ -24,9 +24,9 @@
 
 {% block sidebar %}
 PHILSTYLEMEPLEASE!!!!!<br />
-<a href="{% url schedule_buildout project.id %}">Buildout</a><br />
-<a href="{% url schedule_test project.id %}">Test</a><br />
+<a class="button right" href="{% url schedule_buildout project.id %}">Buildout</a><br />
+<a class="button right" href="{% url schedule_test project.id %}">Test</a><br />
 {% if project.git_repo %}
-<a href="{% url schedule_pull project.id %}">Git Pull</a><br />
+    <a class="button right" href="{% url schedule_pull project.id %}">Git Pull</a><br />
 {% endif %}
 {% endblock %}
