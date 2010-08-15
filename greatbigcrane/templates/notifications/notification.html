@@ -7,7 +7,7 @@
     <span class="time">{{notification.notification_time}}</span>
     <!-- <span class="name">{{notification.project.name}}</span> -->
   </span>
-  <a href="{% url view_project notification.project.id %}" class="block">View Project</a>
+  <a href="{% url view_project notification.project.id %}" class="block">View Project &rarr;</a>
   <code>{{notification.message}}</code>
 </div>
 {% endblock %}
