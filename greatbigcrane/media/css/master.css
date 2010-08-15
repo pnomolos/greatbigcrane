@@ -442,19 +442,22 @@ ul.tests li.general a.result {
   margin: 0 auto;
 }
 
-#sidebar ul.tests li:first-child a {
+#sidebar ul.tests li:first-child a,
+.notifications li:first-child a {
   border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
 }
 
-#sidebar ul.tests li:last-child a {
+#sidebar ul.tests li:last-child a,
+.notifications li:last-child a {
   border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
   -moz-border-radius: 0 0 5px 5px;
 }
 
-#sidebar ul.tests li:last-child:first-child a {
+#sidebar ul.tests li:last-child:first-child a,
+.notifications li:last-child:first-child a {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
