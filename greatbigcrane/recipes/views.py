@@ -62,7 +62,7 @@ def edit_buildout_section(request, project, buildout):
     initial = {'contents': string.getvalue()}
     form = BuildoutForm(request.POST or None, initial=initial)
     if form.is_valid():
-        string = StringIO(form.cleaned_data['contents'])
+        string = StringIO(str(form.cleaned_data['contents']))
         config = buildout_manage.parser.buildout_parse(string)
         buildout['buildout'] = config['buildout']
         buildout_manage.parser.buildout_write(project.buildout_filename(), buildout)
