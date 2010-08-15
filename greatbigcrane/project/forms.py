@@ -15,6 +15,7 @@ limitations under the License.
 """
 
 import re
+import os.path
 from django import forms
 
 from project.models import Project
@@ -22,3 +23,7 @@ from project.models import Project
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
+
+    def clean_base_directory(self):
+        value = self.cleaned_data['base_directory']
+        return os.path.expanduser(value)
