@@ -72,12 +72,16 @@ def buildout_parse(filename):
 
     return config
 
-def buildout_write(filename, config):
+def buildout_write(fp, config):
     """
     Given a filename and a BuildoutConfig, write the contents of the BuildoutConfig to the file
     """
 
-    fp = open(filename, "w")
+    if isinstance(fp, str):
+        fp = open(fp, "w")
+        close = True
+    else:
+        close = False
 
     parser = RawConfigParser(dict_type=SortedDict)
 
@@ -92,4 +96,5 @@ def buildout_write(filename, config):
             parser.set(section, key, value)
 
     parser.write(fp)
-    fp.close()
+    if close:
+        fp.close()
