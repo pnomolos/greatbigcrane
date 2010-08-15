@@ -1,4 +1,5 @@
 {% extends 'nosidebar.html' %}
+{% load buildout_config %}
 
 {% block contenttitle %}{{project.name}}{% endblock %}
 
@@ -12,7 +13,7 @@
     <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
     {% for key, value in section.items %}
     <ul>
-        {{key}} = {{value}}
+        {{key}} = {{value|configvalue}}
     </ul>
     {% endfor %}
     </li>
