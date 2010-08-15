@@ -62,7 +62,7 @@ def edit_buildout_section(request, project, buildout):
         string = StringIO(form.cleaned_data['contents'])
         config = buildout_manage.parser.buildout_parse(string)
         buildout['buildout'] = config['buildout']
-        buildout_write(self.project.buildout_filename(), buildout)
+        buildout_manager.parser.buildout_write(project.buildout_filename(), buildout)
         return redirect(project.get_absolute_url())
 
     return render_to_response("recipes/edit_buildout.html", RequestContext(

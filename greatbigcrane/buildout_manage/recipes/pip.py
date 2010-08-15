@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from buildout_manage.recipetools import add_parts, simple_property, bool_property
+from buildout_manage.recipetools import add_parts, simple_property
 
 class PipRecipe(object):
     def __init__(self, config, section_name):
