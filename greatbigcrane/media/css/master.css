@@ -154,6 +154,7 @@ ul.projects li {
   color: #627f60;
   font: normal normal 12px/1.3 Verdana, sans-serif;
   background: #121212;
+  cursor: pointer;
   
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
