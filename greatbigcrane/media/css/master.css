@@ -181,6 +181,8 @@ ul.projects li .buttons a {
   overflow: hidden;
   outline: none;
   opacity: 0.6;
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
 }
 
 ul.projects li .buttons a:hover {
