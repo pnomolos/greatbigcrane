@@ -85,8 +85,6 @@ jQuery(function($){
       $('div.dashboard ul.tests li:nth-child(11n)').slideUp(function(){$(this).remove()});
   });
   
-  $("#id_eggs, #id_extra_paths").lineeditor();
-  
   // if ($('.notifications').size()) {
   //   var paper = Raphael(
   //     $(".notifications .svg").get(0),
