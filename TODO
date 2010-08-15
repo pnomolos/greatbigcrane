@@ -2,11 +2,10 @@
     * I added a delete, but we don't have trash yet
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
-* Improve about page and make it a help file/readme
 * Figure out how to edit the buildout section (not a recipe)
-* bootstrap button on project page
 * Make ~ expand to your home directory in preferences and base directory
 
 Phil:
 * Possibly include RTE on description fields
 * Notification page should have a link back to the project
+* Bootstrap icon on project page
