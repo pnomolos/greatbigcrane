@@ -63,10 +63,11 @@
       function processValues(e) {
         if (e && e.keyCode == 9) {
           e.preventDefault();
-          if ( !e.shiftKey ) {
-            $(e.target).nextAll('input[type=text]:first').focus().size() || addLine().focus(); 
+          target = $(e.target).closest('.input');
+          if (!e.shiftKey) {
+            target.nextAll('.input:first').find('input[type=text]:first').focus().size() || addLine().focus(); 
           } else {
-            $(e.target).prevAll('input[type=text]:first').focus();
+            target.prevAll('.input:first').find('input[type=text]').focus();
           } 
           return;
         }
