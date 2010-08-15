@@ -55,7 +55,8 @@ jQuery(function($){
   
   $('div.projects .favourite').live('click', function(e){
     e.preventDefault();
-    $.post( $(this).attr('href'), { update: '{"#project-list":"projects"}' }, ajaxHandler );
+    var href = $(this).attr('href') + '?' + $(this).parents('form').serialize();
+    $.post( href, { update: '{"#project-list":"projects"}' }, ajaxHandler );
   });
 
   $('div.dashboard .projects .favourite').live('click', function(e){

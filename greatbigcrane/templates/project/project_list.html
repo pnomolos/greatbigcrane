@@ -4,19 +4,16 @@
 
 {% block main %}
 <div class="projects">
-  <form action="/projects" method="get">
+  <form action="/projects/" method="get">
     <select name="orderby" class="autosubmit">
-      <option value="">Sort Projects By</option>
-      <option {% if orderby == 'updated_at' %}selected="selected"{% endif %} value="updated_at">Date</option>
-      <option {% if orderby == 'name' %}selected="selected"{% endif %} value="name">Name</option>
+      <option {% if orderby == 'name' or orderby == '' %}selected="selected"{% endif %} value="name">Name</option>
+      <option {% if orderby == '-updated_at' %}selected="selected"{% endif %} value="-updated_at">Last Updated</option>
       <option {% if orderby == 'test_status' %}selected="selected"{% endif %} value="test_status">Test Status</option>
     </select>
+    <ul class="projects" id="project-list">
+      {% include 'project/_project_list.html' %}
+    </ul>
   </form>
-
-
-  <ul class="projects" id="project-list">
-    {% include 'project/_project_list.html' %}
-  </ul>
 </div>
 {% endblock %}
 

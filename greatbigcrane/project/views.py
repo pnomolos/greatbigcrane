@@ -120,7 +120,7 @@ def handle_ajax(request):
         d = json.loads(request.POST['update'])
         for k,v in d.items():
             if v == 'projects':
-                update[k] = Project.objects.all()
+                update[k] = Project.objects.all().order_by(request.GET.get('orderby', 'name'))
             elif v == 'home-projects':
                 update[k] = Project.objects.filter(favourite=False).order_by('-updated_at')[:5]
             elif v == 'favourite-projects':
