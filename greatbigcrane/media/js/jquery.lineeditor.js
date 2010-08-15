@@ -30,8 +30,8 @@
         var button_container = $('<span class="buttons"></span>');
         $.each({
           'delete': removeLine,
-          'moveup': moveUp,
-          'movedown': moveDown
+          'moveup': move('up'),
+          'movedown': move('down')
         },function(k,v){
           var node = $('<a href="#' + k + '" class="' + k + '">' + k + '</a>').click(v);
           button_container.append(node)
@@ -48,17 +48,17 @@
         processValues();
       }
       
-      function move(direction, ev) {
-        var target = $(this).closest('.input');
-        if (direction == 'down') {
-          target.insertAfter(target.next('.input'));
-        } else if ( direction == 'up' ) {
-          target.insertBefore(target.prev('.input'));
-        }
+      function move(direction) {
+        return (function(ev) {
+          ev.preventDefault();
+          var target = $(this).closest('.input');
+          if (direction == 'down') {
+            target.insertAfter(target.next('.input'));
+          } else if ( direction == 'up' ) {
+            target.insertBefore(target.prev('.input'));
+          }
+        })
       }
-      
-      function moveDown() { return function(e){move('down',e)} };
-      function moveUp() { return function(e){move('up',e)} };
       
       function processValues(e) {
         if (e && e.keyCode == 9) {
