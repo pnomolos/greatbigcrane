@@ -22,6 +22,7 @@
       <ul>
         <li class="clearfix">
           <a href="{% url edit_recipe project.id name %}" class="button right grey">Edit Recipe</a>
+          <a href="{% url delete_recipe project.id name %}" class="button ajax right red confirm">Delete Recipe</a>
           <h3>{{name}}</h3>
           {% for key, value in section.items %}
           <ul>

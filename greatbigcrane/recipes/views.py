@@ -33,6 +33,14 @@ def edit_recipe(request, project_id, section_name):
             'recipe_name': recipe_name,
             'project': project}))
 
+def delete_recipe(request, project_id, section_name):
+    project = get_object_or_404(Project, id=project_id)
+    buildout = project.buildout()
+    del buildout[section_name]
+    buildout_manage.parser.buildout_write(project.buildout_filename(), buildout)
+    return redirect(project.get_absolute_url())
+
+
 def recipe_template(request, project_id, recipe_name):
     project = get_object_or_404(Project, id=project_id)
     form = recipe_form_map[recipe_name](project)
@@ -51,7 +59,6 @@ def save_recipe(request, project_id):
     else:
         return render_to_response("recipes/recipe_templates/%s.html" % recipe_name,
                 {'form': form})
-
 
 def edit_buildout_section(request, project, buildout, section_name):
     new_buildout = buildout_manage.parser.BuildoutConfig()
