@@ -9,7 +9,7 @@ from cStringIO import StringIO
 
 def add_recipe(request, project_id):
     project = get_object_or_404(Project, id=project_id)
-    return render_to_response("project/add_recipe.html", 
+    return render_to_response("recipes/add_recipe.html", 
             RequestContext(request, {
                 'project': project,
                 'available_recipes': sorted(buildout_manage.recipes)}))
@@ -24,9 +24,9 @@ def edit_recipe(request, project_id, section_name):
     recipe = buildout_manage.recipes[recipe_name](buildout, section_name)
 
     form = recipe_form_map[recipe_name](project, initial=recipe.dict())
-    return render_to_response("project/edit_recipe.html", RequestContext(
+    return render_to_response("recipes/edit_recipe.html", RequestContext(
         request, {'form': form,
-            'template_name': "project/recipe_templates/%s.html" % recipe_name,
+            'template_name': "recipes/recipe_templates/%s.html" % recipe_name,
             'recipe_name': recipe_name,
             'project': project}))
 
@@ -46,7 +46,7 @@ def save_recipe(request, project_id):
         form.save(buildout)
         return redirect(project.get_absolute_url())
     else:
-        return render_to_response("project/recipe_templates/%s.html" % recipe_name,
+        return render_to_response("recipes/recipe_templates/%s.html" % recipe_name,
                 {'form': form})
 
 
