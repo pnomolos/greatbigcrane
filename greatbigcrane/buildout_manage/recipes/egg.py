@@ -27,6 +27,17 @@ class EggRecipe(object):
         self.section = self.config[self.section_name]
         self.section['recipe'] = 'zc.recipe.egg'
 
+    def dict(self):
+        # FIXME: This fails if an option has not been set
+        return dict(eggs=self.eggs,
+                find_links=self.find_links,
+                interpreter=self.interpreter,
+                index=self.index,
+                python=self.python,
+                extra_paths=self.extra_paths,
+                relative_paths=self.relative_paths,
+                dependent_scripts=self.dependent_scripts)
+
     eggs = simple_property('eggs')
     find_links = simple_property('find-links')
     interpreter = simple_property('interpreter')

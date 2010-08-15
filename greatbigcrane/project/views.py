@@ -115,7 +115,7 @@ def edit_recipe(request, project_id, recipe_name):
     buildout=project.buildout()
     section=buildout[recipe_name]
     recipe_type = section['recipe']
-    recipe = buildout_manage.recipes['djangorecipe'](buildout, recipe_name)
+    recipe = buildout_manage.recipes[recipe_type](buildout, recipe_name)
 
     form = recipe_form_map[recipe_type](project, initial=recipe.dict())
     return render_to_response("project/edit_recipe.html", RequestContext(

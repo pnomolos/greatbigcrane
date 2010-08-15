@@ -58,10 +58,7 @@ class DjangoRecipeForm(forms.Form):
         buildout_write(self.project.buildout_filename(), buildout)
 
 class EggRecipeForm(forms.Form):
-    def __init__(self, project, *args, **kwargs):
-        super(EggRecipeForm, self).__init__(*args, **kwargs)
-        self.project = project
-
+    name = forms.CharField(initial="eggs")
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
     find_links = forms.CharField(required=False)
     interpreter = forms.CharField(required=False)
@@ -70,6 +67,19 @@ class EggRecipeForm(forms.Form):
     extra_paths = forms.CharField(required=False)
     relative_paths = forms.BooleanField(required=False)
     dependent_scripts = forms.BooleanField(required=False)
+
+    def __init__(self, project, *args, **kwargs):
+        super(EggRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+
+
+    def save(self, buildout):
+        name = self.cleaned_data['name']
+        dr = recipes['zc.recipe.egg'](buildout, name)
+        for key in self.fields:
+            if key == "name": continue
+            setattr(dr, key, self.cleaned_data[key])
+        buildout_write(self.project.buildout_filename(), buildout)
 
 
 recipe_form_map = {
