@@ -17,7 +17,9 @@ def edit_recipe(request, project_id, section_name):
     project = get_object_or_404(Project, id=project_id)
     buildout=project.buildout()
     section=buildout[section_name]
-    recipe_name = section['recipe']
+    if section_name == "buildout":
+        return edit_buildout_section(request, project, buildout)
+    recipe_name = section.get('recipe')
     recipe = buildout_manage.recipes[recipe_name](buildout, section_name)
 
     form = recipe_form_map[recipe_name](project, initial=recipe.dict())
@@ -47,3 +49,6 @@ def save_recipe(request, project_id):
                 {'form': form})
 
 
+def edit_buildout_section(request, project, buildout):
+    from django.http import HttpResponse
+    return HttpResponse("We haven't figured that out yet")
