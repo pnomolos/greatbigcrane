@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import re
 from django import forms
 
 from project.models import Project
@@ -44,6 +45,8 @@ class DjangoRecipeForm(forms.Form):
     def __init__(self, project, *args, **kwargs):
         super(DjangoRecipeForm, self).__init__(*args, **kwargs)
         self.project = project
+        safe_name = re.sub(r'[^A-Za-z0-9_]', '', project.name).lower()
+        self.fields['project'].initial = safe_name
 
     def save(self, buildout):
         name = self.cleaned_data['name']
