@@ -60,9 +60,13 @@ class Project(models.Model):
         github page.'''
         github = self.git_repo.find("github.com")
         if github > -1:
-            # -4 to extract ".git"
-            # replace to change ssh://blah@github.com:blah urls
-            return "http://" + self.git_repo[github:-4].replace(":", "/")
+            url = self.git_repo[github:].replace(":", "/")
+            if url.endswith(".git"):
+                url = url[:-4]
+            url = "http://%s" % url
+        else:
+            url = ""
+        return url
 
     def __unicode__(self):
         return self.name

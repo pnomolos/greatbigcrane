@@ -77,3 +77,8 @@ class ProjectGithubUrlTests(TestCase):
         p = Project(name="great big crane", 
                 git_repo="git://github.com/pnomolos/Django-Dash-2010.git")
         assert p.github_url() == "http://github.com/pnomolos/Django-Dash-2010"
+
+    def test_no_git(self):
+        p = Project(name="great big crane", 
+                git_repo="git://github.com/pnomolos/Django-Dash-2010")
+        assert p.github_url() == "http://github.com/pnomolos/Django-Dash-2010"
