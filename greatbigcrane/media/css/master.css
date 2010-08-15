@@ -381,3 +381,16 @@ footer {
   text-align: right;
   color: #999;
 }
+
+
+/* lineeditor */
+.lineeditor .delete {
+  position: relative;
+  text-indent: -999em;
+  float: right;
+  top: -30px;
+  right: 5px;
+  background: url(../images/small-icon-delete.png) 0 0 no-repeat;
+  width: 20px;
+  height: 20px;
+}
