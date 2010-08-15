@@ -3,7 +3,7 @@
 {% block main %}
 <p>Are you sure you want to delete the {{object.name}} project?</p>
 <form method="POST" class="clearfix">
-    <input type="submit" value="Yes" class="red margin left"> 
+    <input type="submit" value="Yes" class="red left"> 
     <a href="{{object.get_absolute_url}}" class="button orange left block">No</a>
 </form>
 {% endblock %}

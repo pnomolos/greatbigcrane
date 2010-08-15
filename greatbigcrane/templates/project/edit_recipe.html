@@ -1,12 +1,13 @@
 {% extends 'nosidebar.html' %}
 
 {% block main %}
-<form method="post" action="{% url save_recipe project.id %}">
+<form method="post" action="{% url save_recipe project.id %}" class="clearfix">
   {{form.media}}
   <input type="hidden" name="recipe_name" value="{{recipe_name}}">
   <div id="recipe_template_container">
     {% include template_name %}
   </div>
-  <input type="submit" value="Save Recipe" class="orange">
+  <input type="submit" value="Save Recipe" class="left blue">
+  <a class="left orange button" href="{% url view_project project.id %}">Cancel</a>
 </form>
 {% endblock %}
