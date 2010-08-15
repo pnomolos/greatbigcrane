@@ -142,6 +142,11 @@ def test_buildout(project_id):
                 project.name, "success" if not errors else "error"),
             message=('\n\n'+'*'*50+'\n\n').join(responses),
             project=project)
+    if not errors:
+        # TODO: Potential for race condition?
+        
+        project.test_status = True
+        project.save()
 
 
 
