@@ -55,7 +55,8 @@ def list_projects(request):
 
 def view_project(request, project_id):
     return object_detail(request, Project.objects.all(), object_id=project_id,
-            template_object_name='project', extra_context={'notifications': Notification.objects.filter(project=project_id)})
+            template_object_name='project', extra_context={
+            'notifications': Notification.objects.filter(project=project_id,dismissed=False)[:10]})
 
 def add_project(request):
     form = ProjectForm(request.POST or None)
@@ -118,9 +119,10 @@ def favourite_project(request, project_id):
     return handle_ajax(request)
 
 def project_notifications(request, project_id):
-    notifications = Notification.objects.filter(project=project_id)
+    project = Project.objects.get(pk=project_id)
+    notifications = Notification.objects.filter(project=project_id,dismissed=False)[:10]
     return render_to_response("notifications/_notification_list.html",
-            RequestContext(request, {'notifications': notifications}))
+            RequestContext(request, {'notifications': notifications, 'project': project}))
 
 def handle_ajax(request):
     # return HttpResponse(request.POST['update'])

@@ -66,12 +66,13 @@ function show_queuing_response(node) {
 }
 
 function update_notifications(data) {
+  var $el = $(this);
   $(data).each(function(_,n){
     if ( n.id && $("#"+n.id).size() == 0 ) {
-      $(n).css('display','none').prependTo($($.selector)).slideDown();
+      $(n).css('display','none').prependTo($el).slideDown();
     }
   })
-  $($.selector + ' li:nth-child(11n)').slideUp(function(){$(this).remove()});
+  $el.find('li:nth-child(11n)').slideUp(function(){$(this).remove()});
 }
 
 jQuery(function($){
