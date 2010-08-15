@@ -1,6 +1,7 @@
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
 * Figure out how to edit the buildout section (not a recipe)
+* Move recipe templates out of project directory
 
 Phil:
 * Possibly include RTE on description fields
