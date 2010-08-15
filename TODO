@@ -7,3 +7,4 @@
 Phil:
 * Possibly include RTE on description fields
 * Style project view page
+* Add magic that makes line_editor automatically update when hidden input value is changed
