@@ -67,7 +67,7 @@ function show_queuing_response(node) {
 
 function update_notifications(data) {
   var $el = $(this);
-  var number_to_remove = 0;
+  var number_to_remove = $el.find('li').size()-10;
   $(data).each(function(_,n){
     if ( n.id && $("#"+n.id).size() == 0 ) {
       var id = parseInt(n.id.replace(/\D*/,''));
@@ -127,7 +127,7 @@ jQuery(function($){
   });
 
   $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'));
-  $('.actions .ajax').live('click',queue_button('closest', 'section'));
+  $('.actions .ajax').live('click',queue_button('closest', 'div.project > section'));
   $('.confirm').live('click',function(e){
     e.preventDefault();
     if ( confirm("Are you sure you want to do this?") ) {
