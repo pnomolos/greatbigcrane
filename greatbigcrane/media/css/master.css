@@ -398,11 +398,9 @@ ul.tests li a.result {
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
   text-align: left;
-  -webkit-transition: border-color 0.3s linear;
-  -moz-transition: border-color 0.3s linear;
-  
-  -webkit-transition: border-radius 0.3s linear;
-  -moz-transition: border-radius 0.3 linear;
+
+  -webkit-transition: border-color 0.3s linear, border-radius 0.3s linear;
+  -moz-transition: border-color 0.3s linear, border-radius 0.3s linear;
 }
 
 ul.tests li a.result:hover {
