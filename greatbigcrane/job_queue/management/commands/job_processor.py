@@ -166,7 +166,7 @@ def clone_repo(project_id):
     queue_job('BOOTSTRAP', project_id=project_id)
 
 def pull_repo(project_id):
-    print("pulling repo for %s" % proect_id)
+    print("pulling repo for %s" % project_id)
     project = Project.objects.get(id=project_id)
 
     process = subprocess.Popen(['git', 'pull'], cwd=project.base_directory,
