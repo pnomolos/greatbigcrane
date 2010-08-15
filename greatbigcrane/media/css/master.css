@@ -70,8 +70,8 @@ h3 {
 
 a, a:link, a:visited {
   color: #eee;
-  -webkit-transition: color 0.4s linear;
-  -moz-transition: color 0.4s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
   text-decoration: none;
 }
 
@@ -181,8 +181,8 @@ ul.projects li .buttons a {
   overflow: hidden;
   outline: none;
   opacity: 0.3;
-  -webkit-transition: opacity 0.4s linear;
-  -moz-transition: opacity 0.4s linear;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
 }
 
 ul.projects li .buttons a:hover {
@@ -240,8 +240,8 @@ ul.projects li .buttons .favourite.favourited {
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
   text-align: left;
-  -webkit-transition: border-color 0.4s linear;
-  -moz-transition: border-color 0.4s linear;
+  -webkit-transition: border-color 0.3s linear;
+  -moz-transition: border-color 0.3s linear;
 }
 
 .tests li a.result:hover {
@@ -327,8 +327,8 @@ a.button {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   
-  -webkit-transition: background 0.4s linear;
-  -moz-transition: background 0.4s linear;
+  -webkit-transition: background 0.3s linear;
+  -moz-transition: background 0.3s linear;
 }
 
 form input[type=submit]:hover,
