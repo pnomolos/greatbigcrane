@@ -221,6 +221,11 @@ ul.projects li .buttons .tests.success,
   background-position: 0 -144px;
 }
 
+ul.projects li .buttons .pull,
+.project .actions .pull {
+  background-position: 0 -192px;
+}
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
