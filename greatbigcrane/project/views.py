@@ -90,8 +90,9 @@ def add_recipe(request, project_id):
                 'available_recipes': buildout_manage.recipes}))
 
 
-def recipe_template(request, recipe_name):
-    form = recipe_form_map[recipe_name]()
+def recipe_template(request, project_id, recipe_name):
+    project = get_object_or_404(Project, id=project_id)
+    form = recipe_form_map[recipe_name](project)
     return render_to_response("project/recipe_templates/%s.html" % recipe_name,
             {'form': form})
 
@@ -99,10 +100,10 @@ def recipe_template(request, recipe_name):
 def save_recipe(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     recipe_name = request.POST['recipe_name']
-    form = recipe_form_map[recipe_name](request.POST)
+    form = recipe_form_map[recipe_name](project, request.POST)
     if form.is_valid():
         buildout = project.buildout()
-        form.save(project, buildout)
+        form.save(buildout)
         return redirect(project.get_absolute_url())
     else:
         return render_to_response("project/recipe_templates/%s.html" % recipe_name,

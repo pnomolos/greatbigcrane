@@ -14,3 +14,9 @@ Select the type of recipe you would like to add to {{project.name}}'s buildout.c
     <input type="submit" value="create recipe" />
 </form>
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $('#available_recipes').change(load_recipe_template({{project.id}}));
+</script>
+{% endblock %}

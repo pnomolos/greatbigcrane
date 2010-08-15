@@ -17,10 +17,13 @@ function dismiss_notification(notification_id) {
     });
 }
 
-function load_recipe_template() {
-    if ($('#available_recipes').val() != "") {
-        $("#recipe_template_container").load("/projects/recipe_template/" +
-                $('#available_recipes').val() + '/');
+function load_recipe_template(project_id) {
+    return function(node) {
+        if ($('#available_recipes').val() != "") {
+            $("#recipe_template_container").load("/projects/" + 
+                    "recipe_template/" + project_id + '/' +
+                    $('#available_recipes').val() + '/');
+        }
     }
 }
 

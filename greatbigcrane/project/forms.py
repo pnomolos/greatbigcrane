@@ -26,7 +26,7 @@ class ProjectForm(forms.ModelForm):
 
 class DjangoRecipeForm(forms.Form):
     name = forms.CharField(initial="django")
-    settings = forms.CharField()
+    settings = forms.CharField(initial="development")
     version = forms.ChoiceField(choices=[
         ("trunk", "trunk"),
         ("1.2", "1.2"),
@@ -41,7 +41,11 @@ class DjangoRecipeForm(forms.Form):
     fcgi = forms.BooleanField(required=False)
     wsgi = forms.BooleanField(required=False)
 
-    def save(self, project, buildout):
+    def __init__(self, project, *args, **kwargs):
+        super(DjangoRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+
+    def save(self, buildout):
         name = self.cleaned_data['name']
         dr = recipes['djangorecipe'](buildout, name)
         for key in self.fields:

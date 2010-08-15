@@ -24,5 +24,5 @@ urlpatterns = patterns('project.views',
         url('^favourite/(?P<project_id>\d+)/$', 'favourite_project', name="favourite_project"),
         url('^add_recipe/(?P<project_id>\d+)/$', 'add_recipe', name="add_recipe"),
         url('^save_recipe/(?P<project_id>\d+)/$', 'save_recipe', name="save_recipe"),
-        url('^recipe_template/(?P<recipe_name>[^/]*)/$', 'recipe_template', name='recipe_template')
+        url('^recipe_template/(?P<project_id>\d+)/(?P<recipe_name>[^/]*)/$', 'recipe_template', name='recipe_template')
         )
