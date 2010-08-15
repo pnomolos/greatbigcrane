@@ -400,6 +400,7 @@ form input[type=text], form textarea {
 
 form input[type=submit],
 a.button {
+  margin: 0;
   border: 1px solid #ddd;
   background: #999;
   padding: 10px;
@@ -412,6 +413,8 @@ a.button {
   
   -webkit-transition: background 0.3s linear;
   -moz-transition: background 0.3s linear;
+  
+  margin-right: 10px;
 }
 
 form input[type=submit]:hover,

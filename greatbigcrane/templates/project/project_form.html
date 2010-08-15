@@ -5,10 +5,11 @@ Add A Project
 {% endblock %}
 
 {% block main %}
-<form method="post">
+<form method="post" class="clearfix">
   {% csrf_token %}
   {% include 'project/_form.html' %}
-  <input type="submit" value="{% block submit_command %}Create Project{% endblock %}">
+  <input type="submit" value="{% block submit_command %}Create Project{% endblock %}" class="left">
+  <a href="{% url list_projects %}" class="button left">Cancel</a>
 </form>
 {% endblock %}
 
