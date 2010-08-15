@@ -50,6 +50,20 @@ class BuildoutConfig(SortedDict):
 
         return [section_name for section_name, section in self.iteritems() if key in section]
 
+    def remove_part(self, section_name):
+        parts_list = self['buildout'].setdefault('parts', [])
+        if not isinstance(parts_list, list):
+            self['buildout']['parts'] = parts_list = [parts_list]
+        if section_name in parts_list:
+            parts_list.remove(section_name)
+
+    def add_part(self, section_name):
+        parts_list = self['buildout'].setdefault('parts', [])
+        if not isinstance(parts_list, list):
+            self['buildout']['parts'] = parts_list = [parts_list]
+        if section_name not in parts_list:
+            parts_list.append(section_name)
+
 def buildout_parse(filename):
     """
     Given a filename, parse the buildout config and return a BuildoutConfig object that represents it

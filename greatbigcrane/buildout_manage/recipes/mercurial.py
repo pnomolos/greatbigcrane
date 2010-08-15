@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-from buildout_manage.recipetools import add_parts, simple_property, bool_property
+from buildout_manage.recipetools import simple_property, bool_property
 
 class MercurialRecipe(object):
     def __init__(self, config, section_name):
@@ -22,7 +22,7 @@ class MercurialRecipe(object):
 
     def init(self):
         # Does section already exist?
-        add_parts(self.config, self.section_name)
+        self.config.add_part(self.section_name)
         self.section = self.config[self.section_name]
         self.section['recipe'] = 'mercurialrecipe'
 

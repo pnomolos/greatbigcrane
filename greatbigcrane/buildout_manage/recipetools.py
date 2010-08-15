@@ -16,13 +16,6 @@ limitations under the License.
 
 import re
 
-def add_parts(config, section_name):
-    parts_list = config['buildout'].setdefault('parts', [])
-    if not isinstance(parts_list, list):
-        config['buildout']['parts'] = parts_list = [parts_list]
-    if section_name not in parts_list:
-        parts_list.append(section_name)
-
 section_re = re.compile(r'\${([^:]*):([^}]*)}')
 
 def expand_value(value):
