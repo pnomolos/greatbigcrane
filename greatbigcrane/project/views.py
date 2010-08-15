@@ -108,3 +108,9 @@ def handle_ajax(request):
         return HttpResponse(json.dumps({'update': update}),content_type="application/json")
     else:
         return HttpResponse('fail')
+
+def schedule_buildout(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    queue_job("BUILDOUT", project_id=project.id)
+
+    return redirect("/projects/")
