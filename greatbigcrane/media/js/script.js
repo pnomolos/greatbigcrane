@@ -65,6 +65,15 @@ function show_queuing_response(node) {
   });
 }
 
+function update_notifications(data) {
+  $(data).each(function(_,n){
+    if ( n.id && $("#"+n.id).size() == 0 ) {
+      $(n).css('display','none').prependTo($($.selector)).slideDown();
+    }
+  })
+  $($.selector + ' li:nth-child(11n)').slideUp(function(){$(this).remove()});
+}
+
 jQuery(function($){
   $('.autosubmit').change(function(){
     $(this).parents('form').first().submit();
@@ -105,20 +114,11 @@ jQuery(function($){
   });
   
 
-  $('div.dashboard .tests').ekko({url: '/notifications/ajax/'},
-    function(data) {
-      $(data).each(function(_,n){
-        if ( n.id && $("#"+n.id).size() == 0 ) {
-          $(n).css('display','none').prependTo($('div.dashboard ul.tests')).slideDown();
-        }
-      })
-      $('div.dashboard ul.tests li:nth-child(11n)').slideUp(function(){$(this).remove()});
-  });
-  
-  $('div.project .tests').ekko({url: '/project/' + $('#project').attr('id').replace(/\D/,'') + '/notifications/'},
-    function(data) {
-    $('div.dashboard ul.tests').empty().html(data);
-  });
+  $('div.dashboard ul.tests:first').ekko({url: '/notifications/ajax/'},update_notifications);
+
+  if ( $('#content .project:first').size() ) {
+    $('div.project .tests.live:first').ekko({url: '/projects/' + $('#content .project:first').attr('id').replace(/\D*/,'') + '/notifications/'},update_notifications);
+  }
   
   $("#id_eggs, #id_extra_paths").lineeditor();
 });
