@@ -313,3 +313,10 @@ a.button:hover {
   -moz-box-shadow: 0 0 8px rgba(196,196,196,1);
   -webkit-box-shadow: 0 0 8px rgba(196,196,196,1);
 }
+
+/* footer */
+footer {
+  padding: 10px;
+  text-align: right;
+  color: #999;
+}
