@@ -23,6 +23,19 @@ class LineEditorChoiceWidget(LineEditorWidget):
         self.choices = choices
 
     def render(self, name, value, attrs=None):
+        print("rendering...")
         rendered = super(LineEditorChoiceWidget, self).render(name, value, attrs)
         options = "".join(["<option value='%s'>%s</option>" % (c[0], c[1]) for c in self.choices])
-        return mark_safe("<select>%s<select>%s" % (options, rendered))
+        script = """<script type="text/javascript">
+        $("#id_%(name)s_button").click(
+            function() {
+                $("#id_%(name)s").val($("#id_%(name)s").val() + "\\n" + $("#id_%(name)s_select").val());
+            }
+        );
+</script>""" % {'name': name}
+        return mark_safe("<select id='id_%(name)s_select'>%(options)s</select><button id='id_%(name)s_button' type='button'>insert</button>%(lineeditor)s%(script)s" % {
+            'name': name,
+            'options': options,
+            'lineeditor': rendered,
+            'script': script
+            })
