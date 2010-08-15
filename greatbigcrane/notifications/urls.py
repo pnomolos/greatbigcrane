@@ -18,6 +18,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('notifications.views',
         url('^$', 'list_notifications', name="list_notifications"),
+        url('^ajax$', 'ajax_notification', name="ajax_notification"),
         url('^dismiss/(?P<notification_id>\d+)/$', 'dismiss_notification',
             name='dismiss_notification'),
         url('^view/(?P<notification_id>\d+)/$', 'view_notification', name="view_notification"),

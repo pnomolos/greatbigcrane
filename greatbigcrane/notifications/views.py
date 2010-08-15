@@ -42,3 +42,8 @@ def dismiss_notification(request, notification_id):
     notification.dismissed = True
     notification.save()
     return HttpResponse("success")
+
+def ajax_notification(request):
+    notifications = Notification.objects.exclude(dismissed=True)[:10]
+    return render_to_response("notifications/ajax_notification.html",
+        RequestContext(request, {'notifications': notifications}))
