@@ -30,7 +30,11 @@ class DjangoRecipeForm(forms.Form):
         self.fields['project'].initial = safe_name
         egg_sections = project.buildout().sections_with_key('eggs')
         egg_choices = [("${%s:eggs}" % s, "${%s:eggs}" % s) for s in egg_sections]
+        extra_path_sections = project.buildout().sections_with_key('extra-paths')
+        extra_paths_choices = [("${%s:extra-paths}" % s, "${%s:extra-paths}" % s) for s in extra_path_sections]
+        print extra_paths_choices
         self.fields['eggs'].widget = LineEditorChoiceWidget(choices=egg_choices)
+        self.fields['extra_paths'].widget = LineEditorChoiceWidget(choices=extra_paths_choices)
 
     def save(self, buildout):
         name = self.cleaned_data['name']
