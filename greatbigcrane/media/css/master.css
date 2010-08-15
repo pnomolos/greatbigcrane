@@ -2,7 +2,7 @@
 
 body {
   background: #313236 url(/media/images/bg.jpg) center 0 no-repeat;
-  color: #f6f6f6;
+  color: #ddd;
 }
 
 #container {
@@ -70,10 +70,9 @@ h3 {
 
 a, a:link, a:visited {
   font-weight: bold;
-  color: #cde;
+  color: #ccb;
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
-  text-decoration: none;
 }
 
 a:hover {
@@ -86,6 +85,10 @@ a.block {
   clear: both;
 }
 
+.highlight {
+  font-size: 16px;
+}
+
 /* misc styles */
 .right {
   float: right;
@@ -95,8 +98,16 @@ a.block {
   float: left;
 }
 
+.clear {
+  clear: both;
+}
+
 .block.right, .block.left {
   clear: none;
+}
+
+.margin {
+  margin: 10px;
 }
 
 p {
@@ -106,6 +117,7 @@ p {
 code {
   white-space: pre;
   color: #999;
+  margin: 10px 0;
 }
 
 /* header styles */
@@ -443,6 +455,10 @@ a.button {
 form input[type=submit]:hover,
 a.button:hover {
   background: #ccc;
+}
+
+a.button.margin {
+  margin: 10px 0;
 }
 
 /* footer */
