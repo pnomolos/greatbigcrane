@@ -26,4 +26,13 @@ class ProjectForm(forms.ModelForm):
 
     def clean_base_directory(self):
         value = self.cleaned_data['base_directory']
-        return os.path.expanduser(value)
+        return os.path.expanduser(value).strip()
+
+    def clean_name(self):
+        return self.cleaned_data['name'].strip()
+
+    def clean_git_repo(self):
+        return self.cleaned_data['git_repo'].strip()
+
+    def clean_description(self):
+        return self.cleaned_data['description'].strip()
