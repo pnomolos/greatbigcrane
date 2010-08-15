@@ -29,7 +29,6 @@
         addLine(this);
       });
       
-
       $el.replaceWith(container);
       calculatePositioning();
       
@@ -89,7 +88,7 @@
           }
           
           if ( $(this).next('.input').size() ) {
-             $(this).find('.movedown').size() || $(this).find('.buttons').append( buttons.find('.movedown').clone(true) );
+             $(this).find('.movedown').size() || $(this).find('.buttons').append(buttons.find('.movedown').clone(true));
           } else {
             $(this).find('.movedown').remove();
           }
