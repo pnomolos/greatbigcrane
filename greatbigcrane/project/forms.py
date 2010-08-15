@@ -55,7 +55,11 @@ class DjangoRecipeForm(forms.Form):
         dr = recipes['djangorecipe'](buildout, name)
         for key in self.fields:
             if key == "name": continue
-            setattr(dr, key, self.cleaned_data[key])
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            setattr(dr, key, value)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class EggRecipeForm(forms.Form):
