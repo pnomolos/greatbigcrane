@@ -22,7 +22,9 @@ function load_recipe_template(project_id) {
     if ($('#available_recipes').val() != "") {
       $("#recipe_template_container").load("/projects/" + project_id +
         "/recipe_template/" +
-        $('#available_recipes').val() + '/');
+        $('#available_recipes').val() + '/',function(){
+          $("#id_eggs, #id_extra_paths").lineeditor();
+        });
     }
   })
 }
