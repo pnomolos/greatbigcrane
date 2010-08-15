@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
 
-from project.forms import recipe_form_map
+from recipes.forms import recipe_form_map
 from project.models import Project
 import buildout_manage
 
