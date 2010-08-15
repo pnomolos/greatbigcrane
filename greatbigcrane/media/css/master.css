@@ -396,13 +396,26 @@ footer {
   display: block;
 }
 
-.lineeditor .delete {
+.lineeditor .buttons a {
   text-indent: -999em;
   float: right;
   width: 20px;
   height: 20px;
+  
+}
+
+.lineeditor .delete {
   background: url(../images/small-icon-delete.png) 0 0 no-repeat;
 }
+
+.lineeditor .moveup {
+  background: url(../images/small-icon-arrow-up.png) 0 0 no-repeat;
+}
+
+.lineeditor .movedown {
+  background: url(../images/small-icon-arrow-down.png) 0 0 no-repeat;
+}
+
 
 /* errors */
 .errorlist {
