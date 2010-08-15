@@ -55,5 +55,14 @@ class Project(models.Model):
                 return True
         return False
 
+    def github_url(self):
+        '''If our repo is a github repo, provide a link to the
+        github page.'''
+        github = self.git_repo.find("github.com")
+        if github > -1:
+            # -4 to extract ".git"
+            # replace to change ssh://blah@github.com:blah urls
+            return "http://" + self.git_repo[github:-4].replace(":", "/")
+
     def __unicode__(self):
         return self.name
