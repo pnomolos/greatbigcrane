@@ -232,6 +232,18 @@ ul.projects li .buttons {
   float: right;
 }
 
+.project > section {
+  margin-bottom: 10px;
+}
+
+.project > section + section {
+  margin-top: 10px;
+}
+
+.project .actions section + section {
+  margin-top: 5px;
+}
+
 ul.projects li .buttons a,
 .project .actions a {
   background: url(../images/icons.png) 0 0 no-repeat;
@@ -315,7 +327,8 @@ ul.projects li .buttons .favourite.favourited,
   background-position: 0 0;
 }
 
-ul.projects li .notice {
+ul.projects li .notice,
+div.project .notice {
   padding: 5px;
   border: 1px solid #333;
   clear: both;
@@ -323,13 +336,19 @@ ul.projects li .notice {
   margin-top: 20px;
 }
 
-ul.projects li .error {
+div.project .notice {
+  margin-top: 10px;
+}
+
+ul.projects li .error, 
+div.project .notice.error {
   border-color: #900;
   background: #fee;
   color: #121212;
 }
 
-ul.projects li .success {
+ul.projects li .success,
+div.project .notice.success {
   border-color: #090;
   background: #cfc;
   color: #121212;
