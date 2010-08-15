@@ -440,6 +440,7 @@ a.button {
   padding: 10px;
   color: #eee;
   font-size: 16px;
+  line-height: 16px;
   text-decoration: none;
   font-weight: bold;
   border-radius: 5px;
@@ -473,6 +474,10 @@ a.button {
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 form input[type=submit] + a.button,
@@ -493,6 +498,17 @@ form input[type=submit].orange {
 .button.orange:hover,
 form input[type=submit].orange:hover {
   background-color: #ea0;
+}
+
+.button.blue,
+form input[type=submit].blue {
+  background-color: #023;
+  border-color: #045;
+}
+
+.button.blue:hover,
+form input[type=submit].blue:hover {
+  background-color: #079;
 }
 
 .button.red,
