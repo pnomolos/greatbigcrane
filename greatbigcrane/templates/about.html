@@ -37,6 +37,9 @@ dashboard when they have completed.
 <p>The dashboard lists your most recently active projects and explicitly
 favourited projects. Projects can be favourited using the star icon in the
 project list. You can also schedule a buildout and tests from the dashboard.
+Tests are run through the buildout. The test icon will glow either red or
+green depending on whether or not the last set of tests for that project
+completed successfully or not.
 </p>
 <p>
 Notifications indicate the output of various asynchronous commands, and can
@@ -44,6 +47,9 @@ indicate success, failure, or a general notification. The small "x" box
 on the right of a notification allows you to dismiss it. The notifications
 page allows you to visually review all recent notifications and is set up
 so you can spatially see notifications in both chronological order and sorted
-by status (success, general, failure) at the same time.
+by status (success, general, failure) at the same time. Clicking the notification
+allows you to view the output of the command that was run.
+</p>
+<p>
 </p>
 {% endblock %}
