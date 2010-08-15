@@ -53,14 +53,23 @@ jQuery(function($){
     $(this).parents('form').first().submit();
   });
   
+  $('.projects li').live('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var href = $(this).find('a.settings').attr('href');
+    window.location = href;
+  });
+  
   $('div.projects .favourite').live('click', function(e){
     e.preventDefault();
+    e.stopPropagation();
     var href = $(this).attr('href') + '?' + $(this).parents('form').serialize();
     $.post(href, {update: '{"#project-list":"projects"}'}, ajaxHandler);
   });
 
   $('div.dashboard .projects .favourite').live('click', function(e){
     e.preventDefault();
+    e.stopPropagation();
     $.post($(this).attr('href'), { 
       update: '{"#project-list":"home-projects","#favourite-project-list":"favourite-projects"}' 
     }, ajaxHandler);
