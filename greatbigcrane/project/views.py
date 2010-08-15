@@ -104,7 +104,7 @@ def edit_project(request, project_id):
 
     base_url = Preference.objects.get_preference("projects_directory", '')
 
-    return render_to_response("project/project_form.html",
+    return render_to_response("project/project_edit_form.html",
             RequestContext(request, {'form': form, 'base_url': base_url}))
 
 def delete_project(request, project_id):
