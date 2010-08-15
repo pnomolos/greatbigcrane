@@ -140,5 +140,11 @@ def schedule_buildout(request, project_id):
         return HttpResponse('Successfully queued buildout')
     except Exception as e:
         return HttpResponseServerError("Error: " + str(e))
-    
-    
+
+def schedule_test(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    try:
+        queue_job("TEST", project_id=project.id)
+        return HttpResponse('Successfully queued test')
+    except Exception as e:
+        return HttpResponseServerError("Error: " + str(e))
