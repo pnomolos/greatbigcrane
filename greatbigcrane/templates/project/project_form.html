@@ -9,7 +9,7 @@ Add A Project
   {% csrf_token %}
   {% include 'project/_form.html' %}
   <input type="submit" value="{% block submit_command %}Create Project{% endblock %}" class="left">
-  <a href="{% url list_projects %}" class="button left">Cancel</a>
+  <a href="{% block cancel_url %}{% url list_projects %}{% endblock %}" class="button left">Cancel</a>
 </form>
 {% endblock %}
 

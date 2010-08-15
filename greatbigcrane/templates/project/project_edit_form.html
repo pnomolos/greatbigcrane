@@ -5,4 +5,5 @@ Edit project "{{form.instance.name}}"
 {% endblock %}
 
 {% block submit_command %}Save Project{% endblock %}
+{% block cancel_url %}{% url view_project form.instance.id %}{% endblock %}
 {% block scripts %}{% endblock %}
