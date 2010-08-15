@@ -42,6 +42,7 @@
       <a class="edit" href="{% url edit_project project.id %}" title="Edit Project">Edit Project</a>
       <a class="delete confirm" href="{% url delete_project project.id %}" title="Delete Project">Delete Project</a>
       <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
+      <a class="bootstrap ajax" href="{% url schedule_bootstrap project.id %}" title="Bootstrap Buildout">Bootstrap Buildout</a>
       <a class="tests ajax" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
       {% if project.git_repo %}
         <a class="pull ajax" href="{% url schedule_pull project.id %}" title="Git Pull">Git Pull</a>
