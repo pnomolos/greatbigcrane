@@ -82,6 +82,10 @@ class EggRecipeForm(forms.Form):
     def __init__(self, project, *args, **kwargs):
         super(EggRecipeForm, self).__init__(*args, **kwargs)
         self.project = project
+        self.fields['eggs'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section(project, "eggs"))
+        self.fields['extra_paths'].widget = LineEditorChoiceWidget(
+                choices=choices_from_section( project, "extra-paths"))
 
 
     def save(self, buildout):
