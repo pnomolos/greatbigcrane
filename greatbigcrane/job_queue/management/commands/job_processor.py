@@ -165,6 +165,21 @@ def clone_repo(project_id):
 
     queue_job('BOOTSTRAP', project_id=project_id)
 
+def pull_repo(project_id):
+    print("pulling repo for %s" % proect_id)
+    project = Project.objects.get(id=project_id)
+
+    process = subprocess.Popen(['git', 'pull'], cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Pulling '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
 
 
 command_map = {
@@ -172,4 +187,5 @@ command_map = {
     'BUILDOUT': buildout,
     'TEST': test_buildout,
     'GITCLONE': clone_repo,
+    'GITPULL': pull_repo,
 }
