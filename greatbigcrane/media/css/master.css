@@ -226,6 +226,11 @@ ul.projects li .buttons .pull,
   background-position: 0 -192px;
 }
 
+ul.projects li .buttons .delete,
+.project .actions .delete {
+  background-position: 0 -240px;
+}
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
