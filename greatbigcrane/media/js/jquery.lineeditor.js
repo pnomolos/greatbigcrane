@@ -28,8 +28,15 @@
         var input = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
         var input_container = $('<span class="input"></span>');
         var button_container = $('<span class="buttons"></span>');
-        var delete_button = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
-        container.find('a:last').before(input_container.append(input, button_container.append(delete_button)));
+        $.each({
+          'delete': removeLine,
+          'moveup': moveUp,
+          'movedown': moveDown
+        },function(k,v){
+          var node = $('<a href="#' + k + '" class="' + k + '">' + k + '</a>').click(v);
+          button_container.append(node)
+        })
+        container.find('a:last').before(input_container.append(input, button_container));
         processValues();
         calculatePositioning()
         return input;
@@ -40,6 +47,18 @@
         $(this).closest('.input').remove();
         processValues();
       }
+      
+      function move(direction, ev) {
+        var target = $(this).closest('.input');
+        if (direction == 'down') {
+          target.insertAfter(target.next('.input'));
+        } else if ( direction == 'up' ) {
+          target.insertBefore(target.prev('.input'));
+        }
+      }
+      
+      function moveDown() { return function(e){move('down',e)} };
+      function moveUp() { return function(e){move('up',e)} };
       
       function processValues(e) {
         if (e && e.keyCode == 9) {
