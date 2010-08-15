@@ -24,12 +24,14 @@
       function addLine(value) {
         value = ( value.target ? value.preventDefault() && '' : value );
         var node = $('<input type="text"/>').val(value?value.toString():'');
-        var delete_node = $('<a href="#delete" class="delete">Delete</a>');
+        var delete_node = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
         container.find('a:last').before(node, delete_node);
       }
       
-      function removeLine() {
-        
+      function removeLine(ev) {
+        ev.preventDefault();
+        $(this).prev().remove();
+        $(this).remove();
       }
       
     })
