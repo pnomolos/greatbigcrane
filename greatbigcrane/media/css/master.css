@@ -70,8 +70,8 @@ h3 {
 
 a, a:link, a:visited {
   color: #eee;
-  -webkit-transition: color 0.25s linear;
-  -moz-transition: color 0.25s linear;
+  -webkit-transition: color 0.4s linear;
+  -moz-transition: color 0.4s linear;
   text-decoration: none;
 }
 
@@ -181,8 +181,8 @@ ul.projects li .buttons a {
   overflow: hidden;
   outline: none;
   opacity: 0.6;
-  -webkit-transition: opacity 0.25s linear;
-  -moz-transition: opacity 0.25s linear;
+  -webkit-transition: opacity 0.4s linear;
+  -moz-transition: opacity 0.4s linear;
 }
 
 ul.projects li .buttons a:hover {
@@ -240,8 +240,8 @@ ul.projects li .buttons .favourite.favourited {
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
   text-align: left;
-  -webkit-transition: border-color 0.25s linear;
-  -moz-transition: border-color 0.25s linear;
+  -webkit-transition: border-color 0.4s linear;
+  -moz-transition: border-color 0.4s linear;
 }
 
 .tests li a.result:hover {
@@ -326,16 +326,14 @@ a.button {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  box-shadow: 0 0 5px rgba(196,196,196,0.4);
-  -moz-box-shadow: 0 0 5px rgba(196,196,196,0.4);
-  -webkit-box-shadow: 0 0 5px rgba(196,196,196,0.4);
+  
+  -webkit-transition: background 0.4s linear;
+  -moz-transition: background 0.4s linear;
 }
 
 form input[type=submit]:hover,
 a.button:hover {
-  box-shadow: 0 0 8px rgba(196,196,196,1);
-  -moz-box-shadow: 0 0 8px rgba(196,196,196,1);
-  -webkit-box-shadow: 0 0 8px rgba(196,196,196,1);
+  background: #ccc;
 }
 
 /* footer */
