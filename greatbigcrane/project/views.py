@@ -25,11 +25,10 @@ from django.views.generic.list_detail import object_detail
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.core import serializers
 from django.http import HttpResponse, HttpResponseServerError
+from django.forms.util import ErrorList
 
 import buildout_manage
-from buildout_manage.buildout_config import buildout_write, BuildoutConfig
 from job_queue.jobs import queue_job
 from project.models import Project
 from project.forms import ProjectForm, recipe_form_map
@@ -57,26 +56,35 @@ def view_project(request, project_id):
 def add_project(request):
     form = ProjectForm(request.POST or None)
     if form.is_valid():
-        instance = form.save()
-        if instance.git_repo:
-            target_dir = os.path.dirname(instance.base_directory)
-        else:
-            target_dir = instance.base_directory
-        if not os.path.isdir(target_dir):
-            os.makedirs(target_dir)
-        if instance.git_repo:
-            queue_job("GITCLONE", project_id=instance.id)
-        else:
-            skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
-                    os.path.join(instance.base_directory, "bootstrap.py")),
-                (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
-                    os.path.join(instance.base_directory, "buildout.cfg"))]
-            for source, dest in skeleton:
-                if not os.path.isfile(dest):
-                    copyfile(source, dest)
-            queue_job("BOOTSTRAP", project_id=instance.id)
-
-        return redirect(instance.get_absolute_url())
+        try:
+            base_dir = form.cleaned_data['base_directory']
+            
+            if form.cleaned_data['git_repo']:
+                target_dir = os.path.dirname(base_dir)
+            else:
+                target_dir = base_dir
+            if not os.path.isdir(target_dir):
+                os.makedirs(target_dir)
+                
+            if form.cleaned_data['git_repo']:
+                instance = form.save()
+                queue_job("GITCLONE", project_id=instance.id)
+            else:
+                skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
+                        os.path.join(target_dir, "bootstrap.py")),
+                    (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
+                        os.path.join(target_dir, "buildout.cfg"))]
+                for source, dest in skeleton:
+                    if not os.path.isfile(dest):
+                        copyfile(source, dest)
+                instance = form.save()
+                queue_job("BOOTSTRAP", project_id=instance.id)
+                
+            return redirect(instance.get_absolute_url())
+            
+        except IOError as e:
+            errors = form._errors.setdefault("base_directory", ErrorList())
+            errors.append(u"An error occurred: " + str(e))
 
     base_url = Preference.objects.get_preference("projects_directory", '')
 
