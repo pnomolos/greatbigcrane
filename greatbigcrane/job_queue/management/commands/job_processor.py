@@ -36,6 +36,7 @@ import json
 import subprocess
 
 from django.core.management.base import NoArgsCommand
+from greatbigcrane.buildout_manage.buildout_config import buildout_parse
 
 addr = 'tcp://127.0.0.1:5555'
 
@@ -102,7 +103,45 @@ def buildout(project_id):
             message=response,
             project=project)
 
+def test_buildout(project_id):
+    print("running tests for %s" % project_id)
+    project = Project.objects.get(id=project_id)
+
+    bc = buildout_parse(project.buildout_filename())
+
+    test_binaries = []
+
+    # We get to do some detection in this one
+    # First look for django test
+    for section, values in bc.iteritems():
+        if values.get('recipe') == 'djangorecipe':
+            # Django, we know what's going on
+            test_script = section
+            if 'control-script' in values:
+                test_script = values['control-script']
+            test_binaries.append(['bin/' + test_script, 'test'])
+
+    errors = False
+    responses = []
+    for binary in test_binaries:
+        process = subprocess.Popen(binary, cwd=project.base_directory,
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+        responses.append(process.communicate()[0])
+        errors = errors or process.returncode != 0
+
+    # FIXME: Make the output a little nicer when you run multiple test suites
+
+    Notification.objects.create(status="success" if not errors else "error",
+            summary="Testing '%s' %s" % (
+                project.name, "success" if not errors else "error"),
+            message=('\n\n'+'*'*50+'\n\n').join(responses),
+            project=project)
+
+
+
 command_map = {
     'BOOTSTRAP': bootstrap,
     'BUILDOUT': buildout,
+    'TEST': test_buildout,
 }
