@@ -28,7 +28,6 @@ class EggRecipe(object):
         self.section['recipe'] = 'zc.recipe.egg'
 
     def dict(self):
-        # FIXME: This fails if an option has not been set
         return dict(eggs=self.eggs,
                 find_links=self.find_links,
                 interpreter=self.interpreter,

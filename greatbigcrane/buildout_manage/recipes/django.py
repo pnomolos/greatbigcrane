@@ -28,7 +28,6 @@ class DjangoRecipe(object):
         self.section['recipe'] = 'djangorecipe'
 
     def dict(self):
-        # FIXME: This fails if an option has not been set
         return dict(settings=self.settings,
                 version=self.version,
                 eggs=self.eggs,
