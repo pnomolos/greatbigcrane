@@ -111,15 +111,20 @@ def test_buildout(project_id):
 
     test_binaries = []
 
+    parts = bc['buildout']['parts']
+    if not isinstance(parts, list):
+        parts = [parts]
+
     # We get to do some detection in this one
     # First look for django test
     for section, values in bc.iteritems():
-        if values.get('recipe') == 'djangorecipe':
-            # Django, we know what's going on
-            test_script = section
-            if 'control-script' in values:
-                test_script = values['control-script']
-            test_binaries.append(['bin/' + test_script, 'test'])
+        if section in parts:
+            if values.get('recipe') == 'djangorecipe':
+                # Django, we know what's going on
+                test_script = section
+                if 'control-script' in values:
+                    test_script = values['control-script']
+                test_binaries.append(['bin/' + test_script, 'test'])
 
     errors = False
     responses = []
