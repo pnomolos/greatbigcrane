@@ -1,5 +1,3 @@
-* Trash projects
-    * I added a delete, but we don't have trash yet
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
 * Figure out how to edit the buildout section (not a recipe)
