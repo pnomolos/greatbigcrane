@@ -31,6 +31,7 @@ class DjangoRecipeForm(forms.Form):
     settings = forms.CharField(initial="development")
     version = forms.ChoiceField(choices=[
         ("trunk", "trunk"),
+        ("1.2.1", "1.2.1"),
         ("1.2", "1.2"),
         ("1.1.2", "1.1.2"),
         ("1.1", "1.1"),
