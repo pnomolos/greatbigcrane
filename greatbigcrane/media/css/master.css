@@ -370,7 +370,7 @@ ul.tests .notification .dismiss {
 ul.tests li a.result {
   font-size: 13px;
   display: block;
-  padding: 10px 20px 10px 40px;
+  padding: 10px 25px 10px 40px;
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
   text-align: left;
@@ -379,7 +379,7 @@ ul.tests li a.result {
 }
 
 ul.tests li a.result:hover {
-  padding: 9px 19px 9px 39px;
+  padding: 9px 24px 9px 39px;
   border: 1px solid #666 !important;
   background-position: 9px center !important;
 }
