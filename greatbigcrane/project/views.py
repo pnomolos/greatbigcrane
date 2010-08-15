@@ -18,7 +18,7 @@ import os.path
 import json
 from shutil import copyfile
 
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import delete_object
@@ -89,6 +89,18 @@ def add_project(request):
         except IOError as e:
             errors = form._errors.setdefault("base_directory", ErrorList())
             errors.append(u"An error occurred: " + str(e))
+
+    base_url = Preference.objects.get_preference("projects_directory", '')
+
+    return render_to_response("project/project_form.html",
+            RequestContext(request, {'form': form, 'base_url': base_url}))
+
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    form = ProjectForm(request.POST or None, instance=project)
+    if form.is_valid():
+        instance = form.save()
+        return redirect(instance.get_absolute_url())
 
     base_url = Preference.objects.get_preference("projects_directory", '')
 

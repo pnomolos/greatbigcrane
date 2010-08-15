@@ -19,6 +19,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('project.views',
         url('^$', 'list_projects', name="list_projects"),
         url('^(?P<project_id>\d+)/view/$', 'view_project', name="view_project"),
+        url('^(?P<project_id>\d+)/edit/$', 'edit_project', name="edit_project"),
         url('^add/$', 'add_project', name="add_project"),
         url('^(?P<project_id>\d+)/delete/$', 'delete_project', name="delete_project"),
         url('^(?P<project_id>\d+)/favourite/$', 'favourite_project', name="favourite_project"),

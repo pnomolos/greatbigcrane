@@ -30,6 +30,7 @@
   <section>
     <h2>Actions</h2>
     <div class="actions clearfix">
+      <a class="edit" href="{% url edit_project project.id %}" title="Edit Project">Edit Project</a>
       <a class="delete confirm" href="{% url delete_project project.id %}" title="Delete Project">>Delete Project</a>
       <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
       <a class="tests ajax" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
