@@ -24,7 +24,14 @@ class ProjectForm(forms.ModelForm):
 
 class DjangoRecipeForm(forms.Form):
     settings = forms.CharField()
-    version = forms.CharField()
+    version = forms.ChoiceField(choices=[
+        ("trunk", "trunk"),
+        ("1.2", "1.2"),
+        ("1.1.2", "1.1.2"),
+        ("1.1", "1.1"),
+        ("1.0.4", "1.04"),
+        ("0.96", "0.96"),
+        ])
     eggs = forms.CharField()
     project = forms.CharField()
     extra_paths = forms.CharField()
