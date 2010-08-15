@@ -46,13 +46,13 @@
       {% if project.git_repo %}
         <a class="pull ajax" href="{% url schedule_pull project.id %}" title="Git Pull">Git Pull</a>
       {% endif %}
+      {% if project.github_url %}
+        <a class="github" href="{{project.github_url}}" title="View on Github">View on Github</a>
+      {% endif %}
       {% if project.is_django %}
         <a class="syncdb ajax" href="{% url schedule_syncdb project.id %}" title="SyncDB">Syncdb</a>
       {# Ideally this would only show up if we knew south was installed #}
         <a class="migrate ajax" href="{% url schedule_migrate project.id %}" title="Migrate">Migrate</a>
-      {% endif %}
-      {% if project.github_url %}
-        <a class="github" href="{{project.github_url}}" title="View on Github">View on Github</a>
       {% endif %}
     </div>
   </section>
