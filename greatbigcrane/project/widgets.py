@@ -23,7 +23,6 @@ class LineEditorChoiceWidget(LineEditorWidget):
         self.choices = choices
 
     def render(self, name, value, attrs=None):
-        print("rendering...")
         rendered = super(LineEditorChoiceWidget, self).render(name, value, attrs)
         options = "".join(["<option value='%s'>%s</option>" % (c[0], c[1]) for c in self.choices])
         script = """<script type="text/javascript">
