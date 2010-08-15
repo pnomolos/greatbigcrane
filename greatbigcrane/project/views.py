@@ -55,7 +55,7 @@ def list_projects(request):
 
 def view_project(request, project_id):
     return object_detail(request, Project.objects.all(), object_id=project_id,
-            template_object_name='project')
+            template_object_name='project', extra_context={'notifications': Notification.objects.filter(project=project_id)})
 
 def add_project(request):
     form = ProjectForm(request.POST or None)
