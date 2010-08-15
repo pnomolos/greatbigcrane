@@ -2,6 +2,7 @@
 * Create a bunch of git repos with different buildout setups in them for easy testing
 * Figure out how to edit the buildout section (not a recipe)
 * Move recipe templates out of project directory
+* Ensure that notifications show up ajaxy on project page if there are currently no notifications for that project (It looks like no, but I didn't look too close)
 
 Phil:
 * Possibly include RTE on description fields
