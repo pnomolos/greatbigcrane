@@ -242,6 +242,11 @@ ul.projects li .buttons .syncdb,
   background-position: 0 -336px;
 }
 
+ul.projects li .buttons .github,
+.project .actions .github {
+  background-position: 0 -384px;
+}
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
