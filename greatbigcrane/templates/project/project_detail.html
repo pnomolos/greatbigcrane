@@ -37,9 +37,9 @@
         <a class="pull" href="{% url schedule_pull project.id %}">Git Pull</a>
       {% endif %}
       {% if project.is_django %}
-        <a class="button right" href="{% url schedule_syncdb project.id %}">Syncdb</a><br />
+        <a class="sync" href="{% url schedule_syncdb project.id %}">Syncdb</a>
       {# Ideally this would only show up if we knew south was installed #}
-        <a class="button right" href="{% url schedule_migrate project.id %}">Migrate</a><br />
+        <a class="migrate" href="{% url schedule_migrate project.id %}">Migrate</a>
       {% endif %}
     </div>
   </section>
