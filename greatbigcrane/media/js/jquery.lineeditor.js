@@ -1,3 +1,12 @@
+/*!
+ * jQuery JavaScript Line Editor plugin
+ *
+ * Copyright 2010, Philip Schalm
+ * Licensed under the MIT licence.
+ *
+ * Date: 2010-08-15
+ */
+
 (function($) {
   jQuery.fn.lineeditor = function () {
     if ( $(this).data('lineeditor') ) { return $(this).data('lineeditor') }    
