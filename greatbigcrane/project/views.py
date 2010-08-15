@@ -73,14 +73,7 @@ def favourite_project(request, project_id):
     project = Project.objects.get(pk=project_id)
     project.favourite=not project.favourite
     project.save()
-    projects = Project.objects.all()
-    
-    if 'update' in request.POST:
-        rendered = render_to_string("project/_project_list.html", RequestContext(request,
-            {'project_list': projects}))
-        return HttpResponse(json.dumps({'update':{request.POST['update']: rendered}}),content_type="application/json")
-    else:
-        return HttpResponse('')
+    return handle_ajax(request)
 
 def add_recipe(request, project_id):
     project = get_object_or_404(Project, id=project_id)
@@ -91,3 +84,23 @@ def add_recipe(request, project_id):
 
 def recipe_template(request, recipe_name):
     return HttpResponse(recipe_name)
+
+def handle_ajax(request):
+    # return HttpResponse(request.POST['update'])
+    if 'update' in request.POST:
+        update = dict()
+        d = json.loads(request.POST['update'])
+        for k,v in d.items():
+            if v == 'projects':
+                update[k] = Project.objects.all()
+            elif v == 'home-projects':
+                update[k] = Project.objects.filter(favourite=False).order_by('-updated_at')[:5]
+            elif v == 'favourite-projects':
+                update[k] = Project.objects.filter(favourite=True).order_by('name')
+            
+            update[k] = render_to_string("project/_project_list.html", RequestContext(request,
+                    {'project_list': update[k]}))
+        
+        return HttpResponse(json.dumps({'update': update}),content_type="application/json")
+    else:
+        return HttpResponse('fail')

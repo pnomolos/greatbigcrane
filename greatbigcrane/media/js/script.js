@@ -27,12 +27,19 @@ jQuery(function($){
     $(this).parents('form').first().submit();
   });
   
-  $('.buttons .favourite').live('click', function(e){
+  $('div.projects .favourite').live('click', function(e){
     e.preventDefault();
-    $.post( $(this).attr('href'), { update: '#project-list' }, ajaxHandler );
+    $.post( $(this).attr('href'), { update: '{"#project-list":"projects"}' }, ajaxHandler );
   });
 
   $('#available_recipes').change(load_recipe_template);
+  
+  $('div.dashboard .projects .favourite').live('click', function(e){
+    e.preventDefault();
+    $.post( $(this).attr('href'), { 
+      update: '{"#project-list":"home-projects","#favourite-project-list":"favourite-projects"}' 
+    }, ajaxHandler );
+  })
   
   // if ($('.notifications').size()) {
   //   var paper = Raphael(
