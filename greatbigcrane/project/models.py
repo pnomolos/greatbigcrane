@@ -48,5 +48,12 @@ class Project(models.Model):
         sections = buildout_parse(self.buildout_filename())
         return sections
 
+    def is_django(self):
+        sections = self.buildout()
+        for name, section in sections.items():
+            if section['recipe'] == 'djangorecipe':
+                return True
+        return False
+
     def __unicode__(self):
         return self.name
