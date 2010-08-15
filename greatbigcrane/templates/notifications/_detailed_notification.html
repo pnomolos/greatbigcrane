@@ -2,6 +2,6 @@
   <a href="{{notification.get_absolute_url}}" class="result">
     <span class="project">{{notification.project.name}}</span>:
     <span class="result">{{notification.summary}}</span>
+    <span class="time">{{notification.notification_time}}</span>
   </a>
-  <a href="javascript: dismiss_notification({{notification.id}});" class="dismiss">dismiss</a>
 </li>

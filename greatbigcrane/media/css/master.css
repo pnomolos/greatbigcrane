@@ -272,6 +272,10 @@ ul.tests .notification .dismiss {
   clear: both;
 }
 
+.notifications ul.tests li .time {
+  display: block;
+}
+
 ul.tests li a.result {
   font-size: 13px;
   display: block;
