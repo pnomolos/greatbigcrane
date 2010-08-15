@@ -426,6 +426,10 @@ form textarea {
   font-size: 16px;
 }
 
+form label {
+  font-weight: bold;
+}
+
 form input[type=text], form textarea {
   width: 678px;
   padding: 10px;
@@ -521,7 +525,7 @@ form input[type=submit].red:hover {
   background-color: #c00;
 }
 
-a.button.margin {
+.button.margin, form input[type=submit].margin {
   margin: 10px 0;
 }
 

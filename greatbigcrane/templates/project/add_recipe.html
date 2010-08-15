@@ -1,8 +1,8 @@
 {% extends 'nosidebar.html' %}
 
 {% block main %}
-Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:
-<form method="post" action="{% url save_recipe project.id %}">
+<p>Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:</p>
+<form method="post" action="{% url save_recipe project.id %}" class="clearfix">
   <select name="recipe_name" id="available_recipes">
     <option value=""></option>
     {% for recipe in available_recipes %}
@@ -11,7 +11,7 @@ Select the type of recipe you would like to add to {{project.name}}'s buildout.c
   </select>
   <div id="recipe_template_container">
   </div>
-  <input type="submit" value="create recipe">
+  <input type="submit" value="Create recipe" class="margin block blue">
 </form>
 {% endblock %}
 
