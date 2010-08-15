@@ -345,12 +345,23 @@ ul.tests li.error a.result {
   border-color: #4f2020;
 }
 
+.notification li.general a.result {
+  color: #ffd;
+  background: #666 url(../images/small-icon-fail.png) 10px center no-repeat;
+  border-color: #666;
+}
+
+
 .notifications ul.tests li.success {
   float: left;
 }
 
 .notifications ul.tests li.error {
   float: right;
+}
+
+.notifications ul.tests li.general {
+  margin: 0 auto;
 }
 
 /* notifications */
