@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
 
-from recipes.forms import recipe_form_map
+from recipes.forms import recipe_form_map, BuildoutForm
 from project.models import Project
 import buildout_manage
 
@@ -50,5 +50,6 @@ def save_recipe(request, project_id):
 
 
 def edit_buildout_section(request, project, buildout):
-    from django.http import HttpResponse
-    return HttpResponse("We haven't figured that out yet")
+    form = BuildoutForm()
+    return render_to_response("recipes/edit_buildout.html", RequestContext(
+        request, {'form': form, 'project': project}))

@@ -159,6 +159,9 @@ class MercurialRecipeForm(forms.Form):
                 delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
+class BuildoutForm(forms.Form):
+    contents = forms.CharField(widget=forms.Textarea)
+
 
 recipe_form_map = {
         'djangorecipe': DjangoRecipeForm,

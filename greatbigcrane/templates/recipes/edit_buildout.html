@@ -1,0 +1,12 @@
+{% extends 'nosidebar.html' %}
+
+{% block contenttitle %}Edit Buildout on "{{project.name}}"{% endblock %}
+
+{% block main %}
+<form method="post">
+  {{form.media}}
+  {{form}}
+  <input type="submit" value="Save Section" class="left blue">
+  <a class="left orange button" href="{% url view_project project.id %}">Cancel</a>
+</form>
+{% endblock %}
