@@ -18,6 +18,7 @@ from django import forms
 
 from project.models import Project
 from buildout_manage.buildout_config import buildout_write
+from buildout_manage import recipes
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -42,9 +43,10 @@ class DjangoRecipeForm(forms.Form):
 
     def save(self, project, buildout):
         name = self.cleaned_data['name']
+        dr = recipes['djangorecipe'](buildout, name)
         for key in self.fields:
             if key == "name": continue
-            buildout[name][key] = self.cleaned_data[key]
+            setattr(dr, key, self.cleaned_data[key])
         buildout_write(project.buildout_filename(), buildout)
 
 
