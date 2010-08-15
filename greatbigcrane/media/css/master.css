@@ -132,10 +132,19 @@ header nav li a:visited {
   color: #f6f6f6;
   text-decoration: none;
   display: block;
+  font-weight: normal;
+  padding: 10px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+
+  
+  -webkit-transition: background 0.3s linear;
+  -moz-transition: background 0.3s linear;
 }
 
 header nav li a:hover {
   color: #ddd;
+  background: #333;
 }
 
 header nav li + li a {
@@ -144,9 +153,6 @@ header nav li + li a {
 
 header nav a.current {
   background: #212121;
-  padding: 10px;
-  margin-top: -10px;
-  margin-bottom: -10px;
 }
 
 /* project listing */
