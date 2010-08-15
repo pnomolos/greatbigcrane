@@ -77,7 +77,7 @@ jQuery(function($){
     }, ajaxHandler);
   });
 
-  $('div.dashboard .projects .buildout, div.dashboard .projects .tests').live('click', function(e){
+  $('.projects .buildout, .projects .tests').live('click', function(e){
     e.preventDefault();
     $.ajax({
       url: $(this).attr('href'),
