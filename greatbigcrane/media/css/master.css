@@ -383,12 +383,12 @@ ul.tests .notification .dismiss {
 }
 
 .notifications ul.tests li {
-  width: 500px;
   clear: both;
+  margin-bottom: 1px;
 }
 
 .notifications ul.tests li .time {
-  display: block;
+  float: right;
 }
 
 ul.tests li a.result {
@@ -430,13 +430,13 @@ ul.tests li.general a.result {
 }
 
 
-.notifications ul.tests li.success {
+/*.notifications ul.tests li.success {
   float: left;
 }
 
 .notifications ul.tests li.error {
   float: right;
-}
+}*/
 
 .notifications ul.tests li.general {
   margin: 0 auto;
