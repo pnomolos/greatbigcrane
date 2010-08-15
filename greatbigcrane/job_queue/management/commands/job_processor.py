@@ -35,7 +35,6 @@ import time
 import json
 
 from django.core.management.base import NoArgsCommand
-from greatbigcrane.buildout_manage.buildout_config import buildout_parse
 
 from job_queue.jobs import command_map 
 from notifications.models import Notification

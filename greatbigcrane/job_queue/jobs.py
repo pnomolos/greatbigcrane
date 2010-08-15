@@ -19,6 +19,7 @@ import json
 import subprocess
 from project.models import Project
 from notifications.models import Notification
+from greatbigcrane.buildout_manage.buildout_config import buildout_parse
 
 addr = 'tcp://127.0.0.1:5555'
 
@@ -104,11 +105,8 @@ def test_buildout(project_id):
                 project.name, "success" if not errors else "error"),
             message=('\n\n'+'*'*50+'\n\n').join(responses),
             project=project)
-    if not errors:
-        # TODO: Potential for race condition?
-        
-        project.test_status = True
-        project.save()
+    prject.test_status = bool(errors)
+    project.save()
 
 def clone_repo(project_id):
     from greatbigcrane.job_queue.jobs import queue_job
