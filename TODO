@@ -1,3 +1,4 @@
 * Trash projects
 * More AJAX awesomeness
 * Add support for list-based interface for extra_paths
+* Write helper for seeing if a section is in parts
