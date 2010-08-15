@@ -1,7 +1,8 @@
 {% extends 'nosidebar.html' %}
 
+{% block contenttitle %}Notifications{% endblock %}
+
 {% block main %}
-<h1>Notifications</h1>
 <div class="notifications clearfix">
   <ul class="tests">
     {% for notification in all_notifications %}
