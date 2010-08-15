@@ -96,10 +96,16 @@ def test_buildout(project_id):
         if section in parts:
             if values.get('recipe') == 'djangorecipe':
                 # Django, we know what's going on
-                test_script = section
-                if 'control-script' in values:
-                    test_script = values['control-script']
-                test_binaries.append(['bin/' + test_script, 'test'])
+                if 'test' in values:
+                    test_script = 'test'
+                    if 'testrunner' in values:
+                        test_script = values['testrunner']
+                    test_binaries.append(['bin/' + test_script])
+                else:
+                    test_script = section
+                    if 'control-script' in values:
+                        test_script = values['control-script']
+                    test_binaries.append(['bin/' + test_script, 'test'])
             elif values.get('recipe') == 'zc.recipe.testrunner':
                 test_script = section
                 if 'script' in values:
