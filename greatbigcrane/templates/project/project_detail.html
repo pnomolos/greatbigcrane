@@ -7,32 +7,45 @@
 <p>{{project.git_repo}}</p>
 <p>{{project.base_directory}}</p>
 <p>{{project.description}}</p>
-<h2>Buildout Sections</h2>
-{% for name, section in project.buildout_sections %}
-<ul>
-  <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
-  {% for key, value in section.items %}
+
+<section>
+  <h2>Buildout Sections</h2>
+  {% for name, section in project.buildout_sections %}
   <ul>
-    {{key}} = {{value|configvalue}}
+    <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
+    {% for key, value in section.items %}
+    <ul>
+      {{key}} = {{value|configvalue}}
+    </ul>
+    {% endfor %}
+    </li>
   </ul>
   {% endfor %}
-  </li>
-</ul>
-{% endfor %}
-<a href="{% url add_recipe project.id %}">Add Recipe</a>
+  <a href="{% url add_recipe project.id %}">Add Recipe</a>
+</section>
 {% endblock %}
 
 {% block sidebar %}
-PHILSTYLEMEPLEASE!!!!!<br />
-<a class="button right" href="{% url delete_project project.id %}">Delete Project</a><br />
-<a class="button right" href="{% url schedule_buildout project.id %}">Buildout</a><br />
-<a class="button right" href="{% url schedule_test project.id %}">Test</a><br />
-{% if project.git_repo %}
+<section>
+  <h2>Actions</h2>
+  <a class="button right" href="{% url delete_project project.id %}">Delete Project</a><br />
+  <a class="button right" href="{% url schedule_buildout project.id %}">Buildout</a><br />
+  <a class="button right" href="{% url schedule_test project.id %}">Test</a><br />
+  {% if project.git_repo %}
     <a class="button right" href="{% url schedule_pull project.id %}">Git Pull</a><br />
-{% endif %}
-{% if project.is_django %}
-<a class="button right" href="{% url schedule_syncdb project.id %}">Syncdb</a><br />
-{# Ideally this would only show up if we knew south was installed #}
-<a class="button right" href="{% url schedule_migrate project.id %}">Migrate</a><br />
-{% endif %}
+  {% endif %}
+  {% if project.is_django %}
+    <a class="button right" href="{% url schedule_syncdb project.id %}">Syncdb</a><br />
+  {# Ideally this would only show up if we knew south was installed #}
+    <a class="button right" href="{% url schedule_migrate project.id %}">Migrate</a><br />
+  {% endif %}
+</section>
+<section>
+  <h2>Notifications</h2>
+  <ul class="tests">
+    {% for notification in notifications %}
+      {% include 'notifications/_notification.html' %}
+    {% endfor %}
+  </ul>
+</section>
 {% endblock %}
