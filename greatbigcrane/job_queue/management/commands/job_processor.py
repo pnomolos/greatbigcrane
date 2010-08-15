@@ -54,16 +54,20 @@ class Command(NoArgsCommand):
                 continue
 
             job = json.loads(job)
-            command = command_map[job['command']]
+            command_name = job['command']
             del job['command']
+            command = command_map[command_name]
             # unicode strings as keyword arguments != cool for Python 2.6.1
             job = dict((str(k), v) for k,v in job.iteritems())
             try:
                 print repr(job)
                 command(**job)
             except Exception, e:
-                print e
-
+                Notification.objects.create(status="error",
+                        summary="%s command failed to run" %(command_name),
+                        message = "%s failed on these arguments: \n%s\n\n"
+                        "The exception was %s" % (
+                            command_name, job, e.message))
 
 # Create the actual commands here and keep the command_map below up to date
 # FIXME: I feel this should go to it's own module
