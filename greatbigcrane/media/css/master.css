@@ -183,7 +183,8 @@ ul.projects li .buttons {
   float: right;
 }
 
-ul.projects li .buttons a {
+ul.projects li .buttons a,
+.project .actions a {
   background: url(../images/icons.png) 0 0 no-repeat;
   width: 48px;
   height: 48px;
@@ -196,11 +197,13 @@ ul.projects li .buttons a {
   -moz-transition: opacity 0.3s linear;
 }
 
-ul.projects li .buttons a:hover {
+ul.projects li .buttons a:hover,
+.project .actions a:hover {
   opacity: 0.9;
 }
 
-ul.projects li .buttons .buildout {
+ul.projects li .buttons .buildout,
+.project .actions .buildout {
   background-position: 0 0;
 }
 
@@ -208,19 +211,23 @@ ul.projects li .buttons .settings {
   background-position: 0 -48px;
 }
 
-ul.projects li .buttons .tests {
+ul.projects li .buttons .tests,
+.project .actions .tests {
   background-position: 0 -96px;
 }
 
-ul.projects li .buttons .tests.success {
+ul.projects li .buttons .tests.success,
+.project .actions .tests.success {
   background-position: 0 -144px;
 }
 
-ul.projects li .buttons .favourite {
+ul.projects li .buttons .favourite,
+.project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
 }
 
-ul.projects li .buttons .favourite.favourited {
+ul.projects li .buttons .favourite.favourited,
+.project .actions .favourite.favourited {
   background-position: 0 0;
 }
 
