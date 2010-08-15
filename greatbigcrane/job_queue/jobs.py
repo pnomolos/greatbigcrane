@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import os.path
 import zmq
 import json
 import subprocess
@@ -99,6 +100,9 @@ def test_buildout(project_id):
                 if 'control-script' in values:
                     test_script = values['control-script']
                 test_binaries.append(['bin/' + test_script, 'test'])
+
+    if os.path.isfile(os.path.join(project.base_directory, 'bin/test')) and ['bin/test'] not in test_binaries:
+        test_binaries.append(['bin/test'])
 
     errors = False
     responses = []
