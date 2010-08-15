@@ -35,12 +35,18 @@ class Project(models.Model):
 
     def buildout_sections(self):
         '''Return sorted dictionary of buildout sections'''
-        buildout_filename = os.path.join(self.base_directory, 'buildout.cfg')
-        sections = buildout_parse(buildout_filename)
+        sections = self.buildout()
         # You may wonder why I'm returning items. I am too. For unknown
         # reasons, {{project.buildout_sections.items}} does not return a
         # correct value inside templates.
         return sections.items()
-        
+
+    def buildout_filename(self):
+        return os.path.join(self.base_directory, 'buildout.cfg')
+
+    def buildout(self):
+        sections = buildout_parse(self.buildout_filename())
+        return sections
+
     def __unicode__(self):
         return self.name

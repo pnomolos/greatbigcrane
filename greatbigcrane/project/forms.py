@@ -17,6 +17,7 @@ limitations under the License.
 from django import forms
 
 from project.models import Project
+from buildout_manage.buildout_config import buildout_write
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -33,11 +34,19 @@ class DjangoRecipeForm(forms.Form):
         ("1.0.4", "1.04"),
         ("0.96", "0.96"),
         ])
-    eggs = forms.CharField()
-    project = forms.CharField()
-    extra_paths = forms.CharField()
-    fcgi = forms.BooleanField()
-    wsgi = forms.BooleanField()
+    eggs = forms.CharField(required=False)
+    project = forms.CharField(required=False)
+    extra_paths = forms.CharField(required=False)
+    fcgi = forms.BooleanField(required=False)
+    wsgi = forms.BooleanField(required=False)
+
+    def save(self, project, buildout):
+        name = self.cleaned_data['name']
+        for key in self.fields:
+            if key == "name": continue
+            buildout[name][key] = self.cleaned_data[key]
+        buildout_write(project.buildout_filename(), buildout)
+
 
 recipe_form_map = {
         'djangorecipe': DjangoRecipeForm

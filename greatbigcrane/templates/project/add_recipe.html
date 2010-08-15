@@ -2,14 +2,15 @@
 
 {% block main %}
 Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:
-<form>
-    <select id="available_recipes">
+<form method="post" action="{% url save_recipe project.id %}">
+    <select name="recipe_name" id="available_recipes">
         <option value=""></option>
         {% for recipe in available_recipes %}
         <option value="{{recipe}}">{{recipe}}</option>
         {% endfor %}
     </select>
+    <div id="recipe_template_container">
+    </div>
+    <input type="submit" value="create recipe" />
 </form>
-<div id="recipe_template_container">
-</div>
 {% endblock %}

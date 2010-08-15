@@ -19,6 +19,7 @@ import json
 from shutil import copyfile
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.template import RequestContext
@@ -28,6 +29,7 @@ from django.core import serializers
 from django.http import HttpResponse
 
 import buildout_manage
+from buildout_manage.buildout_config import buildout_write, BuildoutConfig
 from job_queue.jobs import queue_job
 from project.models import Project
 from project.forms import ProjectForm, recipe_form_map
@@ -87,10 +89,25 @@ def add_recipe(request, project_id):
                 'project': project,
                 'available_recipes': buildout_manage.recipes}))
 
+
 def recipe_template(request, recipe_name):
     form = recipe_form_map[recipe_name]()
     return render_to_response("project/recipe_templates/%s.html" % recipe_name,
             {'form': form})
+
+@require_POST
+def save_recipe(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    recipe_name = request.POST['recipe_name']
+    form = recipe_form_map[recipe_name](request.POST)
+    if form.is_valid():
+        buildout = project.buildout()
+        form.save(project, buildout)
+        return redirect(project.get_absolute_url())
+    else:
+        return render_to_response("project/recipe_templates/%s.html" % recipe_name,
+                {'form': form})
+
 
 def handle_ajax(request):
     # return HttpResponse(request.POST['update'])
