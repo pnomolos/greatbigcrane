@@ -59,7 +59,10 @@ def buildout_parse(filename):
     # Don't ask me, buildout had it...
     parser.optionxform = lambda s: s
 
-    parser.read(filename)
+    if isinstance(filename, (str, unicode)):
+        parser.read(filename)
+    else:
+        parser.readfp(filename)
 
     config = BuildoutConfig()
 
@@ -77,7 +80,7 @@ def buildout_write(fp, config):
     Given a filename and a BuildoutConfig, write the contents of the BuildoutConfig to the file
     """
 
-    if isinstance(fp, str):
+    if isinstance(fp, (str, unicode)):
         fp = open(fp, "w")
         close = True
     else:

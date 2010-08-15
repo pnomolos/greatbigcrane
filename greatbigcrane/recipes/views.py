@@ -4,7 +4,8 @@ from django.views.decorators.http import require_POST
 
 from recipes.forms import recipe_form_map, BuildoutForm
 from project.models import Project
-import buildout_manage
+import buildout_manage.parser
+from cStringIO import StringIO
 
 def add_recipe(request, project_id):
     project = get_object_or_404(Project, id=project_id)
@@ -50,6 +51,19 @@ def save_recipe(request, project_id):
 
 
 def edit_buildout_section(request, project, buildout):
-    form = BuildoutForm()
+    new_buildout = buildout_manage.parser.BuildoutConfig()
+    new_buildout['buildout'] = buildout['buildout']
+    string = StringIO()
+    buildout_manage.parser.buildout_write(string, new_buildout)
+
+    initial = {'contents': string.getvalue()}
+    form = BuildoutForm(request.POST or None, initial=initial)
+    if form.is_valid():
+        string = StringIO(form.cleaned_data['contents'])
+        config = buildout_manage.parser.buildout_parse(string)
+        buildout['buildout'] = config['buildout']
+        buildout_write(self.project.buildout_filename(), buildout)
+        return redirect(project.get_absolute_url())
+
     return render_to_response("recipes/edit_buildout.html", RequestContext(
         request, {'form': form, 'project': project}))
