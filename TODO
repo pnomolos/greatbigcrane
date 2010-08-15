@@ -5,3 +5,4 @@
 * Create a bunch of git repos with different buildout setups in them for easy testing
 * IOError if you enter '/' into Base Directory field
 * Improve about page and make it a help file/readme
+* Pull recipe editing stuff into it's own app (out of project views.py)
