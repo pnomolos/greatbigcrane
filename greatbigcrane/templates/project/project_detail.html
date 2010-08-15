@@ -1,4 +1,4 @@
-{% extends 'nosidebar.html' %}
+{% extends 'sidebar.html' %}
 {% load buildout_config %}
 
 {% block contenttitle %}{{project.name}}{% endblock %}
@@ -20,4 +20,10 @@
 </ul>
 {% endfor %}
 <a href="{% url add_recipe project.id %}">Add Recipe</a>
+{% endblock %}
+
+{% block sidebar %}
+PHILSTYLEMEPLEASE!!!!!<br />
+<a href="{% url schedule_buildout project.id %}">Buildout</a><br />
+<a href="{% url schedule_test project.id %}">Test</a><br />
 {% endblock %}
