@@ -84,7 +84,21 @@ def bootstrap(project_id):
             message=response,
             project=project)
 
+def buildout(project_id):
+    print("running buildout %s" % project_id)
+    project = Project.objects.get(id=project_id)
+    process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Buildouting '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
 
 command_map = {
     'BOOTSTRAP': bootstrap,
+    'BUILDOUT': buildout,
 }
