@@ -7,4 +7,6 @@
 * put git scheduling stuff into it's own app, I think
 * fix up the dict methods on recipes to be less breaky and duplicaty (Jason)
 * Figure out how to edit the buildout section (not a recipe)
+* Add a decorator to maintain the job command_map
+* Try to get project information into job notification errors
 
