@@ -40,9 +40,9 @@ class RecipeTests(TestCase):
 
         dr.settings = 'development'
         dr.version = '1.2.1'
-        dr.eggs = (('eggs', 'eggs'),)
+        dr.eggs = '${eggs:eggs}'
         dr.project = 'greatbigcrane'
-        dr.extra_paths = (('eggs', 'extra-paths'),)
+        dr.extra_paths = '${eggs:extra-paths}'
         dr.fcgi = True
         dr.wsgi = False
 
@@ -88,7 +88,7 @@ wsgi = false
 
         assert dr.settings == 'development'
         assert dr.version == '1.2.1'
-        assert dr.extra_paths == (('eggs', 'extra-paths'),)
+        assert dr.extra_paths == '${eggs:extra-paths}'
         assert dr.fcgi == True
 
     def test_change_existing_djangorecipe(self):
@@ -102,7 +102,7 @@ wsgi = false
         dr.version = '1.1.1'
         dr.fcgi = False
         dr.wsgi = False
-        dr.eggs = [dr.eggs, (('pyzmq', 'parts'),)]
+        dr.eggs = [dr.eggs, '${pyzmq:parts}']
 
         fp.seek(0)
         buildout_write(fp.name, bc)
@@ -152,18 +152,18 @@ as_egg = True
         eggrecipe = recipes['zc.recipe.egg']
         eg = eggrecipe(bc, 'eggs')
 
-        assert eg.extra_paths == [(('buildout', 'directory'), '/parts/django'),
-            (('buildout', 'directory'), '/parts/django-registration'),
-            (('buildout', 'directory'), '/greatbigcrane'),
-            (('buildout', 'directory'), '/parts/pyzmq'),
+        assert eg.extra_paths == ['${buildout:directory}/parts/django',
+            '${buildout:directory}/parts/django-registration',
+            '${buildout:directory}/greatbigcrane',
+            '${buildout:directory}/parts/pyzmq',
             ]
 
-        eg.extra_paths = ('/something/', ('buildout', 'directory'), '/another/thing')
+        eg.extra_paths = '/something/${buildout:directory}/another/thing'
 
         djangorecipe = recipes['djangorecipe']
         dr = djangorecipe(bc, 'django')
 
-        assert dr.eggs == (('eggs', 'eggs'),)
+        assert dr.eggs == '${eggs:eggs}'
 
         fp.seek(0)
         buildout_write(fp.name, bc)
