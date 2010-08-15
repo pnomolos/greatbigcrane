@@ -18,7 +18,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('recipes.views',
         url('^(?P<project_id>\d+)/add_recipe/$', 'add_recipe', name="add_recipe"),
-        url('^(?P<project_id>\d+)/recipe/(?P<recipe_name>[^/]*)/edit/$', 'edit_recipe', name="edit_recipe"),
+        url('^(?P<project_id>\d+)/recipe/(?P<section_name>[^/]*)/edit/$', 'edit_recipe', name="edit_recipe"),
         url('^(?P<project_id>\d+)/save_recipe/$', 'save_recipe', name="save_recipe"),
         url('^(?P<project_id>\d+)/recipe_template/(?P<recipe_name>[^/]*)/$', 'recipe_template', name='recipe_template')
         )
