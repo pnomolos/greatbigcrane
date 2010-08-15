@@ -117,6 +117,11 @@ def favourite_project(request, project_id):
     project.save()
     return handle_ajax(request)
 
+def project_notifications(request, project_id):
+    notifications = Notification.objects.filter(project=project_id)
+    return render_to_response("notifications/_notification_list.html",
+            RequestContext(request, {'notifications': notifications}))
+
 def handle_ajax(request):
     # return HttpResponse(request.POST['update'])
     if 'update' in request.POST:

@@ -23,4 +23,5 @@ urlpatterns = patterns('project.views',
         url('^add/$', 'add_project', name="add_project"),
         url('^(?P<project_id>\d+)/delete/$', 'delete_project', name="delete_project"),
         url('^(?P<project_id>\d+)/favourite/$', 'favourite_project', name="favourite_project"),
+        url('^(?P<project_id>\d+)/notifications/$', 'project_notifications', name="project_notifications"),
         )

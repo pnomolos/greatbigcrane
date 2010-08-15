@@ -115,6 +115,11 @@ jQuery(function($){
       $('div.dashboard ul.tests li:nth-child(11n)').slideUp(function(){$(this).remove()});
   });
   
+  $('div.project .tests').ekko({url: '/project/' + $('#project').attr('id').replace(/\D/,'') + '/notifications/'},
+    function(data) {
+    $('div.dashboard ul.tests').empty().html(data);
+  });
+  
   $("#id_eggs, #id_extra_paths").lineeditor();
 });
 
