@@ -26,6 +26,7 @@ class DjangoRecipe(object):
         add_parts(self.config, self.section_name)
         self.section = self.config[self.section_name]
         self.section['recipe'] = 'djangorecipe'
+        self.config['buildout']['unzip'] = "true"
 
     def dict(self):
         return dict(settings=self.settings,
