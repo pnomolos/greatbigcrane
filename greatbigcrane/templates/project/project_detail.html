@@ -4,25 +4,27 @@
 {% block contenttitle %}{{project.name}}{% endblock %}
 
 {% block main %}
-<p>{{project.git_repo}}</p>
-<p>{{project.base_directory}}</p>
-<p>{{project.description}}</p>
+  <div id="project-{{project.id}}" class="project">
+    <p>{{project.git_repo}}</p>
+    <p>{{project.base_directory}}</p>
+    <p>{{project.description}}</p>
 
-<section>
-  <h2>Buildout Sections</h2>
-  {% for name, section in project.buildout_sections %}
-  <ul>
-    <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
-    {% for key, value in section.items %}
-    <ul>
-      {{key}} = {{value|configvalue}}
-    </ul>
-    {% endfor %}
-    </li>
-  </ul>
-  {% endfor %}
-  <a href="{% url add_recipe project.id %}">Add Recipe</a>
-</section>
+    <section>
+      <h2>Buildout Sections</h2>
+      {% for name, section in project.buildout_sections %}
+      <ul>
+        <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
+        {% for key, value in section.items %}
+        <ul>
+          {{key}} = {{value|configvalue}}
+        </ul>
+        {% endfor %}
+        </li>
+      </ul>
+      {% endfor %}
+      <a href="{% url add_recipe project.id %}">Add Recipe</a>
+    </section>
+  </div>
 {% endblock %}
 
 {% block sidebar %}
