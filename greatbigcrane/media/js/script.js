@@ -24,7 +24,8 @@ function load_recipe_template(project_id) {
         "/recipe_template/" +
         $('#available_recipes').val() + '/',function(){
           $("#id_eggs, #id_extra_paths").lineeditor();
-        });
+        }
+      );
     }
   })
 }
@@ -117,7 +118,7 @@ jQuery(function($){
     var href = $(this).attr('href') + '?' + $(this).parents('form').serialize();
     $.post(href, {update: '{"#project-list":"projects"}'}, ajaxHandler);
   });
-
+  
   $('div.dashboard .projects .favourite').live('click', function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -125,7 +126,7 @@ jQuery(function($){
       update: '{"#project-list":"home-projects","#favourite-project-list":"favourite-projects"}' 
     }, ajaxHandler);
   });
-
+  
   $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'));
   $('.actions .ajax').live('click',queue_button('closest', 'div.project > section'));
   $('.confirm').live('click',function(e){
@@ -137,13 +138,12 @@ jQuery(function($){
     }
   });
   
-
   $('div.dashboard ul.tests:first').ekko({url: '/notifications/ajax/'},update_notifications);
-
+  
   if ( $('#content .project:first').size() ) {
     $('div.project .tests.live:first').ekko({url: '/projects/' + $('#content .project:first').attr('id').replace(/\D*/,'') + '/notifications/'},update_notifications);
   }
-
+  
   $("#recipe_form").submit(function() {
     if ($("#available_recipes").val() == "") {
       alert("Must select a recipe");
