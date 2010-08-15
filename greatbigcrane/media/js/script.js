@@ -67,6 +67,7 @@ function show_queuing_response(node) {
 
 function update_notifications(data) {
   var $el = $(this);
+  var number_to_remove = 0;
   $(data).each(function(_,n){
     if ( n.id && $("#"+n.id).size() == 0 ) {
       var id = parseInt(n.id.replace(/\D*/,''));
@@ -77,17 +78,22 @@ function update_notifications(data) {
           node_after = this;
         } else {
           $(n).css('display','none').insertBefore($(this)).slideDown();
+          number_to_remove++;
           added = true;
         }
       })
       if ( node_after && !added ) {
         $(n).css('display','none').insertAfter($(node_after)).slideDown();
-      } else if ( !node_after ) {
+        number_to_remove++;
+      } else if ( !node_after && !added ) {
         $(n).css('display','none').appendTo($el).slideDown();
+        number_to_remove++;
       }
     }
-  })
-  $el.find('li:nth-child(11n)').slideUp(function(){$(this).remove()});
+  });
+  while ( number_to_remove-- > 0 ) {
+    $el.find('li:last').remove();
+  } 
 }
 
 jQuery(function($){
