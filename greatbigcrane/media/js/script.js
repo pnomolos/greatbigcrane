@@ -31,7 +31,6 @@ function load_recipe_template(project_id) {
 
 function queue_button(node_or_function_string,selector) {
   return (function(ev) {
-    console.log(this);
     if ( typeof node_or_function_string == 'string' ) {
       node = $(this)[node_or_function_string](selector);
     } else {
