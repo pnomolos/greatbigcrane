@@ -82,6 +82,8 @@ function update_notifications(data) {
       })
       if ( node_after && !added ) {
         $(n).css('display','none').insertAfter($(node_after)).slideDown();
+      } else if ( !node_after ) {
+        $(n).css('display','none').appendTo($el).slideDown();
       }
     }
   })
