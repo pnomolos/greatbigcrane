@@ -6,7 +6,7 @@
       
       if ( el.nodeName.toLowerCase() != 'textarea' ) { return; }
       
-      var hidden = $('<input type="hidden"/>').attr('id', el.id).attr('name',el.name);      
+      var hidden = $('<input type="hidden"/>').attr('id', el.id).attr('name',el.name).val($el.val());      
       var container = $('<div class="lineeditor"></div>');
       var val = $el.val();
       
