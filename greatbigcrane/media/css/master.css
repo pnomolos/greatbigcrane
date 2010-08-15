@@ -231,6 +231,16 @@ ul.projects li .buttons .delete,
   background-position: 0 -240px;
 }
 
+ul.projects li .buttons .migrate,
+.project .actions .migrate {
+  background-position: 0 -288px;
+}
+
+ul.projects li .buttons .syncdb,
+.project .actions .syncdb {
+  background-position: 0 -236px;
+}
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
