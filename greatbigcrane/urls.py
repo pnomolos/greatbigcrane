@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     (r'^notifications/', include('notifications.urls')),
     (r'^projects/', include('project.urls')),
     (r'^preferences/', include('preferences.urls')),
+    (r'^jobs/', include('job_queue.urls')),
 )
 
 if settings.DEBUG:
