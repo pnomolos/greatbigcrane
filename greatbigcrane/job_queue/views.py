@@ -19,6 +19,10 @@ def schedule_syncdb(request, project_id):
     return schedule_project_command(request, project_id, "SYNCDB",
             "Successuflly queued syncdb")
 
+def schedule_migrate(request, project_id):
+    return schedule_project_command(request, project_id, "MIGRATE",
+            "Successuflly queued south migrate")
+
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)
     try:

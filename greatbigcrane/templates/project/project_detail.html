@@ -32,5 +32,7 @@ PHILSTYLEMEPLEASE!!!!!<br />
 {% endif %}
 {% if project.is_django %}
 <a class="button right" href="{% url schedule_syncdb project.id %}">Syncdb</a><br />
+{# Ideally this would only show up if we knew south was installed #}
+<a class="button right" href="{% url schedule_migrate project.id %}">Migrate</a><br />
 {% endif %}
 {% endblock %}
