@@ -59,7 +59,10 @@ class DjangoRecipeForm(forms.Form):
             value = self.cleaned_data[key]
             if not isinstance(value, bool) and '\r\n' in value:
                 value = value.split('\r\n')
-            setattr(dr, key, value)
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class EggRecipeForm(forms.Form):
@@ -83,7 +86,14 @@ class EggRecipeForm(forms.Form):
         dr = recipes['zc.recipe.egg'](buildout, name)
         for key in self.fields:
             if key == "name": continue
-            setattr(dr, key, self.cleaned_data[key])
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
 

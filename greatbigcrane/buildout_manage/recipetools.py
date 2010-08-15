@@ -69,7 +69,8 @@ def simple_property_set(name):
 
 def simple_property_delete(name):
     def delete(self):
-        del self.section[name]
+        if name in self.section:
+            del self.section[name]
     return delete
 
 simple_property = lambda name: property(simple_property_get(name), simple_property_set(name), simple_property_delete(name))
