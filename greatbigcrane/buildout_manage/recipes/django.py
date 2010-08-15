@@ -34,6 +34,7 @@ class DjangoRecipe(object):
     extra_paths = simple_property('extra-paths')
     fcgi = bool_property('fcgi')
     wsgi = bool_property('wsgi')
+    test = simple_property('test')
 
 def django(config, section_name):
     recipe = DjangoRecipe(config, section_name)
