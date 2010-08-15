@@ -58,16 +58,23 @@ def add_project(request):
     form = ProjectForm(request.POST or None)
     if form.is_valid():
         instance = form.save()
-        if not os.path.isdir(instance.base_directory):
-            os.makedirs(instance.base_directory)
-        skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
-                os.path.join(instance.base_directory, "bootstrap.py")),
-            (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
-                os.path.join(instance.base_directory, "buildout.cfg"))]
-        for source, dest in skeleton:
-            if not os.path.isfile(dest):
-                copyfile(source, dest)
-        queue_job("BOOTSTRAP", project_id=instance.id)
+        if instance.git_repo:
+            target_dir = os.path.dirname(instance.base_directory)
+        else:
+            target_dir = instance.base_directory
+        if not os.path.isdir(target_dir):
+            os.makedirs(target_dir)
+        if instance.git_repo:
+            queue_job("GITCLONE", project_id=instance.id)
+        else:
+            skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
+                    os.path.join(instance.base_directory, "bootstrap.py")),
+                (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
+                    os.path.join(instance.base_directory, "buildout.cfg"))]
+            for source, dest in skeleton:
+                if not os.path.isfile(dest):
+                    copyfile(source, dest)
+            queue_job("BOOTSTRAP", project_id=instance.id)
 
         return redirect(instance.get_absolute_url())
 
