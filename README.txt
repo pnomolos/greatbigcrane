@@ -10,3 +10,4 @@ The job server and at least one job processor work need to be running for greatb
 Example test git repos:
 http://github.com/xentac/fakezopetestrunner
 http://github.com/pnomolos/Django-Dash-2010 <--- Self hosting! Yeah baby!
+http://github.com/edorian/Build-your-own-Textadventure.git
