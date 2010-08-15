@@ -3,7 +3,7 @@
     <a href="{% url favourite_project project.id %}" class="favourite{{project.favourite|yesno:' favourited,'}}" title="Favourite">Favourite</a>
     <a href="{% url schedule_buildout project.id %}" class="buildout" title="Run Buildout">Run Buildout</a>
     <a href="{% url schedule_test project.id %}" class="tests {{ project.test_status|yesno:'success,error' }}" title="Run Tests">Run Tests</a>
-    <a href="{% url view_project project.id %}" class="settings" title="Project Settings">Settings</a>
+    <a href="{% url edit_project project.id %}" class="edit" title="Edit Project">Edit Project</a>
   </div>
   <h3>{{project.name}}</h3>
   <span>{{project.base_directory}}</span>

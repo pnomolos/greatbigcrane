@@ -84,7 +84,9 @@ jQuery(function($){
     if ( e.isPropagationStopped() ) { return; }
     e.preventDefault();
     e.stopPropagation();
-    var href = $(this).find('a.settings').attr('href');
+    var id = $(this).attr('id');
+    id = id.match(/project-(\d+)/)[1];
+    var href = "/projects/" + id + "/view/";
     window.location = href;
   });
   
