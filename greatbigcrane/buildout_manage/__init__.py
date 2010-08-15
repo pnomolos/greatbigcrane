@@ -14,7 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import recipes.django, recipes.egg
+import recipes.django, recipes.egg, recipes.git
 
 recipes = {'djangorecipe':recipes.django.django,
-    'zc.recipe.egg': recipes.egg.egg}
+    'zc.recipe.egg': recipes.egg.egg,
+    'zerokspot.recipe.git': recipes.git.git,
+}

@@ -96,8 +96,39 @@ class EggRecipeForm(forms.Form):
                 delattr(dr, key)
         buildout_write(self.project.buildout_filename(), buildout)
 
+class GitRecipeForm(forms.Form):
+    name = forms.CharField(initial="git")
+    repository = forms.CharField(required=True)
+    rev = forms.CharField(required=False)
+    branch = forms.CharField(required=False)
+    paths = forms.CharField(required=False,widget=LineEditorWidget)
+    cache_name = forms.CharField(required=False)
+    as_egg = forms.BooleanField(required=False)
+    newest = forms.BooleanField(required=False)
+
+    def __init__(self, project, *args, **kwargs):
+        super(GitRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+
+
+    def save(self, buildout):
+        name = self.cleaned_data['name']
+        dr = recipes['zerokspot.recipe.git'](buildout, name)
+        for key in self.fields:
+            if key == "name": continue
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
+        buildout_write(self.project.buildout_filename(), buildout)
+
 
 recipe_form_map = {
         'djangorecipe': DjangoRecipeForm,
-        'zc.recipe.egg': EggRecipeForm
+        'zc.recipe.egg': EggRecipeForm,
+        'zerokspot.recipe.git': GitRecipeForm
         }
