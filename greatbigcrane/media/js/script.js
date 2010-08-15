@@ -56,6 +56,7 @@ jQuery(function($){
   });
   
   $('.projects li').live('click', function(e){
+    if ( e.isPropagationStopped() ) { return; }
     e.preventDefault();
     e.stopPropagation();
     var href = $(this).find('a.settings').attr('href');
