@@ -180,7 +180,7 @@ ul.projects li .buttons a {
   text-indent: -999em;
   overflow: hidden;
   outline: none;
-  opacity: 0.6;
+  opacity: 0.3;
   -webkit-transition: opacity 0.4s linear;
   -moz-transition: opacity 0.4s linear;
 }
