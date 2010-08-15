@@ -45,21 +45,21 @@
     <h2>Actions</h2>
     <div class="actions clearfix">
       <a class="edit" href="{% url edit_project project.id %}" title="Edit Project">Edit Project</a>
-      <a class="delete confirm" href="{% url delete_project project.id %}" title="Delete Project">Delete Project</a>
-      <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
       <a class="bootstrap ajax" href="{% url schedule_bootstrap project.id %}" title="Bootstrap Buildout">Bootstrap Buildout</a>
+      <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
       <a class="tests ajax" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
-      {% if project.git_repo %}
-        <a class="pull ajax" href="{% url schedule_pull project.id %}" title="Git Pull">Git Pull</a>
-      {% endif %}
       {% if project.github_url %}
         <a class="github" href="{{project.github_url}}" title="View on Github">View on Github</a>
+      {% endif %}
+      {% if project.git_repo %}
+        <a class="pull ajax" href="{% url schedule_pull project.id %}" title="Git Pull">Git Pull</a>
       {% endif %}
       {% if project.is_django %}
         <a class="syncdb ajax" href="{% url schedule_syncdb project.id %}" title="SyncDB">Syncdb</a>
       {# Ideally this would only show up if we knew south was installed #}
         <a class="migrate ajax" href="{% url schedule_migrate project.id %}" title="Migrate">Migrate</a>
       {% endif %}
+      <a class="delete confirm" href="{% url delete_project project.id %}" title="Delete Project">Delete Project</a>
     </div>
   </section>
   <section>
