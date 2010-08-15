@@ -23,6 +23,7 @@ class ProjectForm(forms.ModelForm):
         model = Project
 
 class DjangoRecipeForm(forms.Form):
+    name = forms.CharField(initial="django")
     settings = forms.CharField()
     version = forms.ChoiceField(choices=[
         ("trunk", "trunk"),
