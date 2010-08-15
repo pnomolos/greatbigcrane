@@ -1,5 +1,5 @@
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
-* Ensure that notifications show up ajaxy on project page if there are currently no notifications for that project (It looks like no, but I didn't look too close)
+* Move recipe templates out of project directory
 
 * Problem renaming sections
