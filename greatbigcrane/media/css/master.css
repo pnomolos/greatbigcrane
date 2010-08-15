@@ -589,3 +589,26 @@ footer {
   border: 1px solid #900;
   background: #fdd;
 }
+
+/* .buildout */
+.buildout ul {
+  list-style: none;
+  margin-left: 20px;
+}
+
+.buildout > ul > li {
+  border: 1px solid #303030;
+  background: #222;
+  margin: 10px 0;
+  padding: 10px;
+  
+  border-radius: 5px;
+  -moz-border-radisu: 5px;
+  -webkit-border-radius: 5px;
+  
+  -webkit-background-clip: padding-box;
+}
+
+.buildout > ul > li > h3 {
+  margin-bottom: 10px;
+}

@@ -16,23 +16,25 @@
     <h2>Description</h2>
     <p>{{project.description}}</p>
 
-    <section>
+    <section class="buildout">
       <h2>Buildout Sections</h2>
       {% if not project.buildout_sections %}
         <p>No Buildout sections yet.</p>
       {% endif %}
       {% for name, section in project.buildout_sections %}
       <ul>
-        <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
-        {% for key, value in section.items %}
-        <ul>
-          {{key}} = {{value|configvalue}}
-        </ul>
-        {% endfor %}
+        <li class="clearfix">
+          <a href="{% url edit_recipe project.id name %}" class="button right grey">Edit Recipe</a>
+          <h3>{{name}}</h3>
+          {% for key, value in section.items %}
+          <ul>
+            <li>{{key}} = {{value|configvalue}}</li>
+          </ul>
+          {% endfor %}
         </li>
       </ul>
       {% endfor %}
-      <a href="{% url add_recipe project.id %}" class="left orange button margin">Add Recipe</a>
+      <a href="{% url add_recipe project.id %}" class="left orange button orange">Add Recipe</a>
     </section>
   </div>
 {% endblock %}
