@@ -7,6 +7,10 @@ def schedule_buildout(request, project_id):
     return schedule_project_command(request, project_id, "BUILDOUT",
             "Successuflly queued buildout")
 
+def schedule_bootstrap(request, project_id):
+    return schedule_project_command(request, project_id, "BOOTSTRAP",
+            "Successuflly queued bootstrap")
+
 def schedule_test(request, project_id):
     return schedule_project_command(request, project_id, "TEST",
             "Successuflly queued test")
