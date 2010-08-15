@@ -69,19 +69,21 @@ h3 {
 }
 
 a, a:link, a:visited {
-  color: #eee;
+  font-weight: bold;
+  color: #cde;
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
   text-decoration: none;
 }
 
 a:hover {
-  color: #666;
+  color: #fff;
 }
 
 a.block {
   display: block;
   margin: 5px 0;
+  clear: both;
 }
 
 /* misc styles */
@@ -91,6 +93,10 @@ a.block {
 
 .left {
   float: left;
+}
+
+.block.right, .block.left {
+  clear: none;
 }
 
 p {
