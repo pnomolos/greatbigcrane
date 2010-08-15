@@ -29,7 +29,7 @@ class LineEditorChoiceWidget(LineEditorWidget):
         script = """<script type="text/javascript">
         $("#id_%(name)s_button").click(
             function() {
-                $("#id_%(name)s").val($("#id_%(name)s").val() + "\\n" + $("#id_%(name)s_select").val());
+                $("#id_%(name)s").lineeditor().addLine($("#id_%(name)s_select").val());
             }
         );
 </script>""" % {'name': name}

@@ -1,11 +1,8 @@
 (function($) {
   jQuery.fn.lineeditor = function () {
+    if ( $(this).data('lineeditor') ) { return $(this).data('lineeditor') }    
     return this.each(function () {
-      if ( this.liveeditor ) {
-        return this.liveeditor;
-      }
-      
-      this.liveeditor = function() {
+      this.lineeditor = function() {
         if (this.nodeName.toLowerCase() != 'textarea') { return; }
         
         var el = {};
@@ -103,8 +100,10 @@
         $el.replaceWith(el.container);
         el.calculatePositioning();
         
+        el.hidden.data('lineeditor', el);
+        return this;
       }
-      return this.liveeditor();
+      return this.lineeditor();
     })
   }
 })(jQuery);

@@ -122,8 +122,6 @@ jQuery(function($){
   if ( $('#content .project:first').size() ) {
     $('div.project .tests.live:first').ekko({url: '/projects/' + $('#content .project:first').attr('id').replace(/\D*/,'') + '/notifications/'},update_notifications);
   }
-  
-  $("#id_eggs, #id_extra_paths").lineeditor();
 
   $("#recipe_form").submit(function() {
     if ($("#available_recipes").val() == "") {
