@@ -395,3 +395,18 @@ footer {
   height: 20px;
   margin-bottom: -20px;
 }
+
+/* errors */
+.errorlist {
+  margin: 10px 0;
+  padding: 10px;
+  border: #900;
+  background: #fdd;
+  color: #600;
+  list-style: none;
+}
+
+.errorlist + p input {
+  border: 1px solid #900;
+  background: #fdd;
+}
