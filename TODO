@@ -5,8 +5,8 @@
 * Improve about page and make it a help file/readme
 * Figure out how to edit the buildout section (not a recipe)
 * Rename buildout_config
-* move forms to recipes
 
 Phil:
 * Make a button for the github_url
+* make a button for edit button
 * Notification page should have a link back to the project
