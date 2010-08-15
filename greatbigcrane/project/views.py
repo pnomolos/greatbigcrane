@@ -19,7 +19,6 @@ import json
 from shutil import copyfile
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import delete_object
