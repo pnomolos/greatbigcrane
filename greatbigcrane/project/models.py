@@ -24,7 +24,7 @@ class Project(models.Model):
     name = models.CharField(max_length=32)
     base_directory = models.CharField(max_length=512, unique=True)
     git_repo = models.CharField(max_length=512, blank=True, default='')
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, help_text="(Markdown syntax is supported)")
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     test_status = models.BooleanField(default=False)
