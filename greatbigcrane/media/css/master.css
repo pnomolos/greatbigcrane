@@ -277,6 +277,10 @@ ul.projects li .buttons .edit,
   background-position: 0 -432px;
 }
 
+ul.projects li .buttons .bootstrap,
+.project .actions .bootstrap {
+  background-position: 0 -480px;
+}
 
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
