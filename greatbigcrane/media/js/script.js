@@ -42,6 +42,11 @@ jQuery(function($){
       update: '{"#project-list":"home-projects","#favourite-project-list":"favourite-projects"}' 
     }, ajaxHandler );
   })
+
+  $('div.dashboard').ekko({url: '/notifications/ajax'},
+    function(data) {
+      $('div.dashboard ul.tests').html(data);
+  });
   
   // if ($('.notifications').size()) {
   //   var paper = Raphael(
