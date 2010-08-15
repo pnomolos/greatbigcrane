@@ -7,3 +7,4 @@
 * Improve about page and make it a help file/readme
 * Pull recipe editing stuff into it's own app (out of project views.py)
 * fix up the dict methods on recipes to be less breaky and duplicaty (Jason)
+* Figure out how to edit the buildout section (not a recipe)
