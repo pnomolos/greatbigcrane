@@ -18,6 +18,9 @@
 
     <section>
       <h2>Buildout Sections</h2>
+      {% if not project.buildout_sections %}
+        <p>No Buildout sections yet.</p>
+      {% endif %}
       {% for name, section in project.buildout_sections %}
       <ul>
         <li><h3>{{name}}</h3>(<a href="{% url edit_recipe project.id name %}">Edit Recipe</a>)
