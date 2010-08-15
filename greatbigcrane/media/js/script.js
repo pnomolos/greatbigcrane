@@ -43,7 +43,7 @@ jQuery(function($){
     }, ajaxHandler );
   });
 
-  $('div.dashboard').ekko({url: '/notifications/ajax'},
+  $('div.dashboard').ekko({url: '/notifications/ajax/'},
     function(data) {
       $(data).each(function(_,n){
         if ( n.id && $("#"+n.id).size() == 0 ) {
