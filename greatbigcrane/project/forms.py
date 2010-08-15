@@ -18,6 +18,7 @@ import re
 from django import forms
 
 from project.models import Project
+from project.widgets import LineEditorWidget
 from buildout_manage.buildout_config import buildout_write
 from buildout_manage import recipes
 
@@ -36,9 +37,9 @@ class DjangoRecipeForm(forms.Form):
         ("1.0.4", "1.04"),
         ("0.96", "0.96"),
         ])
-    eggs = forms.CharField(required=False,widget=forms.Textarea)
+    eggs = forms.CharField(required=False,widget=LineEditorWidget)
     project = forms.CharField(required=False)
-    extra_paths = forms.CharField(required=False,widget=forms.Textarea)
+    extra_paths = forms.CharField(required=False,widget=LineEditorWidget)
     fcgi = forms.BooleanField(required=False)
     wsgi = forms.BooleanField(required=False)
 

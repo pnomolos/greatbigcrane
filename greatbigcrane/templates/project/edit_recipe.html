@@ -2,6 +2,7 @@
 
 {% block main %}
 <form method="post" action="{% url save_recipe project.id %}">
+    {{form.media}}
     <input type="hidden" name="recipe_name" value="{{recipe_name}}" />
     <div id="recipe_template_container">
         {% include template_name %}
