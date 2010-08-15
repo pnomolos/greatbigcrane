@@ -69,7 +69,20 @@ function update_notifications(data) {
   var $el = $(this);
   $(data).each(function(_,n){
     if ( n.id && $("#"+n.id).size() == 0 ) {
-      $(n).css('display','none').prependTo($el).slideDown();
+      var id = parseInt(n.id.replace(/\D*/,''));
+      var node_after = added = null;
+      $('.tests li').each(function(){
+        if ( added ) { return false; }
+        if ( parseInt(this.id.replace(/\D*/,'')) > id ) {
+          node_after = this;
+        } else {
+          $(n).css('display','none').insertBefore($(this)).slideDown();
+          added = true;
+        }
+      })
+      if ( node_after && !added ) {
+        $(n).css('display','none').insertAfter($(node_after)).slideDown();
+      }
     }
   })
   $el.find('li:nth-child(11n)').slideUp(function(){$(this).remove()});
