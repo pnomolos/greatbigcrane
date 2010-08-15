@@ -1,5 +1,5 @@
 function slugify(string) {
-    return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
+  return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
 }
 
 function ajaxHandler( data ) {
@@ -11,10 +11,10 @@ function ajaxHandler( data ) {
 }
 
 function dismiss_notification(notification_id) {
-    $.get("/notifications/dismiss/" + notification_id + "/", {},
-            function(data, textStatus, xhr) {
-                $("#notification-" + notification_id).slideUp(function(){$(this).remove()});
-            });
+  $.get("/notifications/dismiss/" + notification_id + "/", {},
+    function(data, textStatus, xhr) {
+      $("#notification-" + notification_id).slideUp(function(){$(this).remove()});
+    });
 }
 
 function load_recipe_template() {
@@ -41,11 +41,18 @@ jQuery(function($){
     $.post( $(this).attr('href'), { 
       update: '{"#project-list":"home-projects","#favourite-project-list":"favourite-projects"}' 
     }, ajaxHandler );
-  })
+  });
 
   $('div.dashboard').ekko({url: '/notifications/ajax'},
     function(data) {
-      $('div.dashboard ul.tests').html(data);
+      $(data).each(function(_,n){
+        if ( n.id && $("#"+n.id).size() == 0 ) {
+          $(n).css('display','none').prependTo($('div.dashboard ul.tests')).slideDown();
+          while($('div.dashboard ul.tests li').size() > 10) {
+            $('div.dashboard ul.tests li:last').slideUp(function(){$(this).remove()});
+          }
+        }
+      })
   });
   
   // if ($('.notifications').size()) {
