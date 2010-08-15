@@ -79,6 +79,7 @@ jQuery(function($){
 
   $('.projects .buildout, .projects .tests').live('click', function(e){
     e.preventDefault();
+    e.stopPropagation();
     $.ajax({
       url: $(this).attr('href'),
       success: show_buildout_result($(this)),
