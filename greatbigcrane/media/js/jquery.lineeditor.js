@@ -26,12 +26,22 @@
         var node = $('<input type="text"/>').val(value?value.toString():'');
         var delete_node = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
         container.find('a:last').before(node, delete_node);
+        processValues();
       }
       
       function removeLine(ev) {
         ev.preventDefault();
         $(this).prev().remove();
         $(this).remove();
+        processValues();
+      }
+      
+      function processValues() {
+        var val = '';
+        container.find('input[type=text]').each(function(){
+          val += $(this).val() + "\n";
+        })
+        hidden.val(val);
       }
       
     })
