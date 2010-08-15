@@ -210,17 +210,22 @@ ul.projects li .buttons .favourite.favourited {
   height: 20px;
 }
 
+.notifications .tests li {
+  width: 300px;
+  clear: both;
+}
+
 .tests li a.result {
   font-size: 13px;
   display: block;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 20px 10px 40px;
   text-decoration: none;
   background: url(../images/small-icons.png) right 0 no-repeat;
   text-align: left;
 }
 
 .tests li a.result:hover {
-  padding: 9px 9px 9px 39px;
+  padding: 9px 19px 9px 39px;
   border: 1px solid #666;
   background-position: 9px center !important;
 }
@@ -233,11 +238,6 @@ ul.projects li .buttons .favourite.favourited {
 .tests li.error a.result {
   color: #a9a9a9;
   background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
-}
-
-.notifications .tests li {
-  width: 300px;
-  clear: both;
 }
 
 .notifications .tests li.success {
