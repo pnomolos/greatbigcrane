@@ -1,7 +1,7 @@
 import re
 from django import forms
 
-from project.widgets import LineEditorWidget
+from project.widgets import LineEditorWidget, LineEditorChoiceWidget
 from buildout_manage.parser import buildout_write
 from buildout_manage import recipes
 
@@ -28,6 +28,7 @@ class DjangoRecipeForm(forms.Form):
         self.project = project
         safe_name = re.sub(r'[^A-Za-z0-9_]', '', project.name).lower()
         self.fields['project'].initial = safe_name
+        self.fields['eggs'].widget = LineEditorChoiceWidget(choices=[("a", "a"), ("b", "b")])
 
     def save(self, buildout):
         name = self.cleaned_data['name']
