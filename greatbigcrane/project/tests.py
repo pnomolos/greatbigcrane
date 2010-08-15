@@ -16,6 +16,7 @@ limitations under the License.
 
 from django.test import TestCase
 from django.template import Template, RequestContext
+from project.models import Project
 
 class MockPathRequest(object):
     def __init__(self, path):
@@ -60,3 +61,19 @@ class HelperTest(TestCase):
                 "{% load helpers %}<a {% nav_url '/projects/cool/' '/projects/' %}>",
                 "/projects/food/",
                 '<a href="/projects/cool/" class="current">')
+
+class ProjectGithubUrlTests(TestCase):
+    def test_ssh_url(self):
+        p = Project(name="great big crane",
+                git_repo="git@github.com:pnomolos/Django-Dash-2010.git")
+        assert p.github_url() == "http://github.com/pnomolos/Django-Dash-2010"
+
+    def test_http_url(self):
+        p = Project(name="great big crane", 
+                git_repo="https://buchuki@github.com/pnomolos/Django-Dash-2010.git")
+        assert p.github_url() == "http://github.com/pnomolos/Django-Dash-2010"
+
+    def test_git_readonly_url(self):
+        p = Project(name="great big crane", 
+                git_repo="git://github.com/pnomolos/Django-Dash-2010.git")
+        assert p.github_url() == "http://github.com/pnomolos/Django-Dash-2010"
