@@ -53,6 +53,7 @@ h1 {
   font: normal normal 36px/1 'Vollkorn', Arial, sans-serif;
   text-align: right;
   margin: 5px 0 10px;
+  text-shadow: 0 0 2px #000;
 }
 
 h2 {
@@ -128,6 +129,22 @@ header .title {
   text-shadow: 0 0 5px #000;
   color: #ffc;
 }
+
+header nav {
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.0, rgba(66,66,66,0.4)),
+      color-stop(0.57, rgba(138,138,136,0.2))
+  );
+  background-image: -moz-linear-gradient(
+      center bottom,
+      rgba(66,66,66,0.4) 0%,
+      rgba(138,138,136,0.2) 57%
+  );
+}
+
 header nav ul, header nav li {
   margin: 0;
   padding: 0;
@@ -150,14 +167,15 @@ header nav li a:visited {
   margin-top: -10px;
   margin-bottom: -10px;
 
+  text-shadow: 0 0 2px #000;
+  -moz-text-shadow: 0 0 2px #000;
   
   -webkit-transition: background 0.3s linear;
   -moz-transition: background 0.3s linear;
 }
 
 header nav li a:hover {
-  color: #ddd;
-  background: #333;
+  background: rgba(0,0,0,0.3);
 }
 
 header nav li + li a {
@@ -165,7 +183,11 @@ header nav li + li a {
 }
 
 header nav a.current {
-  background: #212121;
+  background: rgba(0,0,0,0.7);
+}
+
+header nav li a.current:hover {
+  background: rgba(0,0,0,0.5);
 }
 
 /* project listing */
