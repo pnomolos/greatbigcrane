@@ -1,11 +1,19 @@
-Zeromq is a dependency of this project.  It must be installed from source or through a package manager (brew, etc).
+Zeromq is a dependency of this project.  Install it with your favourite package manager (pacman, brew, etc) or by hand from http://www.zeromq.org/area:download.  A simple ./configure && make && make install is sufficient to install it.
 
+To set up our project run these commands:
 
-The job server and at least one job processor work need to be running for greatbigcrane to run. Try this for testing: 
+* python bootstrap.py
+* bin/buildout
+* bin/django syncdb
+* bin/django migrate
 
-* Open a terminal and run bin/django job_server
-* Open another terminal and run bin/django job_processor
-* Open another terminal and run bin/django runserver
+There are three processes that need to be running.  Each one is run from inside the buildout:
+
+* bin/django job_server
+* bin/django job_processor
+* bin/django runserver
+
+From there, go to http://localhost:8000/ and enjoy!
 
 Example test git repos:
 http://github.com/xentac/fakezopetestrunner
