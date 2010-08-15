@@ -29,6 +29,22 @@ function load_recipe_template(project_id) {
   })
 }
 
+function queue_button(node_or_function_string,selector) {
+  return (function(ev) {
+    console.log(this);
+    if ( typeof node_or_function_string == 'string' ) {
+      node = $(this)[node_or_function_string](selector);
+    } else {
+      node = node_or_function_string;
+    }
+    ev.preventDefault(); ev.stopPropagation();
+    $.ajax({
+      url: $(this).attr('href'),
+      success: show_queuing_response(node),
+      error: show_queuing_response(node)
+    });
+  });
+}
 
 function show_queuing_response(node) {
   return (function(data_or_xhr, textStatus) {
@@ -78,15 +94,7 @@ jQuery(function($){
     }, ajaxHandler);
   });
 
-  $('.projects .buildout, .projects .tests').live('click', function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    $.ajax({
-      url: $(this).attr('href'),
-      success: show_queuing_response($(this).parents('li')),
-      error: show_queuing_response($(this).parents('li'))
-    });
-  })
+  $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'))
 
   $('div.dashboard .tests').ekko({url: '/notifications/ajax/'},
     function(data) {
