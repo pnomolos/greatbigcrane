@@ -43,7 +43,6 @@
           if ( !e.shiftKey ) {
             $(e.target).nextAll('input[type=text]:first').focus().size() || addLine().focus(); 
           } else {
-            console.log($(e.target));
             $(e.target).prevAll('input[type=text]:first').focus();
           } 
           return;
