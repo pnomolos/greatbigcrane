@@ -115,11 +115,22 @@ def test_buildout(project_id):
         responses.append(process.communicate()[0])
         errors = errors or process.returncode != 0
 
-    # FIXME: Make the output a little nicer when you run multiple test suites
+    # Make the output a little nicer when you run multiple test suites
 
     message = []
     for binary, response in zip(test_binaries, responses):
-        message.append('%s:\n%s' % (' '.join(binary), response))
+        test_command = ' '.join(binary)
+        com_length = len(test_command)+1
+        response_set = []
+        response_set.append('='*com_length)
+        response_set.append('\n')
+        response_set.append(test_command)
+        response_set.append(':')
+        response_set.append('\n')
+        response_set.append('='*com_length)
+        response_set.append('\n')
+        response_set.append(response)
+        message.append(''.join(response_set))
 
     Notification.objects.create(status="success" if not errors else "error",
             summary="Testing '%s' %s" % (
