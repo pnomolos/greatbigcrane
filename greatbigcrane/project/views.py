@@ -43,6 +43,10 @@ def index(request):
     return render_to_response('index.html', RequestContext(request,
         {'project_list': projects, 'favourite_project_list': favourite_projects, 'notifications': notifications}))
 
+def about(request):
+    '''Also go to another app or flatpage...'''
+    return render_to_response('about.html', RequestContext(request))
+
 def list_projects(request):
     orderby = request.GET.get('orderby', 'name')
     projects = Project.objects.all().order_by(orderby)
