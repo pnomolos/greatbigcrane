@@ -31,6 +31,25 @@ class BuildoutConfig(SortedDict):
             self[key] = SortedDict()
         return super(BuildoutConfig, self).__getitem__(key)
 
+    def sections_with_key(self, key):
+        """
+        Get a list of section names that have a given key.
+
+        For example:
+        [buildout]
+        eggs = myeggs
+
+        [django]
+        eggs = myeggs2
+
+        [boo]
+        noeggs = nothing
+
+        sections_with_key['eggs'] will return [buildout, django]
+        """
+
+        return [section_name for section_name, section in self.iteritems() if key in section]
+
 def buildout_parse(filename):
     """
     Given a filename, parse the buildout config and return a BuildoutConfig object that represents it
