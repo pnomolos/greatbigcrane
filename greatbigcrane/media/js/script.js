@@ -94,7 +94,12 @@ jQuery(function($){
     }, ajaxHandler);
   });
 
-  $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'))
+  $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'));
+  $('.actions .ajax').live('click',queue_button('closest', 'section'))
+  $('.confirm').live('click',function(){
+    return confirm("Are you sure you want to do this?") || ev.preventDefault() || true;
+  });
+  
 
   $('div.dashboard .tests').ekko({url: '/notifications/ajax/'},
     function(data) {
