@@ -430,6 +430,12 @@ ul.tests li.general a.result {
   -moz-border-radius: 0 0 5px 5px;
 }
 
+#sidebar ul.tests li:last-child:first-child a {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
 /* notifications */
 
 .notification code {
