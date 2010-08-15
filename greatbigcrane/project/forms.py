@@ -36,9 +36,9 @@ class DjangoRecipeForm(forms.Form):
         ("1.0.4", "1.04"),
         ("0.96", "0.96"),
         ])
-    eggs = forms.CharField(required=False)
+    eggs = forms.CharField(required=False,widget=forms.Textarea)
     project = forms.CharField(required=False)
-    extra_paths = forms.CharField(required=False)
+    extra_paths = forms.CharField(required=False,widget=forms.Textarea)
     fcgi = forms.BooleanField(required=False)
     wsgi = forms.BooleanField(required=False)
 
