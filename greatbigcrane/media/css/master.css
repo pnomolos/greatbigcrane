@@ -216,6 +216,26 @@ ul.projects li .buttons .favourite.favourited {
   background-position: 0 0;
 }
 
+ul.projects li .notice {
+  padding: 5px;
+  border: 1px solid #333;
+  clear: both;
+  display: block;
+  margin-top: 20px;
+}
+
+ul.projects li .error {
+  border-color: #900;
+  background: #fee;
+  color: #121212;
+}
+
+ul.projects li .success {
+  border-color: #090;
+  background: #cfc;
+  color: #121212;
+}
+
 /* tests */
 .tests {
   padding: 0;

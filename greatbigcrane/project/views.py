@@ -26,7 +26,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 
 import buildout_manage
 from buildout_manage.buildout_config import buildout_write, BuildoutConfig
@@ -132,6 +132,10 @@ def handle_ajax(request):
 
 def schedule_buildout(request, project_id):
     project = get_object_or_404(Project, id=project_id)
-    queue_job("BUILDOUT", project_id=project.id)
-
-    return redirect("/projects/")
+    try:
+        queue_job("BUILDOUT", project_id=project.id)
+        return HttpResponse('Successfully queued buildout')
+    except Exception as e:
+        return HttpResponseServerError("Error: " + str(e))
+    
+    

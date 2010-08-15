@@ -1,5 +1,5 @@
 <li id="project-{{project.id}}" class="clearfix">
-  <div class="buttons">
+  <div class="buttons clearfix">
     <a href="{% url favourite_project project.id %}" class="favourite{{project.favourite|yesno:' favourited,'}}">Favourite</a>
     <a href="{% url schedule_buildout project.id %}" class="buildout">Run Buildout</a>
     <a href="{% url view_project project.id %}" class="settings">Settings</a>

@@ -18,13 +18,34 @@ function dismiss_notification(notification_id) {
 }
 
 function load_recipe_template(project_id) {
-    return function(node) {
-        if ($('#available_recipes').val() != "") {
-            $("#recipe_template_container").load("/projects/" + 
-                    "recipe_template/" + project_id + '/' +
-                    $('#available_recipes').val() + '/');
-        }
+  return (function(node) {
+    if ($('#available_recipes').val() != "") {
+      $("#recipe_template_container").load("/projects/" + 
+          "recipe_template/" + project_id + '/' +
+          $('#available_recipes').val() + '/');
     }
+  })
+}
+
+
+function show_buildout_result(node) {
+  return (function(data_or_xhr, textStatus) {
+    var to_append = '';
+    switch (textStatus) {
+      case null:
+      case 'timeout':
+      case 'error':
+      case 'notmodified':
+      case 'parsererror':
+        to_append = '<span class="error notice">' + data_or_xhr.responseText + '</span>';
+        break;
+      default:
+        to_append = '<span class="success notice">' + data_or_xhr + '</span>';
+        break;
+    }
+    to_append = $(to_append).css('display','none');
+    $(to_append).appendTo(node.parents('li')).slideDown().delay(2000).slideUp(function(){$(this).remove();});
+  });
 }
 
 jQuery(function($){
@@ -37,8 +58,6 @@ jQuery(function($){
     $.post( $(this).attr('href'), { update: '{"#project-list":"projects"}' }, ajaxHandler );
   });
 
-  $('#available_recipes').change(load_recipe_template);
-  
   $('div.dashboard .projects .favourite').live('click', function(e){
     e.preventDefault();
     $.post( $(this).attr('href'), { 
@@ -46,9 +65,13 @@ jQuery(function($){
     }, ajaxHandler );
   });
 
-  $('div.dashboard .projects .buildout').click(function(e){
+  $('div.dashboard .projects .buildout').live('click', function(e){
     e.preventDefault();
-    $.get($(this).attr('href'));
+    $.ajax({
+      url: $(this).attr('href'),
+      success: show_buildout_result($(this)),
+      error: show_buildout_result($(this))
+    });
   })
 
   $('div.dashboard .tests').ekko({url: '/notifications/ajax/'},
