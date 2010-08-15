@@ -6,7 +6,7 @@
       
       if (el.nodeName.toLowerCase() != 'textarea') { return; }
       
-      var hidden = $('<input type="hidden"/>').attr('id', el.id).attr('name',el.name).val($el.val());      
+      var hidden = $('<input type="hidden">').attr('id', el.id).attr('name',el.name).val($el.val());      
       var container = $('<div class="lineeditor"></div>');
       var val = $el.val();
       
@@ -23,7 +23,7 @@
       
       function addLine(value) {
         value = (value && value.target ? value.preventDefault() && '' : value);
-        var node = $('<input type="text"/>').val(value?value.toString():'').keydown(processValues);
+        var node = $('<input type="text">').val(value?value.toString():'').keydown(processValues);
         var delete_node = $('<a href="#delete" class="delete">Delete</a>').click(removeLine);
         container.find('a:last').before(node, delete_node);
         processValues();
