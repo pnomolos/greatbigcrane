@@ -5,4 +5,3 @@
 
 Phil:
 * Possibly include RTE on description fields
-* Add magic that makes line_editor automatically update when hidden input value is changed
