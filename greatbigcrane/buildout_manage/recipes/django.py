@@ -27,6 +27,16 @@ class DjangoRecipe(object):
         self.section = self.config[self.section_name]
         self.section['recipe'] = 'djangorecipe'
 
+    def dict(self):
+        # FIXME: This fails if an option has not been set
+        return dict(settings=self.settings,
+                version=self.version,
+                eggs=self.eggs,
+                project=self.project,
+                extra_paths=self.extra_paths,
+                fcgi=self.fcgi,
+                wsgi=self.wsgi)
+
     settings = simple_property('settings')
     version = simple_property('version')
     eggs = simple_property('eggs')
