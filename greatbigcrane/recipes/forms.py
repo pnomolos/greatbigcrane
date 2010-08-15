@@ -28,7 +28,9 @@ class DjangoRecipeForm(forms.Form):
         self.project = project
         safe_name = re.sub(r'[^A-Za-z0-9_]', '', project.name).lower()
         self.fields['project'].initial = safe_name
-        self.fields['eggs'].widget = LineEditorChoiceWidget(choices=[("a", "a"), ("b", "b")])
+        egg_sections = project.buildout().sections_with_key('eggs')
+        egg_choices = [("${%s:eggs}" % s, "${%s:eggs}" % s) for s in egg_sections]
+        self.fields['eggs'].widget = LineEditorChoiceWidget(choices=egg_choices)
 
     def save(self, buildout):
         name = self.cleaned_data['name']
