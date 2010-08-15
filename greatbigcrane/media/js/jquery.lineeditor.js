@@ -37,8 +37,7 @@
       
       function removeLine(ev) {
         ev.preventDefault();
-        $(this).prev().remove();
-        $(this).remove();
+        $(this).closest('.input').remove();
         processValues();
       }
       
