@@ -46,7 +46,7 @@ function show_buildout_result(node) {
         break;
     }
     to_append = $(to_append).css('display','none');
-    $(to_append).appendTo(node.parents('li')).slideDown().delay(2000).slideUp(function(){$(this).remove()});
+    $(to_append).appendTo(node).slideDown().delay(2000).slideUp(function(){$(this).remove()});
   });
 }
 
@@ -83,8 +83,8 @@ jQuery(function($){
     e.stopPropagation();
     $.ajax({
       url: $(this).attr('href'),
-      success: show_buildout_result($(this)),
-      error: show_buildout_result($(this))
+      success: show_buildout_result($(this).parents('li')),
+      error: show_buildout_result($(this).parents('li'))
     });
   })
 
