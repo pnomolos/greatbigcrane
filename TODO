@@ -4,5 +4,9 @@
 * Move recipe templates out of project directory
 * Ensure that notifications show up ajaxy on project page if there are currently no notifications for that project (It looks like no, but I didn't look too close)
 
+* Problem renaming sections
+* Edit recipe needs to prepopulate section name when editing instead of always giving default
+* Add ability to delete section
+
 Phil:
 * Possibly include RTE on description fields
