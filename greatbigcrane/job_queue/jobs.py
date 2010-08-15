@@ -117,10 +117,14 @@ def test_buildout(project_id):
 
     # FIXME: Make the output a little nicer when you run multiple test suites
 
+    message = []
+    for binary, response in zip(test_binaries, responses):
+        message.append('%s:\n%s' % (' '.join(binary), response))
+
     Notification.objects.create(status="success" if not errors else "error",
             summary="Testing '%s' %s" % (
                 project.name, "success" if not errors else "error"),
-            message=('\n\n'+'*'*50+'\n\n').join(responses),
+            message=('\n\n'+'*'*50+'\n\n').join(message),
             project=project)
     project.test_status = not errors
     project.save()
