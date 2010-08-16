@@ -1,7 +1,6 @@
 * Write helper for seeing if a section is in parts
+
 * Create a bunch of git repos with different buildout setups in them for easy testing
-* Move recipe templates out of project directory
+* docstrings!!!
 
 * Problem renaming sections
-* Add ability to delete section
-* Description text doesn't handle any markup (like markdown) so newlines are ignored
