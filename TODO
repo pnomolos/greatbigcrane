@@ -3,3 +3,4 @@
 * docstrings!!!
 * Test status doesn't update ajaxily
 * Problem creating repos from git checkouts with relative paths that are a single directory
+* update about page to reflect the eerie ability to load terminals and editors
