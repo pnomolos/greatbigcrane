@@ -411,7 +411,6 @@ ul.tests .notification .dismiss {
 
 .notifications ul.tests li {
   clear: both;
-  margin-bottom: 1px;
 }
 
 .notifications > .tests {
