@@ -5,30 +5,30 @@ function dismiss_notification(notification_id) {
   });
 }
 
-jQuery(function($){
-  function slugify(string) {
-    return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
-  }
+function slugify(string) {
+  return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
+}
 
+function load_recipe_template(project_id) {
+  return (function(node) {
+    if ($('#available_recipes').val() != "") {
+      $("#recipe_template_container").load("/recipes/" + project_id +
+        "/recipe_template/" +
+        $('#available_recipes').val() + '/',function(){
+          $("#id_eggs, #id_extra_paths").lineeditor();
+        }
+      );
+    }
+  })
+}
+
+jQuery(function($){
   function ajaxHandler(data) {
     if (data.update) {
       $.each(data.update,function(k,v){
         $(k).html(v);
       });
     }
-  }
-
-  function load_recipe_template(project_id) {
-    return (function(node) {
-      if ($('#available_recipes').val() != "") {
-        $("#recipe_template_container").load("/recipes/" + project_id +
-          "/recipe_template/" +
-          $('#available_recipes').val() + '/',function(){
-            $("#id_eggs, #id_extra_paths").lineeditor();
-          }
-        );
-      }
-    })
   }
 
   function queue_button(node_or_function_string,selector) {
