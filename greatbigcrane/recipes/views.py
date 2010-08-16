@@ -25,6 +25,7 @@ def edit_recipe(request, project_id, section_name):
 
     initial=recipe.dict()
     initial['name'] = section_name
+    initial['old_name'] = section_name
 
     form = recipe_form_map[recipe_name](project, initial=initial)
     return render_to_response("recipes/edit_recipe.html", RequestContext(

@@ -27,6 +27,7 @@ def choices_from_section(project, section_name):
 
 class DjangoRecipeForm(forms.Form):
     name = forms.CharField(initial="django")
+    old_name = forms.CharField(widget=forms.HiddenInput)
     settings = forms.CharField(initial="development")
     version = forms.ChoiceField(choices=[
         ("trunk", "trunk"),
@@ -55,6 +56,7 @@ class DjangoRecipeForm(forms.Form):
 
     def save(self, buildout):
         name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
         dr = recipes['djangorecipe'](buildout, name)
         for key in self.fields:
             if key == "name": continue
@@ -66,10 +68,14 @@ class DjangoRecipeForm(forms.Form):
                 setattr(dr, key, value)
             else:
                 delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class EggRecipeForm(forms.Form):
     name = forms.CharField(initial="eggs")
+    old_name = forms.CharField(widget=forms.HiddenInput)
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
     find_links = forms.CharField(required=False,widget=LineEditorWidget)
     interpreter = forms.CharField(required=False)
@@ -90,6 +96,7 @@ class EggRecipeForm(forms.Form):
 
     def save(self, buildout):
         name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
         dr = recipes['zc.recipe.egg'](buildout, name)
         for key in self.fields:
             if key == "name": continue
@@ -101,10 +108,14 @@ class EggRecipeForm(forms.Form):
                 setattr(dr, key, value)
             else:
                 delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class GitRecipeForm(forms.Form):
     name = forms.CharField(initial="git")
+    old_name = forms.CharField(widget=forms.HiddenInput)
     repository = forms.CharField(required=True)
     rev = forms.CharField(required=False)
     branch = forms.CharField(required=False)
@@ -120,6 +131,7 @@ class GitRecipeForm(forms.Form):
 
     def save(self, buildout):
         name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
         dr = recipes['zerokspot.recipe.git'](buildout, name)
         for key in self.fields:
             if key == "name": continue
@@ -131,10 +143,14 @@ class GitRecipeForm(forms.Form):
                 setattr(dr, key, value)
             else:
                 delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class MercurialRecipeForm(forms.Form):
     name = forms.CharField(initial="mercurial")
+    old_name = forms.CharField(widget=forms.HiddenInput)
     repository = forms.CharField(required=True)
     location = forms.CharField(required=False)
     newest = forms.BooleanField(required=False)
@@ -146,6 +162,7 @@ class MercurialRecipeForm(forms.Form):
 
     def save(self, buildout):
         name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
         dr = recipes['mercurialrecipe'](buildout, name)
         for key in self.fields:
             if key == "name": continue
@@ -157,10 +174,14 @@ class MercurialRecipeForm(forms.Form):
                 setattr(dr, key, value)
             else:
                 delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class PipRecipeForm(forms.Form):
     name = forms.CharField(initial="pip")
+    old_name = forms.CharField(widget=forms.HiddenInput)
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
     interpreter = forms.CharField(required=False)
     find_links = forms.CharField(required=False,widget=LineEditorWidget)
@@ -181,6 +202,7 @@ class PipRecipeForm(forms.Form):
 
     def save(self, buildout):
         name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
         dr = recipes['gp.recipe.pip'](buildout, name)
         for key in self.fields:
             if key == "name": continue
@@ -192,6 +214,9 @@ class PipRecipeForm(forms.Form):
                 setattr(dr, key, value)
             else:
                 delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
 class BuildoutForm(forms.Form):
