@@ -113,7 +113,7 @@ function update_notifications(data) {
   }
   // Update the testing button on the project detail page
   if ( $('#sidebar .project').size() ) {
-    if ( $el.find('li[rel*=test]:first').hasClass('success') ) {
+    if ( $el.find('li[rel*=TEST]:first').hasClass('success') ) {
       $('#sidebar .project .actions .tests').addClass('success')
     } else {
       $('#sidebar .project .actions .tests').removeClass('success').addClass('error');
