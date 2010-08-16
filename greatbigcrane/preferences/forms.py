@@ -18,13 +18,15 @@ from django import forms
 from preferences.models import Preference
 
 class PreferencesForm(forms.Form):
+    '''Dynamic form for editing key value preferences stored
+    in the preferences model of the database.'''
     def __init__(self, *args, **kwargs):
         super(PreferencesForm, self).__init__(*args, **kwargs)
         for preference in Preference.objects.all():
-            self.fields[preference.name] = forms.CharField(help_text=preference.help_text)
+            self.fields[preference.name] = forms.CharField(help_text=preference.help_text,
+                    required=False)
 
-    def clean(self):
-        # Apparently clean__projects_directory doesn't work with dynamic forms
+    def clean_projects_directory(self):
         if not self.cleaned_data['projects_directory'].endswith(os.path.sep):
             self.cleaned_data['projects_directory'] += os.path.sep
-        return self.cleaned_data
+        return self.cleaned_data['projects_directory']
