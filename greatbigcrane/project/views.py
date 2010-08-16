@@ -17,6 +17,7 @@ limitations under the License.
 import os.path
 import json
 from shutil import copyfile
+import datetime
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.views.generic.list_detail import object_list
@@ -39,7 +40,8 @@ def index(request):
     '''We should move this to a different app. Possibly preferences, it's more generic.'''
     projects = Project.objects.filter(favourite=False).order_by('-updated_at')[:5]
     favourite_projects = Project.objects.filter(favourite=True).order_by('name')
-    notifications = Notification.objects.exclude(dismissed=True)[:10]
+    notifications = Notification.objects.exclude(dismissed=True,
+            notification_time__lt=datetime.datetime.now() - datetime.timedelta(days=1))[:10]
     return render_to_response('index.html', RequestContext(request,
         {'project_list': projects, 'favourite_project_list': favourite_projects, 'notifications': notifications}))
 
