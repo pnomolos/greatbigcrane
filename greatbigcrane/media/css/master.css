@@ -684,8 +684,34 @@ form input[type=submit].red:hover {
 /* footer */
 footer {
   padding: 10px;
+  color: #777;
+}
+
+footer a,
+footer a:link,
+footer a:visited {
+  color: #777;
+  font-weight: normal;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+footer .copyright {
+  float: right;
+  clear: right;
   text-align: right;
-  color: #999;
+}
+
+footer .copyright.left {
+  float: left;
+  clear: left;
+  text-align: left;
+}
+
+footer p {
+  margin-bottom: 3px;
 }
 
 
