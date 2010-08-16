@@ -151,7 +151,9 @@ def test_buildout(project_id):
             summary="Testing '%s' %s" % (
                 project.name, "success" if not errors else "error"),
             message=('\n\n'+'*'*50+'\n\n').join(message),
-            project=project)
+            project=project,
+            notification_type="TEST",
+            )
     project.test_status = not errors
     project.save()
 
