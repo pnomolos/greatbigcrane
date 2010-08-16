@@ -433,7 +433,7 @@ ul.tests li a.result {
   -moz-transition: border-color 0.3s linear, border-radius 0.3s linear;
 }
 
-ul.tests li a.result:hover {
+ul.tests li:hover a.result {
   padding: 9px 24px 9px 39px;
   border: 1px solid #666 !important;
   background-position: 9px 7px !important;
