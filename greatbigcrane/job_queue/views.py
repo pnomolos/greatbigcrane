@@ -39,6 +39,10 @@ def startapp(request, project_id):
     return render_to_response("form.html", RequestContext(
         request, {'form': form}))
 
+def edit_buildout(request, project_id):
+    return schedule_project_command(request, project_id, "EDIT",
+            "Successfully edited")
+
 
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)
