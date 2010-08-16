@@ -13,6 +13,10 @@ body {
 nav, #main {
   background: #4b4b4b;
   padding: 10px;
+  
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 #main {
