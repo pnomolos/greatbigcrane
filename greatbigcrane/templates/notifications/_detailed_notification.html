@@ -1,6 +1,8 @@
 <li class="notification {{notification.status}}" id="notification-{{notification.id}}">
   <a href="{{notification.get_absolute_url}}" class="result">
-    <span class="project">{{notification.project.name}}</span>:
+    {% if notification.project and notification.project.name %}
+      <span class="project">{{notification.project.name}}</span>:
+    {% endif %}
     <span class="result">{{notification.summary}}</span>
     <span class="time">{{notification.notification_time}}</span>
   </a>
