@@ -727,14 +727,18 @@ footer {
 .errorlist {
   margin: 10px 0;
   padding: 10px;
-  border: #900;
+  border: 1px solid #900;
   background: #fdd;
   color: #600;
   list-style: none;
   width: 680px;
+  
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
-.errorlist + p input {
+.errorlist + p input, .errorlist + input[type=text] {
   border: 1px solid #900;
   background: #fdd;
 }
