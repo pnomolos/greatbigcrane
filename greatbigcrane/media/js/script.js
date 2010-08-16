@@ -103,9 +103,14 @@ jQuery(function($){
         if ( node_after && !added ) {
           $(n).css('display','none').insertAfter($(node_after)).slideDown();
           number_to_remove++;
+          added = true;
         } else if ( !node_after && !added ) {
           $(n).css('display','none').appendTo($el).slideDown();
           number_to_remove++;
+          added = true;
+        }
+        if ( added ) {
+          notification_handler($(n));
         }
       }
     });
@@ -121,6 +126,12 @@ jQuery(function($){
       }
     }
     ajax_update();
+  }
+  
+  function notification_handler(node) {
+    if ( node.attr('rel') == 'GITCLONE' && node.hasClass('success') ) {
+      confirm("The git clone has completed.  Would you like to refresh the page?") && window.location.reload();
+    }
   }
 
   $('.autosubmit').change(function(){
