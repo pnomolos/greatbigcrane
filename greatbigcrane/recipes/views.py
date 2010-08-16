@@ -71,10 +71,13 @@ def edit_buildout_section(request, project, buildout, section_name):
     string = StringIO()
     buildout_manage.parser.buildout_write(string, new_buildout)
 
-    initial = {'contents': string.getvalue()}
+    # Take out the section heading
+    section_value = '\n'.join(string.getvalue().splitlines()[1:])
+    initial = {'contents': section_value}
     form = BuildoutForm(request.POST or None, initial=initial)
     if form.is_valid():
-        string = StringIO(str(form.cleaned_data['contents']))
+        section_value = '[' + str(section_name) + ']\n' + str(form.cleaned_data['contents'])
+        string = StringIO(section_value)
         config = buildout_manage.parser.buildout_parse(string)
         buildout[section_name] = config[section_name]
         buildout_manage.parser.buildout_write(project.buildout_filename(), buildout)
