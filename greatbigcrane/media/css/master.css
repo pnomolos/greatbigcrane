@@ -535,6 +535,7 @@ form textarea {
   -webkit-background-clip: padding-box;
 
   -webkit-transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
 }
 
 form input[type=text]:focus,
