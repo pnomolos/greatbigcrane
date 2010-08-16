@@ -6,7 +6,9 @@
   <span class="meta">
     <span class="time">{{notification.notification_time}}</span>
   </span>
-  <a href="{% url view_project notification.project.id %}" class="button highlight left clear margin orange">View Project</a>
+  {% if notification.project %}
+    <a href="{% url view_project notification.project.id %}" class="button highlight left clear margin orange">View Project</a>
+  {% endif %}
   <code class="clear notification-code">{{notification.message}}</code>
 </div>
 {% endblock %}
