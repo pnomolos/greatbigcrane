@@ -19,7 +19,9 @@
         
         el.addLine = function(value) {
           value = (value && value.target ? value.preventDefault() && '' : value);
-          var input = $('<input type="text">').val(value?value.toString():'').change(el.processValues).keyup(el.processValues).keypress(el.processValues);
+          var input = $('<input type="text">').val(value?value.toString():'').
+            bind('change keyup keypress', el.processValues).
+            keydown(el.handleTab);
           var input_container = $('<span class="input"></span>');
           el.container.find('a:last').before(input_container.append(input).append(el.buttons.clone(true)));
           el.processValues();
@@ -45,8 +47,8 @@
             el.calculatePositioning();
           })
         }
-      
-        el.processValues = function(e) {
+        
+        el.handleTab = function(e) {
           if (e && e.keyCode == 9) {
             e.preventDefault();
             target = $(e.target).closest('.input');
@@ -56,7 +58,10 @@
               target.prevAll('.input:first').find('input[type=text]').focus();
             } 
             return;
-          }
+          }          
+        }
+        
+        el.processValues = function(e) {
           el.hidden.val(
             el.container.find('input[type=text]').map(function(){
               return $(this).val();
