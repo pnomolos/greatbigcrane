@@ -1,4 +1,3 @@
 * Write helper for seeing if a section is in parts
 * Create a bunch of git repos with different buildout setups in them for easy testing
-* Problem creating repos from git checkouts with relative paths that are a single directory
 * update about page to reflect the eerie ability to load terminals and editors
