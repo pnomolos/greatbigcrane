@@ -466,6 +466,10 @@ ul.tests li.general a.result {
   clear: both;
 }
 
+.notification .notification-code {
+  margin-top: 10px;
+}
+
 .notification h2 {
   float: left;
   margin-bottom: 10px;

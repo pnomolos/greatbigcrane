@@ -7,6 +7,6 @@
     <span class="time">{{notification.notification_time}}</span>
   </span>
   <a href="{% url view_project notification.project.id %}" class="button highlight left clear margin orange">View Project</a>
-  <code class="clear" style="margin-top: 10px">{{notification.message}}</code>
+  <code class="clear notification-code" style="margin-top: 10px">{{notification.message}}</code>
 </div>
 {% endblock %}
