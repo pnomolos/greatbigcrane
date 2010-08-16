@@ -10,7 +10,7 @@
       <select name="orderby" class="autosubmit">
         <option {% if orderby == 'name' or orderby == '' %}selected="selected"{% endif %} value="name">Name</option>
         <option {% if orderby == '-updated_at' %}selected="selected"{% endif %} value="-updated_at">Last Updated</option>
-        <option {% if orderby == 'test_status' %}selected="selected"{% endif %} value="test_status">Test Status</option>
+        <option {% if orderby == '-test_status' %}selected="selected"{% endif %} value="-test_status">Test Status</option>
       </select>
     </p>
     <ul class="projects" id="project-list">
