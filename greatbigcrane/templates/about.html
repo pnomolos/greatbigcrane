@@ -11,7 +11,7 @@
     authentication.
   </p>
   <p>
-    In normal usage, Great Big Crane allows you to manage a collection of projects
+    In normal usage, Great Big Crane allows you to manage a collection of <a href="{% url list_projects %}">projects</a>
     in a specific code directory. This directory name is set on the preferences
     page. For example, I store my code in <code>/home/dusty/code/</code> and individual
     projects are in <code>/home/dusty/code/greatbigcrane/</code> or
@@ -36,7 +36,7 @@
     dashboard when they have completed.
   </p>
   <p>
-    The dashboard lists your most recently active projects and explicitly
+    The <a href="{% url dashboard_url %}">dashboard</a> lists your most recently active projects and explicitly
     favourited projects. Projects can be favourited using the star icon in the
     project list. You can also schedule a buildout and tests from the dashboard.
     Tests are run through the buildout. The test icon will glow either red or
@@ -44,7 +44,7 @@
     completed successfully or not.
   </p>
   <p>
-    Notifications indicate the output of various asynchronous commands,
+    <a href="{% url list_notifications %}">Notifications</a> indicate the output of various asynchronous commands,
     and come in three flavours: success, failure, or general. The small
     "x" box on the right of a notification allows you to dismiss it. The
     notifications page allows you to review all notifications dismissed or
