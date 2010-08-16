@@ -312,8 +312,8 @@ ul.projects li .buttons .github,
   background-position: 0 -384px;
 }
 
-ul.projects li .buttons .edit,
-.project .actions .edit {
+ul.projects li .buttons .edit_cfg,
+.project .actions .edit_cfg {
   background-position: 0 -432px;
 }
 
@@ -325,6 +325,11 @@ ul.projects li .buttons .bootstrap,
 ul.projects li .buttons .startapp,
 .project .actions .startapp {
   background-position: 0 -528px;
+}
+
+ul.projects li .buttons .edit,
+.project .actions .edit {
+  background-position: 0 -576px;
 }
 
 ul.projects li .buttons .favourite,
