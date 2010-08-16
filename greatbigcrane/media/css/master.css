@@ -447,7 +447,7 @@ ul.tests li.success a.result {
 }
 
 ul.tests li.error a.result {
-  color: #a9a9a9;
+  color: #e99d83;
   background: #4f2020 url(../images/small-icon-fail.png) 10px 8px no-repeat;
   border-color: #4f2020;
 }
