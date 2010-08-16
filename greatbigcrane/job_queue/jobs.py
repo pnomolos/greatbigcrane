@@ -19,6 +19,7 @@ import zmq
 import json
 import subprocess
 from project.models import Project
+from preferences.models import Preference
 from notifications.models import Notification
 from buildout_manage.parser import buildout_parse
 
@@ -245,3 +246,21 @@ def migrate(project_id):
                 project.name, "success" if not process.returncode else "error"),
             message=response,
             project=project)
+
+@command("EDIT")
+def edit(project_id):
+    """Open the user's favourite editor"""
+    project = Project.objects.get(id=project_id)
+    print("running edit for %s" % project.name)
+
+    terminal_path = Preference.objects.get_preference("terminal_path")
+    editor_path = Preference.objects.get_preference("editor_path")
+    command = editor_path
+
+    if terminal_path:
+        if '#s' in terminal_path:
+            command = terminal_path.replace('#s', editor_path + ' ' + project.buildout_filename())
+    process = subprocess.Popen(command + ' &', cwd=project.base_directory,
+        shell=True, close_fds=True)
+
+    process.communicate()
