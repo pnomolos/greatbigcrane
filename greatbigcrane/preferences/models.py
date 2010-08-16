@@ -18,6 +18,8 @@ from django.db import models
 
 class PreferenceManager(models.Manager):
     def get_preference(self, name, default=None):
+        """Get the named preference, or return a default value if
+        it is unavailable."""
         try:
             return Preference.objects.get(name="projects_directory").value
         except Preference.DoesNotExist:
