@@ -17,6 +17,19 @@ nav, #main {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+  
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.0, rgba(66,66,66,0.0)),
+      color-stop(0.66, rgba(138,138,136,0.4))
+  );
+  background-image: -moz-linear-gradient(
+      center bottom,
+      rgba(66,66,66,0.4) 0%,
+      rgba(138,138,136,0.3) 33%
+  );
 }
 
 #main {
@@ -132,21 +145,6 @@ header .title {
   display: block;
   text-shadow: 0 0 5px #000;
   color: #ffc;
-}
-
-header nav {
-  background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0.0, rgba(66,66,66,0.4)),
-      color-stop(0.63, rgba(138,138,136,0.3))
-  );
-  background-image: -moz-linear-gradient(
-      center bottom,
-      rgba(66,66,66,0.4) 0%,
-      rgba(138,138,136,0.3) 63%
-  );
 }
 
 header nav ul, header nav li {
