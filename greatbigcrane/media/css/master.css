@@ -453,7 +453,7 @@ ul.tests li.error a.result {
 
 ul.tests li.general a.result {
   color: #ffd;
-  background: #121212 url(../images/small-icon-general.png) 10px center no-repeat;
+  background: #121212 url(../images/small-icon-general.png) 10px 8px no-repeat;
   border-color: #121212;
 }
 
