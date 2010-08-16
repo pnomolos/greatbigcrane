@@ -23,7 +23,7 @@ handler500 # Pyflakes
 
 urlpatterns = patterns('',
     url('^$', 'project.views.index', name="dashboard_url"),
-    (r'^about/$', 'project.views.about'),
+    url('^about/$', 'project.views.about', name="about_url"),
     (r'^notifications/', include('notifications.urls')),
     (r'^projects/', include('project.urls')),
     (r'^recipes/', include('recipes.urls')),
