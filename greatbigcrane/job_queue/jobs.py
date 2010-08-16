@@ -38,6 +38,7 @@ def queue_job(command, **kwargs):
     assert socket.recv() == "ACK"
 
 def command(command_name):
+    "Decorator that marks a function as a queuable command."
     def wrap(function):
         command_map[command_name] = function
         return function
@@ -45,7 +46,7 @@ def command(command_name):
 
 command_map = {}
 
-# Create the actual commands here. Use dcommand decorator to keep the map up to date
+# Create the actual commands here. Use command decorator to keep the map up to date
 @command("BOOTSTRAP")
 def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
@@ -64,6 +65,7 @@ def bootstrap(project_id):
 
 @command("BUILDOUT")
 def buildout(project_id):
+    "Run the buildout process in the given project's base directory."
     project = Project.objects.get(id=project_id)
     print("running buildout %s" % project.name)
     process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
@@ -79,6 +81,8 @@ def buildout(project_id):
 
 @command("TEST")
 def test_buildout(project_id):
+    "Run the test command in the buildout project's base directory.
+    Tries to do some intelligent guessing about how tests should be run."
     project = Project.objects.get(id=project_id)
     print("running tests for %s" % project.name)
 
@@ -148,6 +152,7 @@ def test_buildout(project_id):
 
 @command("GITCLONE")
 def clone_repo(project_id):
+    "clone a git repo into the directory if it does not exist."
     from greatbigcrane.job_queue.jobs import queue_job
     project = Project.objects.get(id=project_id)
     print("cloning repo for %s" % project.name)
@@ -173,6 +178,7 @@ def clone_repo(project_id):
 
 @command("GITPULL")
 def pull_repo(project_id):
+    "Run git pull in the base directory to update from the default origin"
     project = Project.objects.get(id=project_id)
     print("pulling repo for %s" % project.name)
 
@@ -190,6 +196,7 @@ def pull_repo(project_id):
 # Django commands
 @command("SYNCDB")
 def syncdb(project_id):
+    "run django syncdb in the project directory"
     project = Project.objects.get(id=project_id)
     print("running syncdb for %s" % project.name)
 
@@ -206,6 +213,7 @@ def syncdb(project_id):
 
 @command("STARTAPP")
 def startapp(project_id, app_name):
+    "Start a new app in the django project"
     project = Project.objects.get(id=project_id)
     print("running startapp %s for %s" % (app_name, project.name))
 
@@ -223,6 +231,7 @@ def startapp(project_id, app_name):
 
 @command("MIGRATE")
 def migrate(project_id):
+    "Run south migrate in the project directory."
     project = Project.objects.get(id=project_id)
     print("running migrate for %s" % project.name)
 
