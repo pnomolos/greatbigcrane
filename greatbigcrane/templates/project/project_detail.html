@@ -54,7 +54,7 @@
       <section class="clearfix">
         <a class="bootstrap ajax" href="{% url schedule_bootstrap project.id %}" title="Bootstrap Buildout">Bootstrap Buildout</a>
         <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
-        <a class="tests ajax" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
+        <a class="tests ajax {{ project.test_status|yesno:'success,error' }}" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
       </section>
       
       {% if project.github_url and project.git_repo %}<section class="clearfix">{% endif %}      
