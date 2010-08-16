@@ -66,6 +66,22 @@ function show_queuing_response(node) {
   });
 }
 
+function ajax_update(params) {
+  if ( !params ) {
+    params = [];
+    if ( $('div.project').size() ) {
+      params.push( '"#project-list":"projects"' )
+    } else {
+      params.push( '"#project-list":"home-projects"' )
+    }
+    params.push( '"#favourite-project-list":"favourite-projects"' );
+    params = '{' + params.join(',') + '}'
+  }
+  $.post('/projects/ajax', { 
+    update: params
+  }, ajaxHandler);
+}
+
 function update_notifications(data) {
   var $el = $(this);
   var number_to_remove = $el.find('li').size()-10;
@@ -94,7 +110,8 @@ function update_notifications(data) {
   });
   while ( number_to_remove-- > 0 ) {
     $el.find('li:last').remove();
-  } 
+  }
+  ajax_update();
 }
 
 jQuery(function($){

@@ -119,29 +119,34 @@ def test_buildout(project_id):
 
     errors = False
     responses = []
-    for binary in test_binaries:
-        process = subprocess.Popen(binary, cwd=project.base_directory,
-                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+    try:
+        for binary in test_binaries:
+            process = subprocess.Popen(binary, cwd=project.base_directory,
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
-        responses.append(process.communicate()[0])
-        errors = errors or process.returncode != 0
+            responses.append(process.communicate()[0])
+            errors = errors or process.returncode != 0
 
-    # Make the output a little nicer when you run multiple test suites
+        # Make the output a little nicer when you run multiple test suites
 
-    message = []
-    for binary, response in zip(test_binaries, responses):
-        test_command = ' '.join(binary)
-        com_length = len(test_command)+1
-        response_set = []
-        response_set.append('='*com_length)
-        response_set.append('\n')
-        response_set.append(test_command)
-        response_set.append(':')
-        response_set.append('\n')
-        response_set.append('='*com_length)
-        response_set.append('\n')
-        response_set.append(response)
-        message.append(''.join(response_set))
+        message = []
+        for binary, response in zip(test_binaries, responses):
+            test_command = ' '.join(binary)
+            com_length = len(test_command)+1
+            response_set = []
+            response_set.append('='*com_length)
+            response_set.append('\n')
+            response_set.append(test_command)
+            response_set.append(':')
+            response_set.append('\n')
+            response_set.append('='*com_length)
+            response_set.append('\n')
+            response_set.append(response)
+            message.append(''.join(response_set))
+    except Exception, e:
+        project.test_status = False
+        project.save
+        raise
 
     Notification.objects.create(status="success" if not errors else "error",
             summary="Testing '%s' %s" % (
