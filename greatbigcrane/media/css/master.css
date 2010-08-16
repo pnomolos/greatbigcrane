@@ -322,6 +322,11 @@ ul.projects li .buttons .bootstrap,
   background-position: 0 -480px;
 }
 
+ul.projects li .buttons .startapp,
+.project .actions .startapp {
+  background-position: 0 -528px;
+}
+
 ul.projects li .buttons .favourite,
 .project .actions .favourite {
   background: url(../images/favourites.png) -48px 0 no-repeat;
