@@ -805,6 +805,8 @@ footer p {
 .blocktext p:first-letter {
   font-size: 18px;
   line-height: 21px;
+  font-family: Georgia, serif;
+  font-weight: bold;
 }
 
 .blocktext p {
