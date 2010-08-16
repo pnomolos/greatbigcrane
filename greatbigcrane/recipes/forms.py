@@ -219,6 +219,38 @@ class PipRecipeForm(forms.Form):
             buildout.remove_part(old_name)
         buildout_write(self.project.buildout_filename(), buildout)
 
+class CrontabRecipeForm(forms.Form):
+    name = forms.CharField(initial="crontab")
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="crontab")
+    times = forms.CharField(required=True)
+    command = forms.CharField(required=False)
+    readcrontab = forms.CharField(required=False)
+    writecrontab = forms.CharField(required=False)
+
+    def __init__(self, project, *args, **kwargs):
+        super(CrontabRecipeForm, self).__init__(*args, **kwargs)
+        self.project = project
+
+
+    def save(self, buildout):
+        name = self.cleaned_data['name']
+        old_name = self.cleaned_data['old_name']
+        dr = recipes['z3c.recipe.usercrontab'](buildout, name)
+        for key in self.fields:
+            if key == "name": continue
+
+            value = self.cleaned_data[key]
+            if not isinstance(value, bool) and '\r\n' in value:
+                value = value.split('\r\n')
+            if value:
+                setattr(dr, key, value)
+            else:
+                delattr(dr, key)
+        if name.strip() != old_name.strip():
+            del buildout[old_name]
+            buildout.remove_part(old_name)
+        buildout_write(self.project.buildout_filename(), buildout)
+
 class BuildoutForm(forms.Form):
     contents = forms.CharField(widget=forms.Textarea)
 
@@ -229,4 +261,5 @@ recipe_form_map = {
         'zerokspot.recipe.git': GitRecipeForm,
         'mercurialrecipe': MercurialRecipeForm,
         'gp.recipe.pip': PipRecipeForm,
+        'z3c.recipe.usercrontab': CrontabRecipeForm,
         }
