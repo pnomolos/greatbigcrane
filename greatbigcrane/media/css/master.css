@@ -532,7 +532,20 @@ form textarea {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   
-  -webkit-background-clip: padding-box;  
+  -webkit-background-clip: padding-box;
+
+  -webkit-transition: all 0.4s linear;
+}
+
+form input[type=text]:focus,
+form textarea:focus {
+  background: #ffb;
+  
+  outline: none;
+  
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
 }
 
 form p.inline label {
