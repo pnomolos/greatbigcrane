@@ -24,3 +24,4 @@ Example test git repos:
 http://github.com/xentac/fakezopetestrunner
 http://github.com/pnomolos/Django-Dash-2010 <--- Self hosting! Yeah baby!
 http://github.com/edorian/Build-your-own-Textadventure.git
+http://github.com/jacobian/django-shorturls.git <--- Example of broken tests
