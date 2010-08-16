@@ -2,3 +2,4 @@
 * Create a bunch of git repos with different buildout setups in them for easy testing
 * docstrings!!!
 * Test status doesn't update ajaxily
+* Problem creating repos from git checkouts with relative paths that are a single directory
