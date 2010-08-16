@@ -7,27 +7,27 @@ from job_queue.forms import StartAppForm
 
 def schedule_buildout(request, project_id):
     return schedule_project_command(request, project_id, "BUILDOUT",
-            "Successuflly queued buildout")
+            "Successfully queued buildout")
 
 def schedule_bootstrap(request, project_id):
     return schedule_project_command(request, project_id, "BOOTSTRAP",
-            "Successuflly queued bootstrap")
+            "Successfully queued bootstrap")
 
 def schedule_test(request, project_id):
     return schedule_project_command(request, project_id, "TEST",
-            "Successuflly queued test")
+            "Successfully queued test")
 
 def schedule_pull(request, project_id):
     return schedule_project_command(request, project_id, "GITPULL",
-            "Successuflly queued git pull")
+            "Successfully queued git pull")
 
 def schedule_syncdb(request, project_id):
     return schedule_project_command(request, project_id, "SYNCDB",
-            "Successuflly queued syncdb")
+            "Successfully queued syncdb")
 
 def schedule_migrate(request, project_id):
     return schedule_project_command(request, project_id, "MIGRATE",
-            "Successuflly queued south migrate")
+            "Successfully queued south migrate")
 
 def startapp(request, project_id):
     # I feel like this belongs elsewhere
