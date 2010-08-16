@@ -68,6 +68,7 @@
           <a class="syncdb ajax" href="{% url schedule_syncdb project.id %}" title="SyncDB">Syncdb</a>
         {# Ideally this would only show up if we knew south was installed #}
           <a class="migrate ajax" href="{% url schedule_migrate project.id %}" title="Migrate">Migrate</a>
+          <a class="startapp" href="{% url startapp project.id %}" title="Start App">Start App</a>
         </section>
       {% endif %}
     </div>

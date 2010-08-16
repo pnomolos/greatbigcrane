@@ -204,6 +204,23 @@ def syncdb(project_id):
             message=response,
             project=project)
 
+@command("STARTAPP")
+def startapp(project_id, app_name):
+    project = Project.objects.get(id=project_id)
+    print("running startapp %s for %s" % (app_name, project.name))
+
+    process = subprocess.Popen('bin/django startapp %s' % app_name,
+            cwd=project.base_directory, stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT, shell=True)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Startapp %s '%s' %s" % (
+                app_name, project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)
+
 @command("MIGRATE")
 def migrate(project_id):
     project = Project.objects.get(id=project_id)
