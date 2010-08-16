@@ -4,7 +4,7 @@
 <div class="notification {{notification.status}}">
   <h2>{{notification.summary}}</h2>
   <span class="meta">
-    <span class="time">{{notification.notification_time}}</span>
+    <span class="time">{{notification.notification_time|date:"Y-m-d H:i:s"}}</span>
   </span>
   {% if notification.project %}
     <a href="{% url view_project notification.project.id %}" class="button highlight left clear margin orange">View Project</a>

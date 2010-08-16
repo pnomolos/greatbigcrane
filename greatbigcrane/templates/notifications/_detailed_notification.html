@@ -4,6 +4,6 @@
       <span class="project">{{notification.project.name}}</span>:
     {% endif %}
     <span class="result">{{notification.summary}}</span>
-    <span class="time">{{notification.notification_time}}</span>
+    <span class="time">{{notification.notification_time|date:"Y-m-d H:i:s"}}</span>
   </a>
 </li>
