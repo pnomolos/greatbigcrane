@@ -372,7 +372,7 @@ ul.tests .notification {
 
 ul.tests .notification .dismiss {
   position: absolute;
-  top: 5px;
+  top: 7px;
   right: 5px;
   overflow: hidden;
   text-indent: -999em;
@@ -415,13 +415,13 @@ ul.tests li a.result:hover {
 
 ul.tests li.success a.result {
   color: #9de983;
-  background: #121212 url(../images/small-icon-pass.png) 10px center no-repeat;
+  background: #121212 url(../images/small-icon-pass.png) 10px 7px no-repeat;
   border-color: #121212;
 }
 
 ul.tests li.error a.result {
   color: #a9a9a9;
-  background: #4f2020 url(../images/small-icon-fail.png) 10px center no-repeat;
+  background: #4f2020 url(../images/small-icon-fail.png) 10px 7px no-repeat;
   border-color: #4f2020;
 }
 
