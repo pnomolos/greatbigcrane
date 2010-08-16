@@ -42,6 +42,7 @@ class Project(models.Model):
         return sections.items()
 
     def buildout_filename(self):
+        '''Get the filename that holds the buildout configuration.'''
         return os.path.join(self.base_directory, 'buildout.cfg')
 
     def buildout(self):

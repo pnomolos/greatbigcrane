@@ -21,6 +21,7 @@ from preferences.forms import PreferencesForm
 from preferences.models import Preference
 
 def preferences(request):
+    """Render a simple preference editing form."""
     form = PreferencesForm(request.POST or None, initial=dict(
         [(p.name, p.value) for p in Preference.objects.all()]))
     if form.is_valid():
