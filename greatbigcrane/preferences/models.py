@@ -19,7 +19,7 @@ from django.db import models
 class PreferenceManager(models.Manager):
     def get_preference(self, name, default=None):
         try:
-            return Preference.objects.get(name="projects_directory").value
+            return Preference.objects.get(name=name).value
         except Preference.DoesNotExist:
             return default
 
