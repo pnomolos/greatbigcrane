@@ -60,11 +60,11 @@
       <span class="title">Great Big Crane</span>
       <nav>
         <ul class="clearfix">
-          <li><a {% url dashboard_url %}>Dashboard</a></li>
-          <li><a {% url list_projects %}>Projects</a></li>
-          <li><a {% url list_notifications %}>Notifications</a></li>
-          <li><a {% url preferences %}>Preferences</a></li>
-          <li><a {% url about_url %}>About</a></li>
+          <li><a {% nav_url '/' %}>Dashboard</a></li>
+          <li><a {% nav_url '/projects/' %}>Projects</a></li>
+          <li><a {% nav_url '/notifications/' %}>Notifications</a></li>
+          <li><a {% nav_url '/preferences/' %}>Preferences</a></li>
+          <li><a {% nav_url '/about/' %}>About</a></li>
         </ul>
       </nav>
     </header>
