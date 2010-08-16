@@ -68,6 +68,10 @@ def buildout(project_id):
     """Run the buildout process in the given project's base directory."""
     project = Project.objects.get(id=project_id)
     print("running buildout %s" % project.name)
+    Notification.objects.create(status="general",
+            summary="Buildout '%s' started" % (project.name),
+            message="Buildout for '%s' project has started" % (project.name),
+            project=project)
     process = subprocess.Popen("bin/buildout", cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
@@ -119,6 +123,10 @@ def test_buildout(project_id):
     errors = False
     responses = []
     try:
+        Notification.objects.create(status="general",
+                summary="Testing of '%s' started" % (project.name),
+                message="Testing for '%s' project has started" % (project.name),
+                project=project)
         for binary in test_binaries:
             process = subprocess.Popen(binary, cwd=project.base_directory,
                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
