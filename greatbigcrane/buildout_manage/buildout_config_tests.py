@@ -38,7 +38,7 @@ class BuildoutParse(TestCase):
         fp = mktmpcfg(simple_buildout_cfg)
         buildout_object = buildout_parse(fp.name)
 
-        assert buildout_object['buildout']['parts'] == ''
+        assert buildout_object['buildout']['parts'] == []
 
     def test_parse_complicated_buildout(self):
         fp = mktmpcfg(complicated_buildout_cfg)
