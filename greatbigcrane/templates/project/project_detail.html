@@ -12,7 +12,9 @@
     
     <p><strong>Directory:</strong> {{project.base_directory}}</p>
     
-    <div class="description">{{project.description|markdown}}</div>
+    {% if project.description %}
+      <div class="description">{{project.description|markdown}}</div>
+    {% endif %}
     
     <section class="buildout">
       <h2>Buildout Sections</h2>
