@@ -1,0 +1,46 @@
+"""
+Copyright 2010 Jason Chu, Dusty Phillips, and Phil Schalm
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+"""
+from buildout_manage.recipetools import simple_property, bool_property
+
+class CrontabRecipe(object):
+    def __init__(self, config, section_name):
+        self.config = config
+        self.section_name = section_name
+
+    def init(self):
+        # Does section already exist?
+        self.config.add_part(self.section_name)
+        self.section = self.config[self.section_name]
+        self.section['recipe'] = 'z3c.recipe.usercrontab'
+        self.config['buildout']['unzip'] = "true"
+
+    def dict(self):
+        return dict(times=self.times,
+                command=self.command,
+                readcrontab=self.readcrontab,
+                writecrontab=self.writecrontab,
+                )
+
+    times = simple_property('times')
+    command = simple_property('command')
+    readcrontab = simple_property('readcrontab')
+    writecrontab = simple_property('writecrontab')
+
+def crontab(config, section_name):
+    recipe = CrontabRecipe(config, section_name)
+    recipe.init()
+    return recipe
+
