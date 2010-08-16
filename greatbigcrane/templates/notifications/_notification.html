@@ -1,7 +1,7 @@
 <li class="notification {{notification.status}}" id="notification-{{notification.id}}">
   <a href="{{notification.get_absolute_url}}" class="result">
     {% if not project %}
-    <span class="project">{{notification.project.name}}</span>:
+      <span class="project">{{notification.project.name}}</span>:
     {% endif %}
     <span class="result">{{notification.summary}}</span>
   </a>
