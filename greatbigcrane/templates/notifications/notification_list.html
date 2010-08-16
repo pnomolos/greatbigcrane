@@ -5,7 +5,7 @@
 {% block main %}
 <div class="notifications clearfix">
   <ul class="tests">
-    {% for notification in all_notifications %}
+    {% for notification in notifications_list %}
       {% include 'notifications/_detailed_notification.html' %}
     {% endfor %}
   </ul>

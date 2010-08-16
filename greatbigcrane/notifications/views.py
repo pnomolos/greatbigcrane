@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from django.views.generic.list_detail import object_list
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -21,15 +22,8 @@ from notifications.models import Notification
 
 def list_notifications(request):
     notifications = Notification.objects.all()
-    error_notifications = Notification.objects.filter(status='error')
-    success_notifications = Notification.objects.filter(status='success')
-    return render_to_response("notifications/notification_list.html",
-            RequestContext(request, 
-            {
-                'all_notifications': notifications,
-                'error_notifications': error_notifications,
-                'success_notifications': success_notifications
-            }))
+    return object_list(request, notifications, template_name="notifications/notification_list.html",
+            template_object_name="notifications", paginate_by=30)
 
 def view_notification(request, notification_id):
     notification = get_object_or_404(Notification, id=notification_id)
