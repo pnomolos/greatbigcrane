@@ -2,6 +2,7 @@ from django.forms.widgets import Textarea
 from django.utils.safestring import mark_safe
 
 class LineEditorWidget(Textarea):
+    """Our nifty line-editing jquery plugin as a django widget."""
     class Media:
         js = ('js/jquery-1.4.2.min.js' ,'js/jquery.lineeditor.js')
 
@@ -17,6 +18,9 @@ class LineEditorWidget(Textarea):
             </script>''' % (name))
 
 class LineEditorChoiceWidget(LineEditorWidget):
+    """Render our nifty line editor with a select box that automatically inserts
+    selected values into the edited lines. The available choices can be passed
+    into the widget."""
 
     def __init__(self, choices, *args, **kwargs):
         super(LineEditorChoiceWidget, self).__init__(*args, **kwargs)
