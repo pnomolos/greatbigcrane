@@ -19,7 +19,7 @@ from django.utils.datastructures import SortedDict
 
 import re
 
-whitespace = re.compile(r'\s')
+whitespace = re.compile(r'\s+')
 
 class BuildoutConfig(SortedDict):
     """
@@ -50,17 +50,30 @@ class BuildoutConfig(SortedDict):
 
         return [section_name for section_name, section in self.iteritems() if key in section]
 
-    def remove_part(self, section_name):
+    def sanitize_parts_list(self):
         parts_list = self['buildout'].setdefault('parts', [])
         if not isinstance(parts_list, list):
-            self['buildout']['parts'] = parts_list = [parts_list]
+            if parts_list:
+                parts_list = [parts_list]
+            else:
+                parts_list = []
+        exploded_parts_list = []
+        for elem in parts_list:
+            if whitespace.search(elem):
+                exploded_parts_list += whitespace.split(elem)
+            else:
+                exploded_parts_list.append(elem)
+        self['buildout']['parts'] = exploded_parts_list
+
+    def remove_part(self, section_name):
+        self.sanitize_parts_list()
+        parts_list = self['buildout']['parts']
         if section_name in parts_list:
             parts_list.remove(section_name)
 
     def add_part(self, section_name):
-        parts_list = self['buildout'].setdefault('parts', [])
-        if not isinstance(parts_list, list):
-            self['buildout']['parts'] = parts_list = [parts_list]
+        self.sanitize_parts_list()
+        parts_list = self['buildout']['parts']
         if section_name not in parts_list:
             parts_list.append(section_name)
 
@@ -83,9 +96,11 @@ def buildout_parse(filename):
     for section in parser.sections():
         for key, value in parser.items(section):
             value = value.strip()
-            if whitespace.search(value):
-                value = whitespace.split(value)
+            if '\n' in value:
+                value = [x for x in value.split('\n') if x]
             config[section][key] = value
+
+    config.sanitize_parts_list()
 
     return config
 
