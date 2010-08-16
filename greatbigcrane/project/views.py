@@ -16,7 +16,6 @@ limitations under the License.
 
 import os.path
 import json
-from shutil import copyfile
 import datetime
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -26,7 +25,6 @@ from django.views.generic.create_update import delete_object
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.conf import settings
 from django.http import HttpResponse
 from django.forms.util import ErrorList
 
@@ -65,31 +63,23 @@ def add_project(request):
     if form.is_valid():
         try:
             base_dir = os.path.expanduser(form.cleaned_data['base_directory'])
-            
+
             base_dir = base_dir.rstrip('/')
             if form.cleaned_data['git_repo']:
                 target_dir = os.path.dirname(base_dir)
-            else:
-                target_dir = base_dir
-            if target_dir and not os.path.isdir(target_dir):
-                os.makedirs(target_dir)
-                
+                if target_dir and not os.path.isdir(target_dir):
+                    os.makedirs(target_dir)
+
             if form.cleaned_data['git_repo']:
                 instance = form.save()
                 queue_job("GITCLONE", project_id=instance.id)
             else:
-                skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
-                        os.path.join(target_dir, "bootstrap.py")),
-                    (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
-                        os.path.join(target_dir, "buildout.cfg"))]
-                for source, dest in skeleton:
-                    if not os.path.isfile(dest):
-                        copyfile(source, dest)
                 instance = form.save()
+                instance.prep_directory()
                 queue_job("BOOTSTRAP", project_id=instance.id)
-                
+
             return redirect(instance.get_absolute_url())
-            
+
         except IOError as e:
             errors = form._errors.setdefault("base_directory", ErrorList())
             errors.append(u"An error occurred: " + str(e))

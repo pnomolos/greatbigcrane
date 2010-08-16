@@ -52,6 +52,9 @@ def bootstrap(project_id):
     '''Run the bootstrap process inside the given project's base directory.'''
     project = Project.objects.get(id=project_id)
     print("running bootstrap %s" % project.name)
+
+    project.prep_project()
+
     process = subprocess.Popen("python bootstrap.py", cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 

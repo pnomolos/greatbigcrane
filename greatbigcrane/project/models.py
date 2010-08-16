@@ -15,8 +15,10 @@ limitations under the License.
 """
 
 import os.path
+from shutil import copyfile
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from buildout_manage.parser import buildout_parse
 
 
@@ -68,6 +70,17 @@ class Project(models.Model):
         else:
             url = ""
         return url
+
+    def prep_project(self):
+        if not os.path.isdir(self.base_directory):
+            os.makedirs(self.base_directory)
+        skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
+                os.path.join(self.base_directory, "bootstrap.py")),
+            (os.path.join(settings.PROJECT_HOME, "../base_buildout.cfg"),
+                os.path.join(self.base_directory, "buildout.cfg"))]
+        for source, dest in skeleton:
+            if not os.path.isfile(dest):
+                copyfile(source, dest)
 
     def __unicode__(self):
         return self.name
