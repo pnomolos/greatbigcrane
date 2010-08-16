@@ -4,69 +4,70 @@
 
 {% block main %}
 <p>
-Great Big Crane allows managing python buildouts and django projects.
-Unlike many django applications, it is designed to be run on a local secured
-environment. This allows it to be extremely responsive and dispense with user
-authentication.
+  Great Big Crane allows managing python buildouts and django projects.
+  Unlike many django applications, it is designed to be run on a local secured
+  environment. This allows it to be extremely responsive and dispense with user
+  authentication.
 </p>
 <p>
-In normal usage, Great Big Crane allows you to manage a collection of projects
-in a specific code directory. This directory name is set on the preferences
-page. For example, I store my code in <code>/home/dusty/code/</code> and individual
-projects are in <code>/home/dusty/code/greatbigcrane/</code> or
-<code>/home/dusty/code/whohasmy/</code>. The projects are expected to contain a
-standard buildout structure with a <code>buildout.cfg</code> and
-<code>bootstrap.py</code>. Great Big Crane can introspect existing directories
-and buildouts in this format or it can help set up brand new buildouts.
+  In normal usage, Great Big Crane allows you to manage a collection of projects
+  in a specific code directory. This directory name is set on the preferences
+  page. For example, I store my code in <code>/home/dusty/code/</code> and individual
+  projects are in <code>/home/dusty/code/greatbigcrane/</code> or
+  <code>/home/dusty/code/whohasmy/</code>. The projects are expected to contain a
+  standard buildout structure with a <code>buildout.cfg</code> and
+  <code>bootstrap.py</code>. Great Big Crane can introspect existing directories
+  and buildouts in this format or it can help set up brand new buildouts.
 </p>
 <p>
-To see it in action, click the Projects button on the menu bar and then click the
-<a href="{% url add_project %}">Add Project</a> button to add a new project. This
-simple form allows you to enter the name, base directory, an
-optional git repository and description. The base directory is automatically
-populated from the directory preference and the name of the project, however
-you are free to change this for code in non-standard locations.
+  To see it in action, click the Projects button on the menu bar and then click the
+  <a href="{% url add_project %}">Add Project</a> button to add a new project. This
+  simple form allows you to enter the name, base directory, an
+  optional git repository and description. The base directory is automatically
+  populated from the directory preference and the name of the project, however
+  you are free to change this for code in non-standard locations.
 </p>
 <p>
-If you provided a git repository, it will automatically clone the repository into
-the new working directory. Otherwise, it will initialize and boostrap a simple
-skeleton buildout in that directory. Both the clone and bootstrap actions are
-processed in an external job queue, and notifications will show up on your
-dashboard when they have completed.
-</p>
-<p>The dashboard lists your most recently active projects and explicitly
-favourited projects. Projects can be favourited using the star icon in the
-project list. You can also schedule a buildout and tests from the dashboard.
-Tests are run through the buildout. The test icon will glow either red or
-green depending on whether or not the last set of tests for that project
-completed successfully or not.
+  If you provided a git repository, it will automatically clone the repository into
+  the new working directory. Otherwise, it will initialize and boostrap a simple
+  skeleton buildout in that directory. Both the clone and bootstrap actions are
+  processed in an external job queue, and notifications will show up on your
+  dashboard when they have completed.
 </p>
 <p>
-Notifications indicate the output of various asynchronous commands,
-and come in three flavours: success, failure, or general. The small
-"x" box on the right of a notification allows you to dismiss it. The
-notifications page allows you to review all notifications dismissed or
-not at the same time. Clicking a notification allows you to view the
-output of the command that was run.
+  The dashboard lists your most recently active projects and explicitly
+  favourited projects. Projects can be favourited using the star icon in the
+  project list. You can also schedule a buildout and tests from the dashboard.
+  Tests are run through the buildout. The test icon will glow either red or
+  green depending on whether or not the last set of tests for that project
+  completed successfully or not.
 </p>
 <p>
-If you click the project's row, you can see the buildout configuration
-for that project, with some helpers to edit the buildout. This
-information is introspected from the buildout.cfg itself, so if you
-want to edit it directly in your text editor, you can. We have provided
-a nifty line editor for editing key value pairs in sections such as
-eggs or extra paths that often have multiple lines. Certain expansions
-are available for quickly referring to other sections (e.g. <code>eggs =
-${buildout:eggs}</code>).
+  Notifications indicate the output of various asynchronous commands,
+  and come in three flavours: success, failure, or general. The small
+  "x" box on the right of a notification allows you to dismiss it. The
+  notifications page allows you to review all notifications dismissed or
+  not at the same time. Clicking a notification allows you to view the
+  output of the command that was run.
 </p>
 <p>
-The sidebar on project lists not only displays non-dismissed
-notifications for the project, but also a set of actions that can be
-executed on that project, mostly asynchronously through the job queue:
-you can edit a project's details or delete it; you can run buildout on
-the project or bootstrap the buildout; you can run the test suite; if
-the project has a git repo, you can issue a git pull to update it; if it
-is a github project, you can view the github page to review commits and
-issues; if it is a django project, you can run syncdb and migrate.
+  If you click the project's row, you can see the buildout configuration
+  for that project, with some helpers to edit the buildout. This
+  information is introspected from the buildout.cfg itself, so if you
+  want to edit it directly in your text editor, you can. We have provided
+  a nifty line editor for editing key value pairs in sections such as
+  eggs or extra paths that often have multiple lines. Certain expansions
+  are available for quickly referring to other sections (e.g. <code>eggs =
+  ${buildout:eggs}</code>).
+</p>
+<p>
+  The sidebar on project lists not only displays non-dismissed
+  notifications for the project, but also a set of actions that can be
+  executed on that project, mostly asynchronously through the job queue:
+  you can edit a project's details or delete it; you can run buildout on
+  the project or bootstrap the buildout; you can run the test suite; if
+  the project has a git repo, you can issue a git pull to update it; if it
+  is a github project, you can view the github page to review commits and
+  issues; if it is a django project, you can run syncdb and migrate.
 </p>
 {% endblock %}
