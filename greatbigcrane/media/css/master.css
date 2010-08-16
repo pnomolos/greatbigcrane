@@ -458,6 +458,20 @@ ul.tests li.general a.result {
   border-color: #666;
 }
 
+ul.tests li.success:nth-child(2n) a.result {
+  background-color: #181818;
+  border-color: #181818;
+}
+
+ul.tests li.error:nth-child(2n) a.result {
+  background-color: #562626;
+  border-color: #562626;
+}
+
+ul.tests li.general:nth-child(2n) a.result {
+  background-color: #6b6b6b;
+  border-color: #6b6b6b;
+}
 .notifications ul.tests li.general {
   margin: 0 auto;
 }
