@@ -1,8 +1,6 @@
 {% extends "project/project_form.html" %}
 
-{% block contenttitle %}
-Edit project "{{form.instance.name}}"
-{% endblock %}
+{% block contenttitle %}Edit project "{{form.instance.name}}"{% endblock %}
 
 {% block submit_command %}Save Project{% endblock %}
 {% block cancel_url %}{% url view_project form.instance.id %}{% endblock %}
