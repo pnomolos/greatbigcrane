@@ -1,3 +1,10 @@
+function dismiss_notification(notification_id) {
+  $.get("/notifications/dismiss/" + notification_id + "/", {},
+    function(data, textStatus, xhr) {
+      $("#notification-" + notification_id).slideUp(function(){$(this).remove()});
+  });
+}
+
 jQuery(function($){
   function slugify(string) {
     return string.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
@@ -9,13 +16,6 @@ jQuery(function($){
         $(k).html(v);
       });
     }
-  }
-
-  function dismiss_notification(notification_id) {
-    $.get("/notifications/dismiss/" + notification_id + "/", {},
-      function(data, textStatus, xhr) {
-        $("#notification-" + notification_id).slideUp(function(){$(this).remove()});
-    });
   }
 
   function load_recipe_template(project_id) {
