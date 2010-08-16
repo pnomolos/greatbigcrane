@@ -21,7 +21,7 @@ Now visit http://localhost:8000/ and enjoy! Read the about page for a tutorial o
 most of the features.
 
 Example test git repos:
-http://github.com/xentac/fakezopetestrunner
-http://github.com/pnomolos/Django-Dash-2010 <--- Self hosting! Yeah baby!
+git://github.com/xentac/fakezopetestrunner.git
+git://github.com/pnomolos/Django-Dash-2010.git <--- Self hosting! Yeah baby!
 http://github.com/edorian/Build-your-own-Textadventure.git
 http://github.com/jacobian/django-shorturls.git <--- Example of broken tests
