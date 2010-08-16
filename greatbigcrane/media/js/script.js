@@ -178,10 +178,21 @@ jQuery(function($){
     }
   });
   
-  $('div.dashboard ul.tests:first').ekko({url: '/notifications/ajax/'},update_notifications);
+  $('div.dashboard ul.tests:first').ekko(
+    {
+      url: '/notifications/ajax/',
+      minTimeout: 500,
+      maxTimeout: 5000
+    },
+  update_notifications);
   
   if ( $('#content .project:first').size() ) {
-    $('div.project .tests.live:first').ekko({url: '/projects/' + $('#content .project:first').attr('id').replace(/\D*/,'') + '/notifications/'},update_notifications);
+    $('div.project .tests.live:first').ekko(
+      {
+        url: '/projects/' + $('#content .project:first').attr('id').replace(/\D*/,'') + '/notifications/',
+        minTimeout: 500,
+        maxTimeout: 5000
+      },update_notifications);
   }
   
   $("#recipe_form").submit(function() {
