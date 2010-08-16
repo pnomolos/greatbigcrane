@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from django.conf.urls.defaults import patterns, include, handler500
+from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
@@ -22,7 +22,7 @@ admin.autodiscover()
 handler500 # Pyflakes
 
 urlpatterns = patterns('',
-    (r'^$', 'project.views.index'),
+    url('^$', 'project.views.index', name="dashboard_url"),
     (r'^about/$', 'project.views.about'),
     (r'^notifications/', include('notifications.urls')),
     (r'^projects/', include('project.urls')),
