@@ -558,6 +558,10 @@ form textarea:focus {
   outline: none;
 }
 
+form p, form section {
+  margin-bottom: 10px;
+}
+
 form p.inline label {
   display: inline-block;
   width: auto;
