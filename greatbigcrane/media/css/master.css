@@ -518,6 +518,13 @@ form textarea {
   font-size: 16px;
 }
 
+form p.inline label {
+  display: inline-block;
+  width: auto;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
 form label {
   font-weight: bold;
 }
