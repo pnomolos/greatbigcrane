@@ -6,8 +6,10 @@
 <form method="post" class="clearfix">
   {% csrf_token %}
   {% include 'project/_form.html' %}
-  <input type="submit" value="{% block submit_command %}Create Project{% endblock %}" class="left blue">
-  <a href="{% block cancel_url %}{% url list_projects %}{% endblock %}" class="button left orange">Cancel</a>
+  <div class="buttons clearfix">
+    <input type="submit" value="{% block submit_command %}Create Project{% endblock %}" class="left blue">
+    <a href="{% block cancel_url %}{% url list_projects %}{% endblock %}" class="button left orange">Cancel</a>
+  </div>
 </form>
 {% endblock %}
 

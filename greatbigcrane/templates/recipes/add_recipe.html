@@ -13,8 +13,10 @@
   </select>
   <div id="recipe_template_container">
   </div>
-  <input type="submit" value="Create Recipe" class="margin blue left">
-  <a class="left orange button margin" href="{% url view_project project.id %}">Cancel</a>  
+  <div class="buttons clearfix">
+    <input type="submit" value="Create Recipe" class="blue left">
+    <a class="left orange button" href="{% url view_project project.id %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}
 
