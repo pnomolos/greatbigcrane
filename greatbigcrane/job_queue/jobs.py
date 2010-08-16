@@ -178,7 +178,9 @@ def clone_repo(project_id):
                 summary="Cloning '%s' %s" % (
                     project.name, "success" if not process.returncode else "error"),
                 message=response,
-                project=project)
+                project=project,
+                notification_type="GITCLONE",
+                )
 
     queue_job('BOOTSTRAP', project_id=project_id)
 
