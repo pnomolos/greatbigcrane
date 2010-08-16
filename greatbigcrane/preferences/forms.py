@@ -27,6 +27,7 @@ class PreferencesForm(forms.Form):
                     required=False)
 
     def clean_projects_directory(self):
+        '''Ensure the projects_directory preference has a trailing slash'''
         if not self.cleaned_data['projects_directory'].endswith(os.path.sep):
             self.cleaned_data['projects_directory'] += os.path.sep
         return self.cleaned_data['projects_directory']
