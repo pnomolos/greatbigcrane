@@ -54,7 +54,7 @@ class Command(NoArgsCommand):
                 try:
                     job = jobs.get_nowait()
                     socket.send(job)
-                except Queue.Empty, e:
+                except Queue.Empty:
                     socket.send("EMPTY")
             else:
                 # Request came from the django app, queue the job

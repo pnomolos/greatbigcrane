@@ -149,7 +149,7 @@ def test_buildout(project_id):
             response_set.append('\n')
             response_set.append(response)
             message.append(''.join(response_set))
-    except Exception, e:
+    except Exception:
         project.test_status = False
         project.save
         raise
