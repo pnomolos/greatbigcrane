@@ -112,6 +112,10 @@ jQuery(function($){
     window.location = href;
   });
   
+  $('ul.projects .edit').live('click', function(e){
+    e.stopPropagation();
+  });
+
   $('div.projects .favourite').live('click', function(e){
     e.preventDefault();
     e.stopPropagation();
