@@ -430,7 +430,7 @@ ul.tests li a.result {
 ul.tests li a.result:hover {
   padding: 9px 24px 9px 39px;
   border: 1px solid #666 !important;
-  background-position: 9px 8px !important;
+  background-position: 9px 7px !important;
 }
 
 ul.tests li.success a.result {
