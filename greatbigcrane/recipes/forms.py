@@ -223,7 +223,7 @@ class CrontabRecipeForm(forms.Form):
     name = forms.CharField(initial="crontab")
     old_name = forms.CharField(widget=forms.HiddenInput,initial="crontab")
     times = forms.CharField(required=True)
-    command = forms.CharField(required=False)
+    command = forms.CharField(required=True)
     readcrontab = forms.CharField(required=False)
     writecrontab = forms.CharField(required=False)
 
