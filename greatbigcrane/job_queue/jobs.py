@@ -25,7 +25,6 @@ from buildout_manage.parser import buildout_parse
 
 addr = 'tcp://127.0.0.1:5555'
 
-# FIXME: I have no idea if this is threadsafe
 context = zmq.Context()
 socket = context.socket(zmq.REQ)
 socket.connect(addr)
