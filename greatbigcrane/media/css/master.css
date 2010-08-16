@@ -447,8 +447,8 @@ ul.tests li.success a.result {
 
 ul.tests li.error a.result {
   color: #e99d83;
-  background: #4f2020 url(../images/small-icon-fail.png) 10px 8px no-repeat;
-  border-color: #4f2020;
+  background: #4f1010 url(../images/small-icon-fail.png) 10px 8px no-repeat;
+  border-color: #4f1010;
 }
 
 ul.tests li.general a.result {
@@ -463,8 +463,8 @@ ul.tests li.success:nth-child(2n) a.result {
 }
 
 ul.tests li.error:nth-child(2n) a.result {
-  background-color: #562626;
-  border-color: #562626;
+  background-color: #561616;
+  border-color: #561616;
 }
 
 ul.tests li.general:nth-child(2n) a.result {
