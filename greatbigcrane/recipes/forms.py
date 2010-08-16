@@ -27,7 +27,7 @@ def choices_from_section(project, section_name):
 
 class DjangoRecipeForm(forms.Form):
     name = forms.CharField(initial="django")
-    old_name = forms.CharField(widget=forms.HiddenInput)
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="django")
     settings = forms.CharField(initial="development")
     version = forms.ChoiceField(choices=[
         ("trunk", "trunk"),
@@ -75,7 +75,7 @@ class DjangoRecipeForm(forms.Form):
 
 class EggRecipeForm(forms.Form):
     name = forms.CharField(initial="eggs")
-    old_name = forms.CharField(widget=forms.HiddenInput)
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="eggs")
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
     find_links = forms.CharField(required=False,widget=LineEditorWidget)
     interpreter = forms.CharField(required=False)
@@ -115,7 +115,7 @@ class EggRecipeForm(forms.Form):
 
 class GitRecipeForm(forms.Form):
     name = forms.CharField(initial="git")
-    old_name = forms.CharField(widget=forms.HiddenInput)
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="git")
     repository = forms.CharField(required=True)
     rev = forms.CharField(required=False)
     branch = forms.CharField(required=False)
@@ -150,7 +150,7 @@ class GitRecipeForm(forms.Form):
 
 class MercurialRecipeForm(forms.Form):
     name = forms.CharField(initial="mercurial")
-    old_name = forms.CharField(widget=forms.HiddenInput)
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="mercurial")
     repository = forms.CharField(required=True)
     location = forms.CharField(required=False)
     newest = forms.BooleanField(required=False)
@@ -181,7 +181,7 @@ class MercurialRecipeForm(forms.Form):
 
 class PipRecipeForm(forms.Form):
     name = forms.CharField(initial="pip")
-    old_name = forms.CharField(widget=forms.HiddenInput)
+    old_name = forms.CharField(widget=forms.HiddenInput,initial="pip")
     eggs = forms.CharField(required=False,widget=LineEditorWidget)
     interpreter = forms.CharField(required=False)
     find_links = forms.CharField(required=False,widget=LineEditorWidget)
