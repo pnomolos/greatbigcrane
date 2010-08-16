@@ -71,7 +71,7 @@ def add_project(request):
                 target_dir = os.path.dirname(base_dir)
             else:
                 target_dir = base_dir
-            if not os.path.isdir(target_dir):
+            if target_dir and not os.path.isdir(target_dir):
                 os.makedirs(target_dir)
                 
             if form.cleaned_data['git_repo']:
