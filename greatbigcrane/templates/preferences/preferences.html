@@ -1,8 +1,6 @@
 {% extends 'nosidebar.html' %}
 
-{% block contenttitle %}
-Preferences
-{% endblock %}
+{% block contenttitle %}Preferences{% endblock %}
 
 {% block main %}
 <form method="post">
@@ -10,5 +8,4 @@ Preferences
   {{form.as_p}}
   <input type="submit" value="Save Preferences" class="blue">
 </form>
-
 {% endblock %}
