@@ -111,6 +111,14 @@ function update_notifications(data) {
   while ( number_to_remove-- > 0 ) {
     $el.find('li:last').remove();
   }
+  // Update the testing button on the project detail page
+  if ( $('#sidebar .project').size() ) {
+    if ( $el.find('li[rel*=test]:first').hasClass('success') ) {
+      $('#sidebar .project .actions .tests').addClass('success')
+    } else {
+      $('#sidebar .project .actions .tests').removeClass('success').addClass('error');
+    }
+  }
   ajax_update();
 }
 
