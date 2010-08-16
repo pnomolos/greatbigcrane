@@ -126,7 +126,6 @@ def project_notifications(request, project_id):
             RequestContext(request, {'notifications': notifications, 'project': project}))
 
 def handle_ajax(request):
-    # return HttpResponse(request.POST['update'])
     if 'update' in request.POST:
         update = dict()
         d = json.loads(request.POST['update'])
