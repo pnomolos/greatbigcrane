@@ -48,6 +48,7 @@ class Command(NoArgsCommand):
         socket = context.socket(zmq.REQ)
         socket.connect(addr)
 
+        print "Job Processor Is Running"
         while True:
             socket.send("GET")
             job = socket.recv()
