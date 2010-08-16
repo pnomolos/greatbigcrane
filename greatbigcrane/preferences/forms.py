@@ -21,7 +21,7 @@ class PreferencesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PreferencesForm, self).__init__(*args, **kwargs)
         for preference in Preference.objects.all():
-            self.fields[preference.name] = forms.CharField()
+            self.fields[preference.name] = forms.CharField(help_text=preference.help_text)
 
     def clean(self):
         # Apparently clean__projects_directory doesn't work with dynamic forms
