@@ -255,11 +255,11 @@ def edit(project_id):
 
     terminal_path = Preference.objects.get_preference("terminal_path")
     editor_path = Preference.objects.get_preference("editor_path")
-    command = editor_path
+    command = editor_path + ' "' + project.buildout_filename() + '"'
 
     if terminal_path:
         if '#s' in terminal_path:
-            command = terminal_path.replace('#s', editor_path + ' ' + project.buildout_filename())
+            command = terminal_path.replace('#s', editor_path)
     process = subprocess.Popen(command + ' &', cwd=project.base_directory,
         shell=True, close_fds=True)
 
