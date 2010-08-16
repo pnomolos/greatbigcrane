@@ -6,7 +6,9 @@
 <form method="post" class="clearfix">
   {{form.media}}
   {{form}}
-  <input type="submit" value="Save Section" class="left blue">
-  <a class="left orange button" href="{% url view_project project.id %}">Cancel</a>
+  <div class="buttons clearfix">
+    <input type="submit" value="Save Section" class="left blue">
+    <a class="left orange button" href="{% url view_project project.id %}">Cancel</a>
+  </div>
 </form>
 {% endblock %}

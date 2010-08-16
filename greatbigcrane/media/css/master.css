@@ -576,6 +576,10 @@ form input[type=text], form textarea {
   background: #ddd;
 }
 
+form .buttons {
+  margin: 10px 0 0;
+}
+
 form input[type=submit],
 a.button,
 span.button {
