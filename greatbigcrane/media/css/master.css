@@ -442,8 +442,8 @@ ul.tests li a.result:hover {
 
 ul.tests li.success a.result {
   color: #9de983;
-  background: #121212 url(../images/small-icon-pass.png) 10px 8px no-repeat;
-  border-color: #121212;
+  background: #204f20 url(../images/small-icon-pass.png) 10px 8px no-repeat;
+  border-color: #204f20;
 }
 
 ul.tests li.error a.result {
@@ -454,13 +454,13 @@ ul.tests li.error a.result {
 
 ul.tests li.general a.result {
   color: #ffd;
-  background: #666 url(../images/small-icon-general.png) 10px center no-repeat;
-  border-color: #666;
+  background: #121212 url(../images/small-icon-general.png) 10px center no-repeat;
+  border-color: #121212;
 }
 
 ul.tests li.success:nth-child(2n) a.result {
-  background-color: #181818;
-  border-color: #181818;
+  background-color: #265626;
+  border-color: #265626;
 }
 
 ul.tests li.error:nth-child(2n) a.result {
@@ -469,8 +469,8 @@ ul.tests li.error:nth-child(2n) a.result {
 }
 
 ul.tests li.general:nth-child(2n) a.result {
-  background-color: #6b6b6b;
-  border-color: #6b6b6b;
+  background-color: #181818;
+  border-color: #181818;
 }
 .notifications ul.tests li.general {
   margin: 0 auto;
