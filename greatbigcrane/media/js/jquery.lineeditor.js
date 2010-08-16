@@ -62,11 +62,12 @@
         }
         
         el.processValues = function(e) {
-          el.hidden.val(
-            el.container.find('input[type=text]').map(function(){
-              return $(this).val();
-            }).toArray().join("\n").trim()
-          );
+          var val = [];
+          el.container.find('input[type=text]').each(function(){
+            val.push( $(this).val() );
+          })
+          val = val.join("\n");
+          el.hidden.val(val);
         }
       
         el.calculatePositioning = function() {
