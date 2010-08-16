@@ -193,7 +193,7 @@ def syncdb(project_id):
     project = Project.objects.get(id=project_id)
     print("running syncdb for %s" % project.name)
 
-    process = subprocess.Popen('bin/django syncdb', cwd=project.base_directory,
+    process = subprocess.Popen('bin/django syncdb --noinput', cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
     response = process.communicate()[0]
