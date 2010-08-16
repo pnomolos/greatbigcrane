@@ -793,7 +793,7 @@ footer p {
 }
 
 /* Better styling for big chunky text */
-.blocktext {
+#content > .blocktext {
   -moz-column-count: 2;
   -moz-column-gap: 40px;
   -webkit-column-count: 2;
