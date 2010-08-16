@@ -26,4 +26,8 @@ class PreferenceManager(models.Manager):
 class Preference(models.Model):
     name = models.CharField(max_length=32, unique=True)
     value = models.CharField(max_length=512)
+    help_text = models.CharField(max_length=512)
     objects = PreferenceManager()
+
+    def __unicode__(self):
+        return self.name
