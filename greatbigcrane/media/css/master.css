@@ -716,11 +716,11 @@ footer {
 /* Better styling for big chunky text */
 .blocktext {
   -moz-column-count: 2;
-  -moz-column-gap: 20px;
+  -moz-column-gap: 40px;
   -webkit-column-count: 2;
-  -webkit-column-gap: 20px;
+  -webkit-column-gap: 40px;
   column-count: 2;
-  column-gap: 20px;
+  column-gap: 40px;
 }
 
 .blocktext p:first-letter {
