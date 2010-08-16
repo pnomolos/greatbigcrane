@@ -5,6 +5,8 @@ install is sufficient to install it.
 
 Then, to set up Great Big Crane run these commands:
 
+* git clone http://github.com/pnomolos/Django-Dash-2010.git
+* cd Django-Dash-2010
 * python bootstrap.py
 * bin/buildout
 * bin/django syncdb
