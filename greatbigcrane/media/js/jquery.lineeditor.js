@@ -107,7 +107,7 @@
         el.hidden.val(el.val);
         el.container.append(el.hidden);
         
-        el.container.append($('<a href="#add-line">Add Line</a>').click(el.addLine));
+        el.container.append($('<a href="#add-line">Add Line</a>').click(el.addLine)).append(" <span>(or hit tab)</span>");
         $.each(el.val.split("\n"),function(){
           el.addLine(this);
         });
