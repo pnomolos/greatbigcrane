@@ -259,7 +259,7 @@ def edit(project_id):
 
     terminal_path = Preference.objects.get_preference("terminal_path")
     editor_path = Preference.objects.get_preference("editor_path")
-    command = editor_path + ' "' + project.buildout_filename() + '"'
+    command = editor_path + ' buildout.cfg'
 
     if terminal_path:
         if '#s' in terminal_path:
