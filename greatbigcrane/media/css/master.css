@@ -538,7 +538,8 @@ form input[type=text], form textarea {
 }
 
 form input[type=submit],
-a.button {
+a.button,
+span.button {
   margin: 0;
   border: 1px solid #444;
   padding: 10px;
@@ -737,3 +738,31 @@ footer {
 .blocktext p + p {
   margin-bottom: 20px;
 }
+
+/* .paginator */
+.paginator-wrapper {
+  margin: 10px;
+}
+
+.paginator {
+  float: right;
+}
+
+.paginator-wrapper:first-child {
+  margin-top: 0;
+}
+
+.paginator-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.paginator .button, .paginator .current, .paginator .disabled {
+  font-size: 12px;
+  padding: 3px 7px;
+  line-height: 16px;
+}
+
+.paginator .disabled {
+  opacity: 0.2;
+}
+

@@ -3,6 +3,7 @@
 {% block contenttitle %}Notifications{% endblock %}
 
 {% block main %}
+{% include 'notifications/paginator.html' %}
 <div class="notifications clearfix">
   <ul class="tests">
     {% for notification in notifications_list %}
