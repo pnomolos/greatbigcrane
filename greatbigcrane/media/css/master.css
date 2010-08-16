@@ -696,6 +696,7 @@ footer {
   top: 10px;
   right: 5px;
   display: block;
+  margin: 0;
 }
 
 .lineeditor .buttons a {
@@ -717,7 +718,6 @@ footer {
 .lineeditor .movedown {
   background: url(../images/small-icon-arrow-down.png) 0 0 no-repeat;
 }
-
 
 /* errors */
 .errorlist {
