@@ -508,7 +508,7 @@ ul.tests li.general:nth-child(2n) a.result {
 
 .notification .notification-code {
   margin-top: 10px;
-  overflow: auto;
+  overflow-x: auto;
 }
 
 .notification h2 {
