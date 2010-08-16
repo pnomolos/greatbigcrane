@@ -488,6 +488,7 @@ ul.tests li.general a.result {
 
 .notification .notification-code {
   margin-top: 10px;
+  overflow: auto;
 }
 
 .notification h2 {
