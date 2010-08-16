@@ -129,8 +129,7 @@ def test_buildout(project_id):
         # Make the output a little nicer when you run multiple test suites
 
         message = []
-        for binary, response in zip(test_binaries, responses):
-            test_command = ' '.join(binary)
+        for test_command, response in zip(test_binaries, responses):
             com_length = len(test_command)+1
             response_set = []
             response_set.append('='*com_length)
