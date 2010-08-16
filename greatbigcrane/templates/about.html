@@ -7,7 +7,7 @@
   <p>
     Great Big Crane allows managing python buildouts and django projects.
     Unlike many django applications, it is designed to be run on a local secured
-    environment. This allows it to be extremely responsive and dispense with user
+    environment. This allows it to be extremely responsive and dispenses with user
     authentication.
   </p>
   <p>
@@ -54,21 +54,30 @@
   <p>
     If you click the project's row, you can see the buildout configuration
     for that project, with some helpers to edit the buildout. This
-    information is introspected from the buildout.cfg itself, so if you
+    information is introspected from the <code>buildout.cfg</code> itself, so if you
     want to edit it directly in your text editor, you can. We have provided
     a nifty line editor for editing key value pairs in sections such as
-    eggs or extra paths that often have multiple lines. Certain expansions
-    are available for quickly referring to other sections (e.g. <code>eggs = ${buildout:eggs}</code>).
+    eggs or extra paths that often have multiple lines. Certain expansions are
+    available for quickly referring to other sections (e.g. <code>eggs =
+        ${buildout:eggs}</code>). Select an expansion from the dropdown and
+    click the insert button to apply it.
   </p>
   <p>
-    The sidebar on project lists not only displays non-dismissed
-    notifications for the project, but also a set of actions that can be
+    The sidebar on project lists displays non-dismissed
+    notifications for the project, as well as a set of actions that can be
     executed on that project, mostly asynchronously through the job queue:
-    you can edit a project's details or delete it; you can run buildout on
-    the project or bootstrap the buildout; you can run the test suite; if
-    the project has a git repo, you can issue a git pull to update it; if it
-    is a github project, you can view the github page to review commits and
-    issues; if it is a django project, you can run syncdb and migrate.
   </p>
+    <ul>
+        <li>edit a project's details</li>
+        <li>delete a project it</li>
+        <li>run buildout on the project</li>
+        <li>bootstrap the buildout</li>
+        <li>run the test suite</li>
+        <li>if the project has a git repo, you can issue a git pull to update it</li>
+        <li>if it is a github project, you can view the github page to review commits and
+        issues</li>
+        <li>if it is a django project, you can run syncdb, startapp, and migrate</li>
+        <li></li><!-- extra li because the column view is hiding a line -->
+    </ul>
 </div>
 {% endblock %}
