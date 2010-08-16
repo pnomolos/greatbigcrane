@@ -1,4 +1,4 @@
-<li class="notification {{notification.status}}" id="notification-{{notification.id}}">
+<li class="notification {{notification.status}}" id="notification-{{notification.id}}" rel="{{notification.notification_type}}">
   <a href="{{notification.get_absolute_url}}" class="result">
     {% if notification.project and notification.project.name %}
       <span class="project">{{notification.project.name}}</span>:
