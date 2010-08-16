@@ -1,5 +1,7 @@
 {% extends 'nosidebar.html' %}
 
+{% block contenttitle %}Add recipe for {{project.name}}{% endblock %}
+
 {% block main %}
 <p>Select the type of recipe you would like to add to {{project.name}}'s buildout.cfg:</p>
 <form method="post" action="{% url save_recipe project.id %}" class="clearfix" id="recipe_form">
