@@ -30,7 +30,7 @@ from django.forms.util import ErrorList
 
 from job_queue.jobs import queue_job
 from project.models import Project
-from project.forms import ProjectForm
+from project.forms import AddProjectForm
 from preferences.models import Preference
 from notifications.models import Notification
 
@@ -63,7 +63,7 @@ def view_project(request, project_id):
                     project=project_id,dismissed=False)[:10]})
 
 def add_project(request):
-    form = ProjectForm(request.POST or None)
+    form = AddProjectForm(request.POST or None)
     if form.is_valid():
         try:
             base_dir = os.path.expanduser(form.cleaned_data['base_directory'])
@@ -95,7 +95,7 @@ def add_project(request):
 
 def edit_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
-    form = ProjectForm(request.POST or None, instance=project)
+    form = AddProjectForm(request.POST or None, instance=project)
     if form.is_valid():
         instance = form.save()
         return redirect(instance.get_absolute_url())
