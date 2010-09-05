@@ -40,7 +40,9 @@ def index(request):
     favourite_projects = Project.objects.filter(favourite=True).order_by('name')
     notifications = Notification.objects.exclude(dismissed=True)[:10]
     return render_to_response('index.html', RequestContext(request,
-        {'project_list': projects, 'favourite_project_list': favourite_projects, 'notifications': notifications}))
+        {'project_list': projects,
+            'favourite_project_list': favourite_projects,
+            'notifications': notifications}))
 
 def about(request):
     '''Also go to another app or flatpage...'''
@@ -49,13 +51,16 @@ def about(request):
 def list_projects(request):
     orderby = request.GET.get('orderby', 'name')
     projects = Project.objects.all().order_by(orderby)
-    return object_list(request, projects, template_name="project/project_list.html",
-            template_object_name="project", extra_context={'orderby': orderby})
+    return object_list(request, projects,
+            template_name="project/project_list.html",
+            template_object_name="project",
+            extra_context={'orderby': orderby})
 
 def view_project(request, project_id):
     return object_detail(request, Project.objects.all(), object_id=project_id,
             template_object_name='project', extra_context={
-            'notifications': Notification.objects.filter(project=project_id,dismissed=False)[:10]})
+                'notifications': Notification.objects.filter(
+                    project=project_id,dismissed=False)[:10]})
 
 def add_project(request):
     form = ProjectForm(request.POST or None)
