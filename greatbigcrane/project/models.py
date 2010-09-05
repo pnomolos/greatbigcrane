@@ -21,6 +21,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from buildout_manage.parser import buildout_parse
 
+make_choice = lambda x: ([(p,p) for p in x])
 
 class Project(models.Model):
     name = models.CharField(max_length=32)
@@ -28,6 +29,8 @@ class Project(models.Model):
     git_repo = models.CharField(max_length=512, blank=True, default='')
     description = models.TextField(blank=True,
             help_text="(Markdown syntax is supported)")
+    project_type = models.CharField(max_length=9,
+            choices=make_choice(["buildout", "pip"]))
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     test_status = models.BooleanField(default=False)
