@@ -9,3 +9,4 @@ parts
 .installed.cfg
 greatbigcrane.db
 test_projects
+*/.ropeproject
