@@ -40,6 +40,7 @@
           <a class="buildout ajax" href="{% url schedule_buildout project.id %}" title="Run Buildout">Buildout</a>
         {% else %}
           <a class="virtualenv ajax" href="{% url schedule_virtualenv project.id %}" title="Build Virtualenv">Build Virtualenv</a>
+          <a class="pip_install ajax" href="{% url schedule_pip_install project.id %}" title="Pip Install">Pip Install</a>
         {% endif %}
         <a class="tests ajax {{ project.test_status|yesno:'success,error' }}" href="{% url schedule_test project.id %}" title="Run Tests">Test</a>
       </section>

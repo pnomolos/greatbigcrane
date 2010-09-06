@@ -324,6 +324,15 @@ ul.projects li .buttons .bootstrap,
   background-position: 0 -480px;
 }
 
+ul.projects li .buttons .virtualenv,
+.project .actions .virtualenv {
+  background-position: 0 -480px;
+}
+ul.projects li .buttons .pip_install,
+.project .actions .pip_install {
+  background-position: 0 0;
+}
+
 ul.projects li .buttons .startapp,
 .project .actions .startapp {
   background-position: 0 -528px;

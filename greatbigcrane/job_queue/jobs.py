@@ -311,3 +311,23 @@ def virtualenv(project_id):
                 project.name, "success" if not process.returncode else "error"),
             message=response,
             project=project)
+
+@command("PIPINSTALL")
+def virtualenv(project_id):
+    """Run pip install in the project directory"""
+    project = Project.objects.get(id=project_id, pipproject__isnull=False)
+    print "Running pip install for %s" % project.name
+
+    command = "source %sbin/activate ; pip install -r requirements.txt" % (
+            project.pipproject.virtualenv_path)
+
+    process = subprocess.Popen(command, cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="pip install '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)

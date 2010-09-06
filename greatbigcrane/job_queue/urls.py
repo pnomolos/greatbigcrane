@@ -26,4 +26,5 @@ urlpatterns = patterns('job_queue.views',
         url('^(?P<project_id>\d+)/migrate/$', 'schedule_migrate', name="schedule_migrate"),
         url('^(?P<project_id>\d+)/edit_buildout/$', 'edit_buildout', name="edit_buildout"),
         url('^(?P<project_id>\d+)/virtualenv/$', 'schedule_virtualenv', name="schedule_virtualenv"),
+        url('^(?P<project_id>\d+)/pip_install/$', 'schedule_pip_install', name="schedule_pip_install"),
         )

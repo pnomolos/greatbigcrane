@@ -47,6 +47,10 @@ def schedule_virtualenv(request, project_id):
     return schedule_project_command(request, project_id, "VIRTUALENV",
             "Successfully queued virtualenv")
 
+def schedule_pip_install(request, project_id):
+    return schedule_project_command(request, project_id, "PIPINSTALL",
+            "Successfully queued pip_install")
+
 
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)
