@@ -77,8 +77,9 @@ def add_project(request):
                 queue_job("GITCLONE", project_id=instance.id)
             else:
                 instance = form.save()
-                instance.prep_project()
-                queue_job("BOOTSTRAP", project_id=instance.id)
+                if instance.project_type == "buildout":
+                    instance.prep_buildout_project()
+                    queue_job("BOOTSTRAP", project_id=instance.id)
 
             return redirect(instance.get_absolute_url())
 

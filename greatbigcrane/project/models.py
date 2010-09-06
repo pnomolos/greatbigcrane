@@ -75,7 +75,7 @@ class Project(models.Model):
             url = ""
         return url
 
-    def prep_project(self):
+    def prep_buildout_project(self):
         if not os.path.isdir(self.base_directory):
             os.makedirs(self.base_directory)
         skeleton = [(os.path.join(settings.PROJECT_HOME, "../bootstrap.py"),
