@@ -49,6 +49,12 @@ class PipProjectForm(forms.ModelForm):
         model = PipProject
         exclude = ("project",)
 
+    def clean_virtualenv_path(self):
+        if self.cleaned_data['virtualenv_path'] and not \
+                self.cleaned_data['virtualenv_path'].endswith(os.path.sep):
+            self.cleaned_data['virtualenv_path'] += os.path.sep
+        return self.cleaned_data['virtualenv_path']
+
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance')
         if os.path.exists(instance.project.requirements_filename()):
