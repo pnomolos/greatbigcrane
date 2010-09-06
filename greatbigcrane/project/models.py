@@ -75,6 +75,12 @@ class Project(models.Model):
             url = ""
         return url
 
+    def prep_project(self):
+        if self.project_type == "buildout":
+            self.prep_buildout_project()
+        elif self.project_type == "pip":
+            self.prep_pip_project()
+
     def prep_buildout_project(self):
         if not os.path.isdir(self.base_directory):
             os.makedirs(self.base_directory)
@@ -85,6 +91,11 @@ class Project(models.Model):
         for source, dest in skeleton:
             if not os.path.isfile(dest):
                 copyfile(source, dest)
+
+    def prep_pip_project(self):
+        if not os.path.isdir(self.base_directory):
+            os.makedirs(self.base_directory)
+        PipProject.objects.create(project=self)
 
     def __unicode__(self):
         return self.name
