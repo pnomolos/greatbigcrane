@@ -117,10 +117,14 @@ def favourite_project(request, project_id):
 
 def project_notifications(request, project_id):
     project = Project.objects.get(pk=project_id)
-    notifications = Notification.objects.filter(project=project_id,dismissed=False)[:10]
+    notifications = Notification.objects.filter(
+            project=project_id,dismissed=False)[:10]
     return render_to_response("notifications/_notification_list.html",
-            RequestContext(request, {'notifications': notifications, 'project': project}))
+            RequestContext(request, {'notifications': notifications,
+                'project': project}))
 
+#FIXME: I'm not sure what this method is doing, so I'm thinking it needs
+# a less generic name.
 def handle_ajax(request):
     if 'update' in request.POST:
         update = dict()

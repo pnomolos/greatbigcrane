@@ -23,11 +23,13 @@ class PreferencesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PreferencesForm, self).__init__(*args, **kwargs)
         for preference in Preference.objects.all():
-            self.fields[preference.name] = forms.CharField(help_text=preference.help_text,
+            self.fields[preference.name] = forms.CharField(
+                    help_text=preference.help_text,
                     required=False)
 
     def clean_projects_directory(self):
         '''Ensure the projects_directory preference has a trailing slash'''
-        if self.cleaned_data['projects_directory'] and not self.cleaned_data['projects_directory'].endswith(os.path.sep):
+        if self.cleaned_data['projects_directory'] and not \
+                self.cleaned_data['projects_directory'].endswith(os.path.sep):
             self.cleaned_data['projects_directory'] += os.path.sep
         return self.cleaned_data['projects_directory']
