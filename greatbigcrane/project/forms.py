@@ -17,7 +17,8 @@ limitations under the License.
 import os.path
 from django import forms
 
-from project.models import Project
+from project.models import Project, PipProject
+from project.widgets import LineEditorWidget
 
 class AddProjectForm(forms.ModelForm):
     class Meta:
@@ -40,3 +41,23 @@ class EditProjectForm(AddProjectForm):
     class Meta:
         model = Project
         exclude =("project_type",)
+
+class PipProjectForm(forms.ModelForm):
+    requirements = forms.CharField(widget=LineEditorWidget)
+
+    class Meta:
+        model = PipProject
+        exclude = ("project",)
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get('instance')
+        if os.path.exists(instance.project.requirements_filename()):
+            initial = kwargs.setdefault('initial', {})
+            with open(instance.project.requirements_filename()) as req_file:
+                initial['requirements'] = req_file.read()
+        super(PipProjectForm, self).__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        instance = super(PipProjectForm, self).save(*args, **kwargs)
+        with open(instance.project.requirements_filename(), "w") as req_file:
+            req_file.write(self.cleaned_data['requirements'])

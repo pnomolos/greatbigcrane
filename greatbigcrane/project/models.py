@@ -51,6 +51,10 @@ class Project(models.Model):
         '''Get the filename that holds the buildout configuration.'''
         return os.path.join(self.base_directory, 'buildout.cfg')
 
+    def requirements_filename(self):
+        '''Get the filename that holds the pip requirements.'''
+        return os.path.join(self.base_directory, 'requirements.txt')
+
     def buildout(self):
         sections = buildout_parse(self.buildout_filename())
         return sections

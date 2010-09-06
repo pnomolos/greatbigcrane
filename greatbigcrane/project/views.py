@@ -30,7 +30,7 @@ from django.forms.util import ErrorList
 
 from job_queue.jobs import queue_job
 from project.models import Project, PipProject
-from project.forms import AddProjectForm, EditProjectForm
+from project.forms import AddProjectForm, EditProjectForm, PipProjectForm
 from preferences.models import Preference
 from notifications.models import Notification
 
@@ -116,8 +116,16 @@ def favourite_project(request, project_id):
 
 # I'm wondering if pip doesn't deserve its own app
 def edit_pip(request, project_id):
-    from django.http import HttpResponse
-    return HttpResponse("Boilerplate")
+    project = get_object_or_404(Project, id=project_id,
+            pipproject__isnull=False)
+    pip = project.pipproject
+    form = PipProjectForm(request.POST or None, instance=pip)
+    if form.is_valid():
+        instance = form.save()
+        return redirect(project)
+
+    return render_to_response("project/pip_edit_form.html",
+            RequestContext(request, {'form': form}))
 
 def project_notifications(request, project_id):
     project = Project.objects.get(pk=project_id)
