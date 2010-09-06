@@ -5,11 +5,6 @@
 {% block main %}
 <form method="post" class="clearfix">
   {% csrf_token %}
-    <section>
-      <label for="id_name">Management Type:</label>
-      {{form.project_type.errors}}
-      {{form.project_type}}
-    </section>
   {% include 'project/_form.html' %}
   <div class="buttons clearfix">
     <input type="submit" value="{% block submit_command %}Create Project{% endblock %}" class="left blue">
