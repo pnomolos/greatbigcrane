@@ -93,36 +93,46 @@ def test_buildout(project_id):
     project = Project.objects.get(id=project_id)
     print("running tests for %s" % project.name)
 
-    bc = buildout_parse(project.buildout_filename())
-
     test_binaries = []
 
-    parts = bc['buildout']['parts']
-    if not isinstance(parts, list):
-        parts = [parts]
+    # FIXME: HOLY NESTED CONDITIONALS, BATMAN
+    # figure out what test commands to run
+    if project.project_type == "buildout":
+        bc = buildout_parse(project.buildout_filename())
 
-    # We get to do some detection in this one
-    # First look for django test
-    for section, values in bc.iteritems():
-        if section in parts:
-            if values.get('recipe') == 'djangorecipe':
-                # Django, we know what's going on
-                if 'test' in values:
-                    test_script = 'test'
-                    if 'testrunner' in values:
-                        test_script = values['testrunner']
-                    test_binaries.append('bin/' + test_script)
-                else:
+        parts = bc['buildout']['parts']
+        if not isinstance(parts, list):
+            parts = [parts]
+
+        # We get to do some detection in this one
+        # First look for django test
+        for section, values in bc.iteritems():
+            if section in parts:
+                if values.get('recipe') == 'djangorecipe':
+                    # Django, we know what's going on
+                    if 'test' in values:
+                        test_script = 'test'
+                        if 'testrunner' in values:
+                            test_script = values['testrunner']
+                        test_binaries.append('bin/' + test_script)
+                    else:
+                        test_script = section
+                        if 'control-script' in values:
+                            test_script = values['control-script']
+                        test_binaries.append('bin/' + test_script + ' test')
+                elif values.get('recipe') == 'zc.recipe.testrunner':
                     test_script = section
-                    if 'control-script' in values:
+                    if 'script' in values:
                         test_script = values['control-script']
-                    test_binaries.append('bin/' + test_script + ' test')
-            elif values.get('recipe') == 'zc.recipe.testrunner':
-                test_script = section
-                if 'script' in values:
-                    test_script = values['control-script']
-                test_binaries.append('bin/' + test_script)
+                    test_binaries.append('bin/' + test_script)
+    elif project.project_type == "pip":
+        # FIXME: Do you use windows and this command failed? Patches welcome.
+        command = "source %sbin/activate ; %s" % (
+                project.pipproject.virtualenv_path,
+                project.pipproject.test_command)
+        test_binaries.append(command)
 
+    # Run the test commands
     errors = False
     responses = []
     try:
