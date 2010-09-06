@@ -1,0 +1,22 @@
+{% load buildout_config %}
+    <section class="buildout">
+      <h2>Buildout Sections</h2>
+      {% if not project.buildout_sections %}
+        <p>No Buildout sections yet.</p>
+      {% endif %}
+      {% for name, section in project.buildout_sections %}
+      <ul>
+        <li class="clearfix">
+          <a href="{% url edit_recipe project.id name %}" class="button right grey">Edit</a>
+          <a href="{% url delete_recipe project.id name %}" class="button ajax right red confirm">Delete</a>
+          <h3>{{name}}</h3>
+          {% for key, value in section.items %}
+          <ul>
+            <li>{{key}} = {{value|configvalue}}</li>
+          </ul>
+          {% endfor %}
+        </li>
+      </ul>
+      {% endfor %}
+      <a href="{% url add_recipe project.id %}" class="left orange button orange">Add Recipe</a>
+    </section>
