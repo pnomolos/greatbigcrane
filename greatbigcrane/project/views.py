@@ -73,8 +73,6 @@ def add_project(request):
                 target_dir = os.path.dirname(base_dir)
                 if target_dir and not os.path.isdir(target_dir):
                     os.makedirs(target_dir)
-
-            if form.cleaned_data['git_repo']:
                 instance = form.save()
                 queue_job("GITCLONE", project_id=instance.id)
             else:
