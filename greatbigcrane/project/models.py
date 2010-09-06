@@ -88,3 +88,14 @@ class Project(models.Model):
 
     def __unicode__(self):
         return self.name
+
+# Possibly We could use inheritance here, but I think it would get messy with
+# generating forms
+class PipProject(models.Model):
+    project = models.OneToOneField(Project)
+    virtualenv_path = models.CharField(max_length=256,
+            help_text="The directory the virtualenv is stored in.",
+            default="venv/")
+    test_command = models.CharField(max_length=128,
+            help_text="Command to run tests. Eg: py.test, nose, ./run_tests.py")
+

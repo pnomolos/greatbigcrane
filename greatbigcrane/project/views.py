@@ -29,7 +29,7 @@ from django.http import HttpResponse
 from django.forms.util import ErrorList
 
 from job_queue.jobs import queue_job
-from project.models import Project
+from project.models import Project, PipProject
 from project.forms import AddProjectForm, EditProjectForm
 from preferences.models import Preference
 from notifications.models import Notification
@@ -80,6 +80,8 @@ def add_project(request):
                 if instance.project_type == "buildout":
                     instance.prep_buildout_project()
                     queue_job("BOOTSTRAP", project_id=instance.id)
+                elif instance.project_type == "pip":
+                    PipProject.objects.create(project=instance)
 
             return redirect(instance.get_absolute_url())
 
