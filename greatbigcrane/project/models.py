@@ -115,3 +115,11 @@ class PipProject(models.Model):
             blank=True,
             help_text="Command to run tests. Eg: py.test, nose, ./run_tests.py")
 
+    @property
+    def requirements(self):
+        if os.path.exists(self.project.requirements_filename()):
+            with open(self.project.requirements_filename()) as req_file:
+                return req_file.read()
+        return ""
+
+

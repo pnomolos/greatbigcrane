@@ -57,10 +57,9 @@ class PipProjectForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance')
-        if os.path.exists(instance.project.requirements_filename()):
-            initial = kwargs.setdefault('initial', {})
-            with open(instance.project.requirements_filename()) as req_file:
-                initial['requirements'] = req_file.read()
+        initial = kwargs.setdefault('initial', {})
+        initial['requirements'] = instance.requirements
+
         super(PipProjectForm, self).__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
