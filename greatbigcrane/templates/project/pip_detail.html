@@ -1,4 +1,8 @@
-This is a pip project. We aren't handling those very well yet.
-
-But we're working on it. Hence this placeholder template.
 <a href="{% url edit_pip project.id %}" class="button right grey">Edit</a>
+
+<p><strong>VirtualEnv:</strong> {{project.pipproject.virtualenv_path}}</p>
+<p><strong>Test Command:</strong> {{project.pipproject.test_command}}</p>
+<h2>Requirements</h2>
+<p>
+{{project.pipproject.requirements|linebreaksbr}}
+</p>
