@@ -114,6 +114,11 @@ def favourite_project(request, project_id):
     project.save()
     return handle_ajax(request)
 
+# I'm wondering if pip doesn't deserve its own app
+def edit_pip(request, project_id):
+    from django.http import HttpResponse
+    return HttpResponse("Boilerplate")
+
 def project_notifications(request, project_id):
     project = Project.objects.get(pk=project_id)
     notifications = Notification.objects.filter(
