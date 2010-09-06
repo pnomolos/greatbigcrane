@@ -35,3 +35,8 @@ class AddProjectForm(forms.ModelForm):
 
     def clean_description(self):
         return self.cleaned_data['description'].strip()
+
+class EditProjectForm(AddProjectForm):
+    class Meta:
+        model = Project
+        exclude =("project_type",)
