@@ -193,7 +193,8 @@ def clone_repo(project_id):
                 notification_type="GITCLONE",
                 )
 
-    queue_job('BOOTSTRAP', project_id=project_id)
+    if project.project_type == "buildout":
+        queue_job('BOOTSTRAP', project_id=project_id)
 
 @command("GITPULL")
 def pull_repo(project_id):
