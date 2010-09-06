@@ -293,3 +293,21 @@ def edit(project_id):
         shell=True, close_fds=True)
 
     process.communicate()
+
+@command("VIRTUALENV")
+def virtualenv(project_id):
+    """Run virtualenv in the project directory"""
+    project = Project.objects.get(id=project_id, pipproject__isnull=False)
+    print "Running virtualenv for %s" % project.name
+
+    process = subprocess.Popen('virtualenv %s' % (
+        project.pipproject.virtualenv_path), cwd=project.base_directory,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
+    response = process.communicate()[0]
+
+    Notification.objects.create(status="success" if not process.returncode else "error",
+            summary="Virtualenv '%s' %s" % (
+                project.name, "success" if not process.returncode else "error"),
+            message=response,
+            project=project)

@@ -43,6 +43,10 @@ def edit_buildout(request, project_id):
     return schedule_project_command(request, project_id, "EDIT",
             "Successfully edited")
 
+def schedule_virtualenv(request, project_id):
+    return schedule_project_command(request, project_id, "VIRTUALENV",
+            "Successfully queued virtualenv")
+
 
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)
