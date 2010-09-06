@@ -300,7 +300,7 @@ def virtualenv(project_id):
     project = Project.objects.get(id=project_id, pipproject__isnull=False)
     print "Running virtualenv for %s" % project.name
 
-    process = subprocess.Popen('virtualenv %s' % (
+    process = subprocess.Popen('virtualenv --no-site-packages %s' % (
         project.pipproject.virtualenv_path), cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
