@@ -112,5 +112,6 @@ class PipProject(models.Model):
             help_text="The directory the virtualenv is stored in.",
             default="venv/")
     test_command = models.CharField(max_length=128,
+            blank=True,
             help_text="Command to run tests. Eg: py.test, nose, ./run_tests.py")
 
