@@ -15,8 +15,8 @@ Then, to set up Great Big Crane run these commands:
 There are three processes that need to be running.  Each one is run from inside
 the buildout directory:
 
-* bin/django job_server # Can run multiples of these for more responsivity
-* bin/django job_processor
+* bin/django job_server 
+* bin/django job_processor # Can run multiples of these for more responsivity
 * bin/django runserver
 
 Now visit http://localhost:8000/ and enjoy! Read the about page for a tutorial on
