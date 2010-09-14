@@ -127,8 +127,9 @@ def test_buildout(project_id):
                     test_binaries.append('bin/' + test_script)
     elif project.project_type == "pip":
         # FIXME: Do you use windows and this command failed? Patches welcome.
-        command = "source %sbin/activate ; %s" % (
-                project.pipproject.virtualenv_path,
+        command = "source %s ; %s" % (
+                os.path.join(project.pipproject.virtualenv_path, 'bin',
+                    'activate'),
                 project.pipproject.test_command)
         test_binaries.append(command)
 
@@ -318,8 +319,8 @@ def virtualenv(project_id):
     project = Project.objects.get(id=project_id, pipproject__isnull=False)
     print "Running pip install for %s" % project.name
 
-    command = "source %sbin/activate ; pip install -r requirements.txt" % (
-            project.pipproject.virtualenv_path)
+    command = "source %s ; pip install -r requirements.txt" % (
+            os.path.join(project.pipproject.virtualenv_path, 'bin', 'activate'))
 
     process = subprocess.Popen(command, cwd=project.base_directory,
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
