@@ -30,7 +30,9 @@
     <div class="actions clearfix">
       <section class="clearfix">
         <a class="edit" href="{% url edit_project project.id %}" title="Edit Project">Edit Project</a>
+        {% if project.project_type == "buildout" %}
         <a class="edit_cfg ajax" href="{% url edit_buildout project.id %}" title="Edit Buildout">Edit Buildout</a>
+        {% endif %}
         <a class="delete confirm" href="{% url delete_project project.id %}" title="Delete Project">Delete Project</a>
       </section>
       
