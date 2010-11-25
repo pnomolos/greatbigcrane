@@ -31,11 +31,17 @@ socket.connect(addr)
 
 def queue_job(command, **kwargs):
     '''Run the given command on the job queue, passing it any arguments as kwargs.'''
-    assert command in command_map
-    kwargs.update(command=command)
-    serialized = json.dumps(kwargs)
+    serialized = make_job_string(command, **kwargs)
+    send_job(serialized)
+
+def send_job(serialized):
     socket.send(serialized)
     assert socket.recv() == "ACK"
+
+def make_job_string(command, **kwargs):
+    assert command in command_map
+    kwargs.update(command=command)
+    return json.dumps(kwargs)
 
 def command(command_name):
     "Decorator that marks a function as a queuable command."
@@ -173,6 +179,7 @@ def test_buildout(project_id):
                 project.name, "success" if not errors else "error"),
             message=('\n\n'+'*'*50+'\n\n').join(message),
             project=project,
+            rerun_job=make_job_string("TEST", project_id=project_id),
             notification_type="TEST",
             )
     project.test_status = not errors

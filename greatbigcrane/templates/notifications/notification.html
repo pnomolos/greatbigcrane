@@ -8,6 +8,9 @@
   </span>
   {% if notification.project %}
     <a href="{% url view_project notification.project.id %}" class="button highlight left clear margin orange">View Project</a>
+    {% if notification.rerun_job %}
+      <a href="{% url rerun_job notification.id %}" class="button highlight left ajax margin orange">Rerun Job</a>
+    {% endif %}
   {% endif %}
   <code class="clear notification-code">{{notification.message}}</code>
 </div>

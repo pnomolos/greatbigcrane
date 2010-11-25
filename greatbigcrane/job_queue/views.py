@@ -2,8 +2,9 @@ from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseServerError
 from django.template import RequestContext
 from project.models import Project
-from job_queue.jobs import queue_job
+from job_queue.jobs import queue_job, send_job
 from job_queue.forms import StartAppForm
+from notifications.models import Notification
 
 def schedule_buildout(request, project_id):
     return schedule_project_command(request, project_id, "BUILDOUT",
@@ -51,6 +52,13 @@ def schedule_pip_install(request, project_id):
     return schedule_project_command(request, project_id, "PIPINSTALL",
             "Successfully queued pip_install")
 
+def rerun_job(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id)
+    print notification.rerun_job
+    if notification.rerun_job:
+        send_job(str(notification.rerun_job))
+        return HttpResponse("Queued")
+    return HttpResponse("No rerun specified")
 
 def schedule_project_command(request, project_id, command, success_message):
     project = get_object_or_404(Project, id=project_id)

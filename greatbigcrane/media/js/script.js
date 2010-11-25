@@ -168,7 +168,7 @@ jQuery(function($){
   });
   
   $('.projects .buildout, .projects .tests').live('click',queue_button('closest', 'li'));
-  $('.actions .ajax').live('click',queue_button('closest', 'div.project > section'));
+  $('.ajax').live('click',queue_button('closest', 'div.project > section'));
   $('.confirm').live('click',function(e){
     e.preventDefault();
     if ( confirm("Are you sure you want to do this?") ) {

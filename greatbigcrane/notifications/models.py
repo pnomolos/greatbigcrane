@@ -29,6 +29,7 @@ class Notification(models.Model):
     project = models.ForeignKey(Project, null=True, blank=True, default=None)
     notification_type = models.CharField(max_length=16, blank=True, default='')
     dismissed = models.BooleanField(blank=True, default=False)
+    rerun_job = models.CharField(blank=True, max_length=128)
 
     def get_absolute_url(self):
         return reverse("view_notification", args=[self.id])
