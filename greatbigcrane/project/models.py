@@ -60,11 +60,14 @@ class Project(models.Model):
         return sections
 
     def is_django(self):
-        sections = self.buildout()
-        for name, section in sections.items():
-            if 'recipe' in section and section['recipe'] == 'djangorecipe':
-                return True
-        return False
+        if not self.pipproject:
+            sections = self.buildout()
+            for name, section in sections.items():
+                if 'recipe' in section and section['recipe'] == 'djangorecipe':
+                    return True
+            return False
+        else:
+            return 'Django' in self.pipproject.requirements
 
     def github_url(self):
         '''If our repo is a github repo, provide a link to the
